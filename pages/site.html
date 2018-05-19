@@ -130,17 +130,22 @@
 
                 <!-- /.row -->
                 <div class="row">
-                    <table id="current_sites" class="table table-hover" style="width: 100%">
-                        <thead>
-                            <tr>
-                                <th>Issued Items</th>
-                                <th>Quantity</th>
-                                <th>Price Purchased (per unit)</th>
-                                <th>Cost</th>
+                        <table id="current_sites" class="table table-hover" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>Issued Items</th>
+                                    <th>Quantity</th>
+                                    <th>Price Purchased (per unit)</th>
+                                    <th>Cost</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <th>Total Inventory cost</th>
                                 <th></th>
-                            </tr>
-                        </thead>
-                    </table>
+                                <th></th>
+                                <th id=total_cost_1>700</th>
+                            </tfoot>
+                        </table>
                 </div>
 
                 <hr>
@@ -154,16 +159,19 @@
                 <hr>
 
                 <div class="row">
-                    <table id="expences" class="table table-hover" style="width: 100%">
+                    <table id="expences" class="table" style="width: 100%">
                         <thead>
                             <tr>
                                 <th>Expence Type</th>
-                                <th></th>
-                                <th></th>
                                 <th>Cost</th>
-                                <th></th>
                             </tr>
                         </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Total site expences</th>
+                                <th id="total_cost_2">300</th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
 
@@ -220,78 +228,62 @@
                                 "issued_items": "panels",
                                 "quantity": "5",
                                 "price": "100",
-                                "cost": "500",
-                                "total": ""
+                                "cost": "500"
                             },    
                             {
                                 "issued_items": "inverters",
                                 "quantity": "1",
                                 "price": "200",
-                                "cost": "200",
-                                "total": ""
-                            },
-                            {
-                                "issued_items": "Total inventory cost",
-                                "quantity": "",
-                                "price": "",
-                                "cost": "",
-                                "total": "700"
+                                "cost": "200"
                             }
                         ]
 
         $(document).ready(function() {
             $('#current_sites').DataTable( {
                 data: dataSet1,
-                responsize: true,
+                searching: false,
+                paging: false,
+                info: false,
+                responsize: false,
                 columns: [
                     { data: "issued_items" },
                     { data: "quantity" },
                     { data: "price" },
-                    { data: "cost" },
-                    { data: "total" }
+                    { data: "cost" }
                 ],
-                select: true
+                select: false
             });
         });
 
         var dataSet2 =   [
                             {
                                 "expence_type": "OT",
-                                "cost": "100",
-                                "total": ""
+                                "cost": "100"
                             },    
                             {
                                 "expence_type": "Travel",
-                                "cost": "100",
-                                "total": ""
+                                "cost": "100"
                             },
                             {
                                 "expence_type": "Meals",
-                                "cost": "50",
-                                "total": ""
+                                "cost": "50"
                             },
                             {
                                 "expence_type": "Other",
-                                "cost": "50",
-                                "total": ""
-                            },
-                            {
-                                "expence_type": "Total site expense",
-                                "cost": "",
-                                "total": "300"
+                                "cost": "50"
                             }
                         ]
 
         $(document).ready(function() {
             $('#expences').DataTable( {
                 data: dataSet2,
+                searching: false,
+                paging: false,
+                info: false,
                 responsize: true,
                 columns: [
                     { data: "expence_type" },
-                    { data: "" },
-                    { data: "" },
-                    { data: "cost" },
-                    { data: "total" }
+                    { data: "cost" }
                 ],
                 select: true
             });
