@@ -219,26 +219,36 @@
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         };
 
-        console.log('site: ' + getUrlParameter('site'));
-
         document.getElementById('topic').innerHTML = getUrlParameter('site');
-        
-        var dataSet1 =   [
-                            {
-                                "issued_items": "panels",
-                                "quantity": "5",
-                                "price": "100",
-                                "cost": "500"
-                            },    
-                            {
-                                "issued_items": "inverters",
-                                "quantity": "1",
-                                "price": "200",
-                                "cost": "200"
-                            }
-                        ]
 
-        $(document).ready(function() {
+        function httpGetAsync(theUrl, callback)
+        {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() { 
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    callback(xmlHttp.responseText);
+            }
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+            xmlHttp.send(null);
+        }
+        
+        var dataSet1 = [];
+        var dataSet2 = [];
+
+        console.log('url: ' + 'http://localhost:3000/site?site=' + getUrlParameter('site'));
+
+        var client = new httpGetAsync('http://localhost:3000/site?site='+ getUrlParameter('site'), function(response) {
+            
+            var output = JSON.parse(response);
+
+            document.getElementById('set1').innerHTML = 'Awarded Date: ' + output.awarded_date;
+            document.getElementById('set2').innerHTML = 'Awarded Price: ' + output.awarded_price;
+            
+            // for first table in the page
+            for (var i = 0; i < output.inventory_cost.data.length; i++) {
+                dataSet1.push(output.inventory_cost.data[i]);
+            }
+
             $('#current_sites').DataTable( {
                 data: dataSet1,
                 searching: false,
@@ -253,28 +263,14 @@
                 ],
                 select: false
             });
-        });
 
-        var dataSet2 =   [
-                            {
-                                "expence_type": "OT",
-                                "cost": "100"
-                            },    
-                            {
-                                "expence_type": "Travel",
-                                "cost": "100"
-                            },
-                            {
-                                "expence_type": "Meals",
-                                "cost": "50"
-                            },
-                            {
-                                "expence_type": "Other",
-                                "cost": "50"
-                            }
-                        ]
+            document.getElementById('total_cost_1').innerHTML = output.inventory_cost.total;
 
-        $(document).ready(function() {
+            // for second table in the page
+            for (var i = 0; i < output.site_expences.data.length; i++) {
+                dataSet2.push(output.site_expences.data[i]);
+            }
+
             $('#expences').DataTable( {
                 data: dataSet2,
                 searching: false,
@@ -287,6 +283,11 @@
                 ],
                 select: true
             });
+
+            document.getElementById('total_cost_2').innerHTML = output.site_expences.total;
+
+            // setup total cost per site
+            document.getElementById('total_cost').innerHTML = 'Total running cost: ' + output.total;
         });
 
     </script>
