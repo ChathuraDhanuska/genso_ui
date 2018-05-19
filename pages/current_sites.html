@@ -158,22 +158,28 @@
     <script src="../dist/js/sb-admin-2.js"></script>
 
     <script>
-        var dataSet =   [
-                            {
-                                "site_name": "Keels Maharagama",
-                                "current_status": "ongoing",
-                                "date_started": "03/04/18",
-                                "date_completed": "-"
-                            },    
-                            {
-                                "site_name": "XYZ",
-                                "current_status": "completed",
-                                "date_started": "01/04/18",
-                                "date_completed": "05/04/18"
-                            }
-                        ]
 
-        $(document).ready(function() {
+        function httpGetAsync(theUrl, callback)
+        {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() { 
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    callback(xmlHttp.responseText);
+            }
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+            xmlHttp.send(null);
+        }
+        
+        var dataSet =   [];
+
+        var client = new httpGetAsync('http://localhost:3000/current_sites', function(response) {
+            
+            var output = JSON.parse(response);
+            
+            for (var i = 0; i < output.data.length; i++) {
+                dataSet.push(output.data[i]);
+            }
+
             $('#current_sites').DataTable( {
                 data: dataSet,
                 responsize: true,

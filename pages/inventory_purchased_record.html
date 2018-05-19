@@ -158,24 +158,27 @@
     <script src="../dist/js/sb-admin-2.js"></script>
 
     <script>
-        var dataSet =   [
-                            {
-                                "inventory_name": "panel",
-                                "date": "01/01/18",
-                                "quantity": "1215",
-                                "price_per_unit": "100",
-                                "total_price": "122000"
-                            },    
-                            {
-                                "inventory_name": "inverters",
-                                "date": "01/01/18",
-                                "quantity": "124",
-                                "price_per_unit": "10",
-                                "total_price": "1240"
-                            }
-                        ]
+        function httpGetAsync(theUrl, callback)
+        {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() { 
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    callback(xmlHttp.responseText);
+            }
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+            xmlHttp.send(null);
+        }
+        
+        var dataSet =   [];
 
-        $(document).ready(function() {
+        var client = new httpGetAsync('http://localhost:3000/inventory_purchase_record', function(response) {
+            
+            var output = JSON.parse(response);
+            
+            for (var i = 0; i < output.data.length; i++) {
+                dataSet.push(output.data[i]);
+            }
+
             $('#inventory_purchased_record').DataTable( {
                 data: dataSet,
                 responsize: true,

@@ -137,6 +137,7 @@
                     </table>
 
                     <!-- <table id="stock_maintenance" class="display" width="100%"></table> -->
+                    <p id="test"></p>
 
                 </div>
             </div>
@@ -165,30 +166,28 @@
     <script src="../dist/js/sb-admin-2.js"></script>
 
     <script>
-        var dataSet =   [
-                            {
-                                "item": "panel",
-                                "current_stock": "1215"
-                            },    
-                            {
-                                "item": "inverters",
-                                "current_stock": "4"
-                            },
-                            {
-                                "item": "mount",
-                                "current_stock": "200"
-                            },
-                            {
-                                "item": "cable",
-                                "current_stock": "5000"
-                            },
-                            {
-                                "item": "clips",
-                                "current_stock": "2500"
-                            }
-                        ]
 
-        $(document).ready(function() {
+        function httpGetAsync(theUrl, callback)
+        {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() { 
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    callback(xmlHttp.responseText);
+            }
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+            xmlHttp.send(null);
+        }
+        
+        var dataSet =   [];
+
+        var client = new httpGetAsync('http://localhost:3000/stock_maintenance', function(response) {
+            
+            var output = JSON.parse(response);
+            
+            for (var i = 0; i < output.data.length; i++) {
+                dataSet.push(output.data[i]);
+            }
+
             $('#stock_maintenance').DataTable( {
                 data: dataSet,
                 responsize: true,
@@ -199,7 +198,7 @@
                 select: true
             });
         });
-        
+
     </script>
 
 </body>
