@@ -17,6 +17,12 @@
     <!-- MetisMenu CSS -->
     <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
+    <!-- DataTables CSS -->
+    <link href="../vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
 
@@ -176,10 +182,10 @@
                                                 <label>Price per unit</label>
                                                 <input class="form-control" value="" id="form_input_4">
                                             </div>
-                                            <div class="form-group">
-                                                <label>Total price</label>
-                                                <input class="form-control" value="" id="form_input_5">
-                                            </div>
+                                            <!-- <div class="form-group"> -->
+                                                <!-- <label>Total price</label> -->
+                                                <!-- <input class="form-control" value="" id="form_input_5"> -->
+                                            <!-- </div> -->
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-3">
@@ -265,7 +271,7 @@
                 document.getElementById("form_input_2").value = data['date'];
                 document.getElementById("form_input_3").value = data['quantity'];
                 document.getElementById("form_input_4").value = data['price_per_unit'];
-                document.getElementById("form_input_5").value = data['total_price'];
+                // document.getElementById("form_input_5").value = data['total_price'];
 
                 document.getElementById("modal_head").innerHTML = "Edit inventory purchase record";
             })
@@ -279,19 +285,67 @@
         // form actions
         // functions for from control
         function onClickSubmit() {
-            console.log('submit button clicked');
+            if(document.getElementById('modal_head').innerHTML === "Edit inventory purchase record") {
+                // run POST request
+                $.ajax({
+                    url: 'http://localhost:3000/inventory_purchase_record',
+                    type: 'PUT',
+                    data: {
+                        inventory_name: document.getElementById("form_input_1").value,
+                        price_per_unit: document.getElementById("form_input_4").value,
+                        quantity: document.getElementById("form_input_3").value
+                    },
+                    success: function() {
+                        // work with the response we get from the server
+                        console.log('POST request success');
+                        location.reload();
+                    }
+                });
+            } else {
+                // run PUT request
+                $.ajax({
+                    url: 'http://localhost:3000/inventory_purchase_record',
+                    type: 'POST',
+                    data: {
+                        inventory_name: document.getElementById("form_input_1").value,
+                        price_per_unit: document.getElementById("form_input_4").value,
+                        quantity: document.getElementById("form_input_3").value
+                    },
+                    success: function() {
+                        // work with the response we get from the server
+                        console.log('POST request success');
+                        location.reload();
+                    }
+                });
+            }
         }
 
         function onClickClear() {
-            console.log('clear button clicked');
+            document.getElementById("form_input_1").value = "";
+            document.getElementById("form_input_2").value = "";
+            document.getElementById("form_input_3").value = "";
+            document.getElementById("form_input_4").value = "";
+            // document.getElementById("form_input_5").value = "";
         }
 
         function onClickDelete() {
-            console.log('delete button clicked');
+            // run DELETE request
+            $.ajax({
+                url: 'http://localhost:3000/inventory_purchase_record',
+                type: 'DELETE',
+                data: {
+                    inventory_name: document.getElementById("form_input_1").value
+                },
+                success: function() {
+                    // work with the response we get from the server
+                    console.log('DELETE request success');
+                    location.reload();
+                }
+            });
         }
 
         function onClickClose() {
-            console.log('close button clicked');
+            location.reload();
         }
 
         function onClickAddButton() {
