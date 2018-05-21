@@ -118,9 +118,13 @@
                     <!-- /.col-lg-12 -->
                 </div>
                 <div class="row">
-                    <div class="col-lg-12">
-                        <p id="set1">Awarded Date:</p>
-                        <p id="set2">Awarded Price:</p>
+                    <div class="col-lg-3">
+                        <p><strong>Date:</strong></p>
+                        <p><strong>Price:</strong></p>
+                    </div>
+                    <div class="col-lg-3">
+                        <p><strong id="set1"></strong></p>
+                        <p><strong id="set2"></strong></p>
                     </div>
                 </div>
 
@@ -184,8 +188,14 @@
                 <hr>
 
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h4 id="total_cost">Total running cost: </h4>
+                    <div class="col-lg-3">
+                        <h4>Toal running cost:</h4>
+                    </div>
+                    <div class="col-lg-6">
+                        <p></p>
+                    </div>
+                    <div class="col-lg-3">
+                        <h4 id="total_cost" style="text-align: right"></h4>
                     </div>
                 </div>
 
@@ -247,8 +257,8 @@
             
             var output = JSON.parse(response);
 
-            document.getElementById('set1').innerHTML = 'Awarded Date: ' + output.awarded_date;
-            document.getElementById('set2').innerHTML = 'Awarded Price: ' + output.awarded_price;
+            document.getElementById('set1').innerHTML = output.awarded_date;
+            document.getElementById('set2').innerHTML = output.awarded_price;
             
             // for first table in the page
             for (var i = 0; i < output.inventory_cost.data.length; i++) {
@@ -265,12 +275,14 @@
                     { data: "issued_items" },
                     { data: "quantity" },
                     { data: "price" },
-                    { data: "cost" }
+                    { data: null, width: "20%", render: function(data, type, row) {
+                        return '<p style="text-align: right">' + data.cost + '</p>';
+                    }}
                 ],
                 select: false
             });
 
-            document.getElementById('total_cost_1').innerHTML = output.inventory_cost.total;
+            document.getElementById('total_cost_1').innerHTML = '<p style="text-align: right">' + output.inventory_cost.total + '</p>';
 
             // for second table in the page
             for (var i = 0; i < output.site_expences.data.length; i++) {
@@ -285,15 +297,17 @@
                 responsize: true,
                 columns: [
                     { data: "expence_type" },
-                    { data: "cost" }
+                    { data: null, width: "20%", render: function(data, type, row) {
+                        return '<p style="text-align: right">' + data.cost + '</p>';
+                    }}
                 ],
                 select: true
             });
 
-            document.getElementById('total_cost_2').innerHTML = output.site_expences.total;
+            document.getElementById('total_cost_2').innerHTML = '<p style="text-align: right">' + output.site_expences.total + '</p>';
 
             // setup total cost per site
-            document.getElementById('total_cost').innerHTML = 'Total running cost: ' + output.total;
+            document.getElementById('total_cost').innerHTML = output.total;
         });
 
     </script>
