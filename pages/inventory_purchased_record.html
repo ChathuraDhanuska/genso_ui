@@ -149,7 +149,7 @@
     <!-- /#wrapper -->
 
     <!-- overlay -->
-    <div id="myModal" class="modal">
+    <div id="invModal" class="modal">
                 <div class="row">
                     <!-- From for getting input -->
                     <div class="col-lg-4">
@@ -271,7 +271,7 @@
             $('#inventory_purchased_record tbody').on('click', 'button', function() {
                 var data = table.row($(this).parents('tr')).data();
                 console.log(data);
-                $('#myModal').modal();
+                $('#invModal').modal();
                 document.getElementById("form_input_1").value = rowData['inventory_name']; 
                 document.getElementById("form_input_2").value = rowData['date'];
                 document.getElementById("form_input_3").value = rowData['quantity'];
@@ -337,7 +337,7 @@
         }
 
         function onClickAddButton() {
-            $('#myModal').modal();
+            $('#invModal').modal();
             document.getElementById("modal_head").innerHTML = "Add new inventory purchase record";
         }
 
@@ -345,7 +345,7 @@
             if(rowData == null) {
                 alert('No row selected');
             } else {
-                $('#myModal').modal();
+                $('#invModal').modal();
                 document.getElementById("form_input_1").value = rowData['inventory_name']; 
                 document.getElementById("form_input_2").value = rowData['date'];
                 document.getElementById("form_input_3").value = rowData['quantity'];

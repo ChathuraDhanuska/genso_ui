@@ -225,7 +225,7 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- overlay -->
+    <!-- overlay site inventory-->
         <div id="siteModal" class="modal">
             <div class="row">
                 <!-- From for getting input -->
@@ -268,7 +268,52 @@
                 </div>
             </div>
         </div>
-    <!-- /overlay -->
+    <!-- /overlay site inventory -->
+
+    <!-- overlay site expences-->
+    <div id="expModal" class="modal">
+        <div class="row">
+            <!-- From for getting input -->
+            <div class="col-lg-4">
+                <!-- blank div to center form -->
+            </div>
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="exp_head">Add new site expences</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form role="form" id="exp_input">
+                                    <div class="form-group">
+                                        <label>Expence Name</label>
+                                        <input class="form-control" value="" id="exp_input_1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Cost</label>
+                                        <input class="form-control" value="" id="exp_input_2">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <button class="btn btn-default btn-lg btn-block" onclick="onClickSubmitExp()">Submit</button>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <button class="btn btn-default btn-lg btn-block" onclick="onClickClearInv()">Clear</button>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <button class="btn btn-default btn-lg btn-block" onclick="onClickCloseInv()">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /overlay site expences -->
 
     <!-- jQuery -->
     <script src="../vendor/jquery/jquery.min.js"></script>
@@ -332,6 +377,7 @@
                 data: dataSet1,
                 searching: false,
                 paging: false,
+                stateSave: true,
                 info: false,
                 responsize: false,
                 columns: [
@@ -371,6 +417,7 @@
                 data: dataSet2,
                 searching: false,
                 paging: false,
+                stateSave: true,
                 info: false,
                 columns: [
                     { data: "expence_type" },
@@ -404,6 +451,10 @@
 
         // prevent default action for the form
         document.getElementById('input_form').addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+
+        document.getElementById('exp_input').addEventListener('click', function(event) {
             event.preventDefault();
         });
 
@@ -479,7 +530,6 @@
         }
 
         function onClickClearInv() {
-            console.log('clicked on clear');
             document.getElementById('inv_input_1').value = "";
             document.getElementById('inv_input_2').value = "";
         }
@@ -490,15 +540,82 @@
 
         // functions for site expences add, edit and delete
         function onClickAddSiteExp() {
-            console.log('on click add new site expences');
+            $('#expModal').modal();
+            document.getElementById('exp_head').innerHTML = "Add new expence";
         }
 
         function onClickEditSiteExp() {
-            console.log('on click edit site expences');
+            if(rowData2 == null) {
+                alert('No row selected');
+            } else {
+                $('#expModal').modal();
+                document.getElementById('exp_head').innerHTML = "Edit expences";
+                document.getElementById('exp_input_1').value = rowData2['expence_type'];
+                document.getElementById('exp_input_2').value = rowData2['cost'];
+            }
         }
 
         function onClickDeleteSiteExp() {
-            console.log('on click delete site expences');
+            if(rowData2 == null) {
+                alert('No row selected');
+            } else {
+                $.ajax({
+                    url: 'http://localhost:3000/site/exp',
+                    type: 'DELETE',
+                    data: {
+                        siteName: getUrlParameter('site'),
+                        expenceType: rowData2['expence_type'],
+                        cost: rowData2['cost']
+                    },
+                    success: function() {
+                        console.log('DELETE request success');  
+                        location.reload();
+                    }
+                })
+            }
+        }
+
+        // functions on the modal overlay
+        function onClickSubmitExp() {
+            // send POST request
+            if(document.getElementById('exp_head').innerHTML === "Add new expence") {
+                $.ajax({
+                    url: 'http://localhost:3000/site/exp',
+                    type: 'POST',
+                    data: {
+                        siteName: getUrlParameter('site'),
+                        expenseType: document.getElementById('exp_input_1').value,
+                        cost: document.getElementById('exp_input_2').value
+                    },
+                    success: function() {
+                        console.log('POST request success');
+                        location.reload();
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: 'http://localhost:3000/site/exp',
+                    type: 'PUT',
+                    data: {
+                        siteName: getUrlParameter('site'),
+                        expenseType: document.getElementById('exp_input_1').value,
+                        cost: document.getElementById('exp_input_2').value
+                    },
+                    success: function() {
+                        console.log('POST request success');
+                        location.reload();
+                    }
+                });
+            }
+        }
+
+        function onClickClearExp() {
+            document.getElementById('exp_input_1').value = "";
+            document.getElementById('exp_input_2').value = "";
+        }
+
+        function onClickCloseExp() {
+            location.reload();
         }
 
     </script>
