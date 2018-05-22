@@ -248,10 +248,8 @@
             var table = $('#current_sites').DataTable( {
                 data: dataSet,
                 responsize: true,
+                stateSave: true,
                 columns: [
-                    // { data: null, render: function(data, type, row) {
-                        // return '<a href="site.html?site=' + data.site_name + '">' + data.site_name + '</a>';
-                    // }}, 
                     { data: "site_name" },
                     { data: "current_status" },
                     { data: "date_started" },

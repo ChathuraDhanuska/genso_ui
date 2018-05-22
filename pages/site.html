@@ -29,6 +29,9 @@
     <!-- Custom Fonts -->
     <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!-- JQuery DataTables CSS -->
+    <link href="../vendor/datatables/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -41,7 +44,6 @@
 <body>
 
     <div id="wrapper">
-
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -96,7 +98,7 @@
                             <a href="inventory_purchased_record.html"><i class="fa fa-table fa-fw"></i> Inventory Purchased Record</a>
                         </li>
                         <li>
-                            <a href="current_sites.html"><i class="fa fa-edit fa-fw"></i> Current Sites</a>
+                            <a href="inventory.html"><i class="fa fa-edit fa-fw"></i> Current Sites</a>
                         </li>
                         <li>
                             <a href="stock_maintenance.html"><i class="fa fa-edit fa-fw"></i> Current Stock Maintenance</a>
@@ -138,9 +140,16 @@
 
                 <hr>
 
+                <!-- Add, edit, delete buttons -->
+                <div class="row">
+                    <button type="button" class="btn btn-default" id="add_button" onclick="onClickAddInventory()">Add</button>
+                    <button type="button" class="btn btn-default" id="edit_button" onclick="onClickEditInventory()">Edit</button>
+                    <button type="button" class="btn btn-default" id="delete_button" onclick="onClickDeleteInventory()">Delete</button>
+                </div>
+
                 <!-- /.row -->
                 <div class="row">
-                        <table id="current_sites" class="table table-hover" style="width: 100%">
+                        <table id="inventory" class="table table-hover" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>Issued Items</th>
@@ -153,7 +162,7 @@
                                 <th>Total Inventory cost</th>
                                 <th></th>
                                 <th></th>
-                                <th id=total_cost_1>700</th>
+                                <th id="total_cost_1"></th>
                             </tfoot>
                         </table>
                 </div>
@@ -168,8 +177,15 @@
 
                 <hr>
 
+                <!-- Add, edit, delete buttons -->
                 <div class="row">
-                    <table id="expences" class="table" style="width: 100%">
+                    <button type="button" class="btn btn-default" id="add_button" onclick="onClickAddSiteExp()">Add</button>
+                    <button type="button" class="btn btn-default" id="edit_button" onclick="onClickEditSiteExp()">Edit</button>
+                    <button type="button" class="btn btn-default" id="delete_button" onclick="onClickDeleteSiteExp()">Delete</button>
+                </div>
+
+                <div class="row">
+                    <table id="expences" class="table table-hover" style="width: 100%">
                         <thead>
                             <tr>
                                 <th>Expence Type</th>
@@ -179,7 +195,7 @@
                         <tfoot>
                             <tr>
                                 <th>Total site expences</th>
-                                <th id="total_cost_2">300</th>
+                                <th id="total_cost_2"></th>
                             </tr>
                         </tfoot>
                     </table>
@@ -208,6 +224,51 @@
 
     </div>
     <!-- /#wrapper -->
+
+    <!-- overlay -->
+        <div id="siteModal" class="modal">
+            <div class="row">
+                <!-- From for getting input -->
+                <div class="col-lg-4">
+                    <!-- blank div to center form -->
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" id="modal_head">Add new inventory</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form role="form" id="input_form">
+                                        <div class="form-group">
+                                            <label>Inventory Name</label>
+                                            <input class="form-control" value="" id="inv_input_1">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Quantity</label>
+                                            <input class="form-control" value="" id="inv_input_2">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <button class="btn btn-default btn-lg btn-block" onclick="onClickSubmitInv()">Submit</button>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <button class="btn btn-default btn-lg btn-block" onclick="onClickClearInv()">Clear</button>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <button class="btn btn-default btn-lg btn-block" onclick="onClickCloseInv()">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- /overlay -->
 
     <!-- jQuery -->
     <script src="../vendor/jquery/jquery.min.js"></script>
@@ -250,6 +311,8 @@
         
         var dataSet1 = [];
         var dataSet2 = [];
+        var rowData1 = null;
+        var rowData2 = null;
 
         console.log('url: ' + 'http://localhost:3000/site?site=' + getUrlParameter('site'));
 
@@ -265,7 +328,7 @@
                 dataSet1.push(output.inventory_cost.data[i]);
             }
 
-            $('#current_sites').DataTable( {
+            var table1 = $('#inventory').DataTable( {
                 data: dataSet1,
                 searching: false,
                 paging: false,
@@ -276,10 +339,25 @@
                     { data: "quantity" },
                     { data: "price" },
                     { data: null, width: "20%", render: function(data, type, row) {
-                        return '<p style="text-align: right">' + data.cost + '</p>';
+                        return '<p style="text-align: right">' + data.cost + '&nbsp;&nbsp;</p>';
                     }}
                 ],
                 select: false
+            });
+
+            // row selection function for inventory table
+            $('#inventory tbody').on('click', 'tr', function() {
+                // console.log('clicked on row');
+                rowData1 = table1.row($(this)).data();
+                console.log(rowData1);
+
+                if ( $(this).hasClass('selected') ) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table1.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }   
             });
 
             document.getElementById('total_cost_1').innerHTML = '<p style="text-align: right">' + output.inventory_cost.total + '</p>';
@@ -289,19 +367,33 @@
                 dataSet2.push(output.site_expences.data[i]);
             }
 
-            $('#expences').DataTable( {
+            var table2 = $('#expences').DataTable( {
                 data: dataSet2,
                 searching: false,
                 paging: false,
                 info: false,
-                responsize: true,
                 columns: [
                     { data: "expence_type" },
                     { data: null, width: "20%", render: function(data, type, row) {
-                        return '<p style="text-align: right">' + data.cost + '</p>';
+                        return '<p style="text-align: right">' + data.cost + '&nbsp;&nbsp;</p>';
                     }}
                 ],
-                select: true
+                select: false
+            });
+
+            // row selection function for site expences table
+            $('#expences tbody').on('click', 'tr', function() {
+                // console.log('clicked on row');
+                rowData2 = table2.row($(this)).data();
+                console.log(rowData2);
+
+                if ( $(this).hasClass('selected') ) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    table2.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }   
             });
 
             document.getElementById('total_cost_2').innerHTML = '<p style="text-align: right">' + output.site_expences.total + '</p>';
@@ -309,6 +401,105 @@
             // setup total cost per site
             document.getElementById('total_cost').innerHTML = output.total;
         });
+
+        // prevent default action for the form
+        document.getElementById('input_form').addEventListener('click', function(event) {
+            event.preventDefault();
+        });
+
+        // functions for site inventory add, edit, delete buttons
+        function onClickAddInventory() {
+            $('#siteModal').modal();
+            document.getElementById('modal_head').innerHTML = "Add new inventory record";
+        }
+
+        function onClickEditInventory() {
+            if(rowData1 == null) {
+                alert('No row selected');
+            } else {
+                $('#siteModal').modal();
+                document.getElementById('modal_head').innerHTML = "Edit inventory record";
+                document.getElementById('inv_input_1').value = rowData1['issued_items'];
+                document.getElementById('inv_input_2').value = rowData1['quantity'];    
+            }
+        }
+
+        function onClickDeleteInventory() {
+            if(rowData1 == null) {
+                alert('No row selected');
+            } else {
+                $.ajax({
+                    url: 'http://localhost:3000/site/inv',
+                    type: 'DELETE',
+                    data: {
+                        siteName: getUrlParameter('site'),
+                        itemName: rowData1['issued_items'],
+                        quantity: rowData1['quantity']
+                    },
+                    success: function() {
+                        console.log('DELETE request success');  
+                        location.reload();
+                    }
+                })
+            }
+        }
+
+        // functions on the modal overlay
+        function onClickSubmitInv() {
+            // send POST request
+            if(document.getElementById('modal_head').innerHTML === "Add new inventory record") {
+                $.ajax({
+                    url: 'http://localhost:3000/site/inv',
+                    type: 'POST',
+                    data: {
+                        siteName: getUrlParameter('site'),
+                        itemName: document.getElementById('inv_input_1').value,
+                        quantity: document.getElementById('inv_input_2').value
+                    },
+                    success: function() {
+                        console.log('POST request success');
+                        location.reload();
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: 'http://localhost:3000/site/inv',
+                    type: 'PUT',
+                    data: {
+                        siteName: getUrlParameter('site'),
+                        itemName: document.getElementById('inv_input_1').value,
+                        quantity: document.getElementById('inv_input_2').value
+                    },
+                    success: function() {
+                        console.log('POST request success');
+                        location.reload();
+                    }
+                });
+            }
+        }
+
+        function onClickClearInv() {
+            console.log('clicked on clear');
+            document.getElementById('inv_input_1').value = "";
+            document.getElementById('inv_input_2').value = "";
+        }
+
+        function onClickCloseInv() {
+            location.reload();
+        }
+
+        // functions for site expences add, edit and delete
+        function onClickAddSiteExp() {
+            console.log('on click add new site expences');
+        }
+
+        function onClickEditSiteExp() {
+            console.log('on click edit site expences');
+        }
+
+        function onClickDeleteSiteExp() {
+            console.log('on click delete site expences');
+        }
 
     </script>
 

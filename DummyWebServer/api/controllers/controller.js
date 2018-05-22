@@ -23,6 +23,27 @@ exports.inv_record = function(req, res) {
     res.json(output);   // send output
 }
 
+exports.inv_put = function(req, res) {
+    console.log('---- PUT ----');
+    console.log(req.body);
+    console.log('');
+    res.json(200);
+}
+
+exports.inv_post = function(req, res) {
+    console.log('---- POST ----');
+    console.log(req.body);
+    console.log('');
+    res.json(200);
+}
+
+exports.inv_del = function(req, res) {
+    console.log('---- DELETE ----');
+    console.log(req.body);
+    console.log('');
+    res.json(200);
+}
+
 exports.cur_sites = function(req, res) {
     var output = {
         'data': [
@@ -42,6 +63,13 @@ exports.cur_sites = function(req, res) {
     }
 
     res.json(output);
+}
+
+exports.add_site = function(req, res) {
+    console.log('---- POST -----');
+    console.log(req.body);
+    console.log('');
+    res.json(200);
 }
 
 exports.stock_mtn = function(req, res) {
@@ -172,4 +200,46 @@ exports.site = function(req, res) {
     }
 
     res.json(output);
+}
+
+exports.add_site_inv = function(req, res) {
+    console.log('---- POST -----');
+    console.log(req.body);
+    console.log('');
+    res.json(200);
+}
+
+exports.edit_site_inv = function(req, res) {
+    console.log('---- PUT -----');
+    console.log(req.body);
+    console.log('');
+    res.json(200);
+}
+
+exports.del_site_inv = function(req, res) {
+    console.log('---- DELETE -----');
+    console.log(req.body);
+    console.log('');
+    res.json(200);
+}
+
+exports.add_site_exp = function(req, res) {
+    console.log('---- POST -----');
+    console.log(req.body);
+    console.log('');
+    res.json(200);
+}
+
+exports.edit_site_exp = function(req, res) {
+    console.log('---- PUT -----');
+    console.log(req.body);
+    console.log('');
+    res.json(200);
+}
+
+exports.del_site_exp = function(req, res) {
+    console.log('---- DELETE -----');
+    console.log(req.body);
+    console.log('');
+    res.json(200);
 }
