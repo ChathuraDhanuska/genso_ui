@@ -118,7 +118,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 id="topic" class="page-header">Current Sites</h1>
+                        <h1 id="topic" class="page-header">User Management</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -343,8 +343,6 @@
             var results = regex.exec(location.search);
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         };
-
-        document.getElementById('topic').innerHTML = getUrlParameter('site');
 
         function httpGetAsync(theUrl, callback)
         {
