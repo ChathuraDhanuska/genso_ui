@@ -122,103 +122,96 @@
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
+                
+                <!-- Section for user management functions -->
                 <div class="row">
-                    <div class="col-lg-3">
-                        <p><strong>Date:</strong></p>
-                        <p><strong>Price:</strong></p>
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <p><i class="fa fa-users"></i> New user requests</p>
+                            </div>
+                            <div class="panel-body">
+                                <div class="alert alert-info">
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <i class="fa fa-users" style="font-size: 25px"></i>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            6 new user requests
+                                        </div>
+                                    </div>
+                                </div>
+                                <table id="new_users" class="table table-striped table-bordered table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <td>User_1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>USER XYZ</td>
+                                        </tr>
+                                        <tr>
+                                            <td>User_2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>USER_4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>User_D</td>
+                                        </tr>
+                                        <tr>
+                                            <td>USER X</td>
+                                        </tr>
+                                    </tbody>           
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-3">
-                        <p><strong id="set1"></strong></p>
-                        <p><strong id="set2"></strong></p>
-                    </div>
+                    <div class="col-lg-8">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <p><string><i class="fa fa-user"></i> users</string></p>
+                                </div>
+                                <div class="panel-body">
+                                    <table id="user_table" class="table table-striped table-bordered table-hover" style="width: 100%">
+                                        <thead>
+                                            <tr>
+                                                <td>User Name</td>
+                                                <td>email</td>
+                                                <td>Role</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>user_amy</td>
+                                                <td>amy@genso.com</td>
+                                                <td>user</td>
+                                            </tr>
+                                            <tr>
+                                                <td>user_a</td>
+                                                <td>a_user@genso.com</td>
+                                                <td>site user</td>
+                                            </tr>
+                                            <tr>
+                                                <td>user_m</td>
+                                                <td>mmm@genso.com</td>
+                                                <td>inventory management</td>
+                                            </tr>
+                                            <tr>
+                                                <td>adminX</td>
+                                                <td>XUser@genso.com</td>
+                                                <td>admin</td>
+                                            </tr>
+                                            <tr>
+                                                <td>phyb</td>
+                                                <td>bphyx@genso.com</td>
+                                                <td>user</td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                 </div>
-
-                <hr>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h4>Inventory Cost</h4>
-                    </div>
-                </div>
-
-                <hr>
-
-                <!-- Add, edit, delete buttons -->
-                <div class="row">
-                    <button type="button" class="btn btn-default" id="add_button" onclick="onClickAddInventory()">Add</button>
-                    <button type="button" class="btn btn-default" id="edit_button" onclick="onClickEditInventory()">Edit</button>
-                    <button type="button" class="btn btn-default" id="delete_button" onclick="onClickDeleteInventory()">Delete</button>
-                </div>
-
-                <!-- /.row -->
-                <div class="row">
-                        <table id="inventory" class="table table-hover" style="width: 100%">
-                            <thead>
-                                <tr>
-                                    <th>Issued Items</th>
-                                    <th>Quantity</th>
-                                    <th>Price Purchased (per unit)</th>
-                                    <th>Cost</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <th>Total Inventory cost</th>
-                                <th></th>
-                                <th></th>
-                                <th id="total_cost_1"></th>
-                            </tfoot>
-                        </table>
-                </div>
-
-                <hr>
-
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h4>Site Expences</h4>
-                    </div>
-                </div>
-
-                <hr>
-
-                <!-- Add, edit, delete buttons -->
-                <div class="row">
-                    <button type="button" class="btn btn-default" id="add_button" onclick="onClickAddSiteExp()">Add</button>
-                    <button type="button" class="btn btn-default" id="edit_button" onclick="onClickEditSiteExp()">Edit</button>
-                    <button type="button" class="btn btn-default" id="delete_button" onclick="onClickDeleteSiteExp()">Delete</button>
-                </div>
-
-                <div class="row">
-                    <table id="expences" class="table table-hover" style="width: 100%">
-                        <thead>
-                            <tr>
-                                <th>Expence Type</th>
-                                <th>Cost</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Total site expences</th>
-                                <th id="total_cost_2"></th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-
-                <hr>
-
-                <div class="row">
-                    <div class="col-lg-3">
-                        <h4>Toal running cost:</h4>
-                    </div>
-                    <div class="col-lg-6">
-                        <p></p>
-                    </div>
-                    <div class="col-lg-3">
-                        <h4 id="total_cost" style="text-align: right"></h4>
-                    </div>
-                </div>
-
-                <hr>
 
             </div>
             <!-- /.container-fluid -->
@@ -336,288 +329,288 @@
     <script src="../dist/js/sb-admin-2.js"></script>
 
     <script>
+//  
+//         function getUrlParameter(name) {
+//             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+//             var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+//             var results = regex.exec(location.search);
+//             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+//         };
 
-        function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        };
-
-        function httpGetAsync(theUrl, callback)
-        {
-            var xmlHttp = new XMLHttpRequest();
-            xmlHttp.onreadystatechange = function() { 
-                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                    callback(xmlHttp.responseText);
-            }
-            xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-            xmlHttp.send(null);
-        }
+//         function httpGetAsync(theUrl, callback)
+//         {
+//             var xmlHttp = new XMLHttpRequest();
+//             xmlHttp.onreadystatechange = function() { 
+//                 if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+//                     callback(xmlHttp.responseText);
+//             }
+//             xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+//             xmlHttp.send(null);
+//         }
         
-        var dataSet1 = [];
-        var dataSet2 = [];
-        var rowData1 = null;
-        var rowData2 = null;
+//         var dataSet1 = [];
+//         var dataSet2 = [];
+//         var rowData1 = null;
+//         var rowData2 = null;
 
-        console.log('url: ' + 'http://localhost:3000/site?site=' + getUrlParameter('site'));
+//         console.log('url: ' + 'http://localhost:3000/site?site=' + getUrlParameter('site'));
 
-        var client = new httpGetAsync('http://localhost:3000/site?site='+ getUrlParameter('site'), function(response) {
+//         var client = new httpGetAsync('http://localhost:3000/site?site='+ getUrlParameter('site'), function(response) {
             
-            var output = JSON.parse(response);
+//             var output = JSON.parse(response);
 
-            document.getElementById('set1').innerHTML = output.awarded_date;
-            document.getElementById('set2').innerHTML = output.awarded_price;
+//             document.getElementById('set1').innerHTML = output.awarded_date;
+//             document.getElementById('set2').innerHTML = output.awarded_price;
             
-            // for first table in the page
-            for (var i = 0; i < output.inventory_cost.data.length; i++) {
-                dataSet1.push(output.inventory_cost.data[i]);
-            }
+//             // for first table in the page
+//             for (var i = 0; i < output.inventory_cost.data.length; i++) {
+//                 dataSet1.push(output.inventory_cost.data[i]);
+//             }
 
-            var table1 = $('#inventory').DataTable( {
-                data: dataSet1,
-                searching: false,
-                paging: false,
-                stateSave: true,
-                info: false,
-                responsize: false,
-                columns: [
-                    { data: "issued_items" },
-                    { data: "quantity" },
-                    { data: "price" },
-                    { data: null, width: "20%", render: function(data, type, row) {
-                        return '<p style="text-align: right">' + data.cost + '&nbsp;&nbsp;</p>';
-                    }}
-                ],
-                select: false
-            });
+//             var table1 = $('#inventory').DataTable( {
+//                 data: dataSet1,
+//                 searching: false,
+//                 paging: false,
+//                 stateSave: true,
+//                 info: false,
+//                 responsize: false,
+//                 columns: [
+//                     { data: "issued_items" },
+//                     { data: "quantity" },
+//                     { data: "price" },
+//                     { data: null, width: "20%", render: function(data, type, row) {
+//                         return '<p style="text-align: right">' + data.cost + '&nbsp;&nbsp;</p>';
+//                     }}
+//                 ],
+//                 select: false
+//             });
 
-            // row selection function for inventory table
-            $('#inventory tbody').on('click', 'tr', function() {
-                // console.log('clicked on row');
-                rowData1 = table1.row($(this)).data();
-                console.log(rowData1);
+//             // row selection function for inventory table
+//             $('#inventory tbody').on('click', 'tr', function() {
+//                 // console.log('clicked on row');
+//                 rowData1 = table1.row($(this)).data();
+//                 console.log(rowData1);
 
-                if ( $(this).hasClass('selected') ) {
-                    $(this).removeClass('selected');
-                }
-                else {
-                    table1.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }   
-            });
+//                 if ( $(this).hasClass('selected') ) {
+//                     $(this).removeClass('selected');
+//                 }
+//                 else {
+//                     table1.$('tr.selected').removeClass('selected');
+//                     $(this).addClass('selected');
+//                 }   
+//             });
 
-            document.getElementById('total_cost_1').innerHTML = '<p style="text-align: right">' + output.inventory_cost.total + '</p>';
+//             document.getElementById('total_cost_1').innerHTML = '<p style="text-align: right">' + output.inventory_cost.total + '</p>';
 
-            // for second table in the page
-            for (var i = 0; i < output.site_expences.data.length; i++) {
-                dataSet2.push(output.site_expences.data[i]);
-            }
+//             // for second table in the page
+//             for (var i = 0; i < output.site_expences.data.length; i++) {
+//                 dataSet2.push(output.site_expences.data[i]);
+//             }
 
-            var table2 = $('#expences').DataTable( {
-                data: dataSet2,
-                searching: false,
-                paging: false,
-                stateSave: true,
-                info: false,
-                columns: [
-                    { data: "expence_type" },
-                    { data: null, width: "20%", render: function(data, type, row) {
-                        return '<p style="text-align: right">' + data.cost + '&nbsp;&nbsp;</p>';
-                    }}
-                ],
-                select: false
-            });
+//             var table2 = $('#expences').DataTable( {
+//                 data: dataSet2,
+//                 searching: false,
+//                 paging: false,
+//                 stateSave: true,
+//                 info: false,
+//                 columns: [
+//                     { data: "expence_type" },
+//                     { data: null, width: "20%", render: function(data, type, row) {
+//                         return '<p style="text-align: right">' + data.cost + '&nbsp;&nbsp;</p>';
+//                     }}
+//                 ],
+//                 select: false
+//             });
 
-            // row selection function for site expences table
-            $('#expences tbody').on('click', 'tr', function() {
-                // console.log('clicked on row');
-                rowData2 = table2.row($(this)).data();
-                console.log(rowData2);
+//             // row selection function for site expences table
+//             $('#expences tbody').on('click', 'tr', function() {
+//                 // console.log('clicked on row');
+//                 rowData2 = table2.row($(this)).data();
+//                 console.log(rowData2);
 
-                if ( $(this).hasClass('selected') ) {
-                    $(this).removeClass('selected');
-                }
-                else {
-                    table2.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }   
-            });
+//                 if ( $(this).hasClass('selected') ) {
+//                     $(this).removeClass('selected');
+//                 }
+//                 else {
+//                     table2.$('tr.selected').removeClass('selected');
+//                     $(this).addClass('selected');
+//                 }   
+//             });
 
-            document.getElementById('total_cost_2').innerHTML = '<p style="text-align: right">' + output.site_expences.total + '</p>';
+//             document.getElementById('total_cost_2').innerHTML = '<p style="text-align: right">' + output.site_expences.total + '</p>';
 
-            // setup total cost per site
-            document.getElementById('total_cost').innerHTML = output.total;
-        });
+//             // setup total cost per site
+//             document.getElementById('total_cost').innerHTML = output.total;
+//         });
 
-        // prevent default action for the form
-        document.getElementById('input_form').addEventListener('click', function(event) {
-            event.preventDefault();
-        });
+//         // prevent default action for the form
+//         document.getElementById('input_form').addEventListener('click', function(event) {
+//             event.preventDefault();
+//         });
 
-        document.getElementById('exp_input').addEventListener('click', function(event) {
-            event.preventDefault();
-        });
+//         document.getElementById('exp_input').addEventListener('click', function(event) {
+//             event.preventDefault();
+//         });
 
-        // functions for site inventory add, edit, delete buttons
-        function onClickAddInventory() {
-            $('#siteModal').modal();
-            document.getElementById('modal_head').innerHTML = "Add new inventory record";
-        }
+//         // functions for site inventory add, edit, delete buttons
+//         function onClickAddInventory() {
+//             $('#siteModal').modal();
+//             document.getElementById('modal_head').innerHTML = "Add new inventory record";
+//         }
 
-        function onClickEditInventory() {
-            if(rowData1 == null) {
-                alert('No row selected');
-            } else {
-                $('#siteModal').modal();
-                document.getElementById('modal_head').innerHTML = "Edit inventory record";
-                document.getElementById('inv_input_1').value = rowData1['issued_items'];
-                document.getElementById('inv_input_2').value = rowData1['quantity'];    
-            }
-        }
+//         function onClickEditInventory() {
+//             if(rowData1 == null) {
+//                 alert('No row selected');
+//             } else {
+//                 $('#siteModal').modal();
+//                 document.getElementById('modal_head').innerHTML = "Edit inventory record";
+//                 document.getElementById('inv_input_1').value = rowData1['issued_items'];
+//                 document.getElementById('inv_input_2').value = rowData1['quantity'];    
+//             }
+//         }
 
-        function onClickDeleteInventory() {
-            if(rowData1 == null) {
-                alert('No row selected');
-            } else {
-                $.ajax({
-                    url: 'http://localhost:3000/site/inv',
-                    type: 'DELETE',
-                    data: {
-                        siteName: getUrlParameter('site'),
-                        itemName: rowData1['issued_items'],
-                        quantity: rowData1['quantity']
-                    },
-                    success: function() {
-                        console.log('DELETE request success');  
-                        location.reload();
-                    }
-                })
-            }
-        }
+//         function onClickDeleteInventory() {
+//             if(rowData1 == null) {
+//                 alert('No row selected');
+//             } else {
+//                 $.ajax({
+//                     url: 'http://localhost:3000/site/inv',
+//                     type: 'DELETE',
+//                     data: {
+//                         siteName: getUrlParameter('site'),
+//                         itemName: rowData1['issued_items'],
+//                         quantity: rowData1['quantity']
+//                     },
+//                     success: function() {
+//                         console.log('DELETE request success');  
+//                         location.reload();
+//                     }
+//                 })
+//             }
+//         }
 
-        // functions on the modal overlay
-        function onClickSubmitInv() {
-            // send POST request
-            if(document.getElementById('modal_head').innerHTML === "Add new inventory record") {
-                $.ajax({
-                    url: 'http://localhost:3000/site/inv',
-                    type: 'POST',
-                    data: {
-                        siteName: getUrlParameter('site'),
-                        itemName: document.getElementById('inv_input_1').value,
-                        quantity: document.getElementById('inv_input_2').value
-                    },
-                    success: function() {
-                        console.log('POST request success');
-                        location.reload();
-                    }
-                });
-            } else {
-                $.ajax({
-                    url: 'http://localhost:3000/site/inv',
-                    type: 'PUT',
-                    data: {
-                        siteName: getUrlParameter('site'),
-                        itemName: document.getElementById('inv_input_1').value,
-                        quantity: document.getElementById('inv_input_2').value
-                    },
-                    success: function() {
-                        console.log('POST request success');
-                        location.reload();
-                    }
-                });
-            }
-        }
+//         // functions on the modal overlay
+//         function onClickSubmitInv() {
+//             // send POST request
+//             if(document.getElementById('modal_head').innerHTML === "Add new inventory record") {
+//                 $.ajax({
+//                     url: 'http://localhost:3000/site/inv',
+//                     type: 'POST',
+//                     data: {
+//                         siteName: getUrlParameter('site'),
+//                         itemName: document.getElementById('inv_input_1').value,
+//                         quantity: document.getElementById('inv_input_2').value
+//                     },
+//                     success: function() {
+//                         console.log('POST request success');
+//                         location.reload();
+//                     }
+//                 });
+//             } else {
+//                 $.ajax({
+//                     url: 'http://localhost:3000/site/inv',
+//                     type: 'PUT',
+//                     data: {
+//                         siteName: getUrlParameter('site'),
+//                         itemName: document.getElementById('inv_input_1').value,
+//                         quantity: document.getElementById('inv_input_2').value
+//                     },
+//                     success: function() {
+//                         console.log('POST request success');
+//                         location.reload();
+//                     }
+//                 });
+//             }
+//         }
 
-        function onClickClearInv() {
-            document.getElementById('inv_input_1').value = "";
-            document.getElementById('inv_input_2').value = "";
-        }
+//         function onClickClearInv() {
+//             document.getElementById('inv_input_1').value = "";
+//             document.getElementById('inv_input_2').value = "";
+//         }
 
-        function onClickCloseInv() {
-            location.reload();
-        }
+//         function onClickCloseInv() {
+//             location.reload();
+//         }
 
-        // functions for site expences add, edit and delete
-        function onClickAddSiteExp() {
-            $('#expModal').modal();
-            document.getElementById('exp_head').innerHTML = "Add new expence";
-        }
+//         // functions for site expences add, edit and delete
+//         function onClickAddSiteExp() {
+//             $('#expModal').modal();
+//             document.getElementById('exp_head').innerHTML = "Add new expence";
+//         }
 
-        function onClickEditSiteExp() {
-            if(rowData2 == null) {
-                alert('No row selected');
-            } else {
-                $('#expModal').modal();
-                document.getElementById('exp_head').innerHTML = "Edit expences";
-                document.getElementById('exp_input_1').value = rowData2['expence_type'];
-                document.getElementById('exp_input_2').value = rowData2['cost'];
-            }
-        }
+//         function onClickEditSiteExp() {
+//             if(rowData2 == null) {
+//                 alert('No row selected');
+//             } else {
+//                 $('#expModal').modal();
+//                 document.getElementById('exp_head').innerHTML = "Edit expences";
+//                 document.getElementById('exp_input_1').value = rowData2['expence_type'];
+//                 document.getElementById('exp_input_2').value = rowData2['cost'];
+//             }
+//         }
 
-        function onClickDeleteSiteExp() {
-            if(rowData2 == null) {
-                alert('No row selected');
-            } else {
-                $.ajax({
-                    url: 'http://localhost:3000/site/exp',
-                    type: 'DELETE',
-                    data: {
-                        siteName: getUrlParameter('site'),
-                        expenceType: rowData2['expence_type'],
-                        cost: rowData2['cost']
-                    },
-                    success: function() {
-                        console.log('DELETE request success');  
-                        location.reload();
-                    }
-                })
-            }
-        }
+//         function onClickDeleteSiteExp() {
+//             if(rowData2 == null) {
+//                 alert('No row selected');
+//             } else {
+//                 $.ajax({
+//                     url: 'http://localhost:3000/site/exp',
+//                     type: 'DELETE',
+//                     data: {
+//                         siteName: getUrlParameter('site'),
+//                         expenceType: rowData2['expence_type'],
+//                         cost: rowData2['cost']
+//                     },
+//                     success: function() {
+//                         console.log('DELETE request success');  
+//                         location.reload();
+//                     }
+//                 })
+//             }
+//         }
 
-        // functions on the modal overlay
-        function onClickSubmitExp() {
-            // send POST request
-            if(document.getElementById('exp_head').innerHTML === "Add new expence") {
-                $.ajax({
-                    url: 'http://localhost:3000/site/exp',
-                    type: 'POST',
-                    data: {
-                        siteName: getUrlParameter('site'),
-                        expenseType: document.getElementById('exp_input_1').value,
-                        cost: document.getElementById('exp_input_2').value
-                    },
-                    success: function() {
-                        console.log('POST request success');
-                        location.reload();
-                    }
-                });
-            } else {
-                $.ajax({
-                    url: 'http://localhost:3000/site/exp',
-                    type: 'PUT',
-                    data: {
-                        siteName: getUrlParameter('site'),
-                        expenseType: document.getElementById('exp_input_1').value,
-                        cost: document.getElementById('exp_input_2').value
-                    },
-                    success: function() {
-                        console.log('POST request success');
-                        location.reload();
-                    }
-                });
-            }
-        }
+//         // functions on the modal overlay
+//         function onClickSubmitExp() {
+//             // send POST request
+//             if(document.getElementById('exp_head').innerHTML === "Add new expence") {
+//                 $.ajax({
+//                     url: 'http://localhost:3000/site/exp',
+//                     type: 'POST',
+//                     data: {
+//                         siteName: getUrlParameter('site'),
+//                         expenseType: document.getElementById('exp_input_1').value,
+//                         cost: document.getElementById('exp_input_2').value
+//                     },
+//                     success: function() {
+//                         console.log('POST request success');
+//                         location.reload();
+//                     }
+//                 });
+//             } else {
+//                 $.ajax({
+//                     url: 'http://localhost:3000/site/exp',
+//                     type: 'PUT',
+//                     data: {
+//                         siteName: getUrlParameter('site'),
+//                         expenseType: document.getElementById('exp_input_1').value,
+//                         cost: document.getElementById('exp_input_2').value
+//                     },
+//                     success: function() {
+//                         console.log('POST request success');
+//                         location.reload();
+//                     }
+//                 });
+//             }
+//         }
 
-        function onClickClearExp() {
-            document.getElementById('exp_input_1').value = "";
-            document.getElementById('exp_input_2').value = "";
-        }
+//         function onClickClearExp() {
+//             document.getElementById('exp_input_1').value = "";
+//             document.getElementById('exp_input_2').value = "";
+//         }
 
-        function onClickCloseExp() {
-            location.reload();
-        }
+//         function onClickCloseExp() {
+//             location.reload();
+//         } -->
 
     </script>
 
