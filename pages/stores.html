@@ -205,7 +205,36 @@
                 <div class="col-lg-9">
                     <!-- table view div -->
                     <div id="list_view">
-                        list view
+                        <table class="table table-striped table-bordered table-hover" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Quantity</td>
+                                    <td>Re-order level</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Rubic Cube</td>
+                                    <td>10</td>
+                                    <td>5</td>
+                                    <td><a href="#">+View details</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Rubic Cube</td>
+                                    <td>10</td>
+                                    <td>5</td>
+                                    <td><a href="#">+View details</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Rubic Cube</td>
+                                    <td>10</td>
+                                    <td>5</td>
+                                    <td><a href="#">+View details</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
     
                     <!-- card view div -->
@@ -525,6 +554,8 @@
                 }
                 list = list + '</li>';
             }
+
+            list = list + '<li><a href="#"><strong>+add new</strong></a></li>';
 
             side_menu.innerHTML = list; // change side menu
 

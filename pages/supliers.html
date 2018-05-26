@@ -188,19 +188,79 @@
                     <br>
                 </div>
                 <div class="row">
-                    <table id="suplier_list" class="table table-striped table-bordered table-hover" style="width: 100%">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Extn.</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                            </tr>
-                        </thead>
-                    </table>
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Alpha</a>
+                                </h4>
+                              </div>
+                              <div id="collapse1" class="panel-collapse collapse in">
+                                <div class="panel-body"><p><strong>Name: </strong>Alpha</p>
+                                    <p><strong>Phone: </strong>0112224445</p>
+                                    <p><strong>email: </strong>alpha@suplier.com</p>
+                                    <p><strong>Address: </strong>No: 1, Greck Alphabet, Lang</p>
+                                    <p><strong>Products:</strong></p>
+                                    <ul>
+                                        <li>product A</li>
+                                        <li>product B</li>
+                                        <li>product C</li>
+                                        <li>product D</li>
+                                        <li>product E</li>
+                                        <li>product F</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                <h4 class="panel-title">
+                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Beta</a>
+                                </h4>
+                              </div>
+                              <div id="collapse2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                        <p><strong>Name: </strong>Beta</p>
+                                        <p><strong>Phone: </strong>0112224445</p>
+                                        <p><strong>email: </strong>beta@suplier.com</p>
+                                        <p><strong>Address: </strong>No: 2, Greck Alphabet, Lang</p>
+                                        <p><strong>Products:</strong></p>
+                                        <ul>
+                                            <li>product A</li>
+                                            <li>product B</li>
+                                            <li>product C</li>
+                                            <li>product D</li>
+                                            <li>product E</li>
+                                            <li>product F</li>
+                                        </ul>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                              <div class="panel-heading">
+                                <h4 class="panel-title">
+                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Gamma</a>
+                                </h4>
+                              </div>
+                              <div id="collapse3" class="panel-collapse collapse">
+                                <div class="panel-body"><p><strong>Name: </strong>Gamma</p>
+                                    <p><strong>Phone: </strong>0112224445</p>
+                                    <p><strong>email: </strong>gamma@suplier.com</p>
+                                    <p><strong>Address: </strong>No: 3, Greck Alphabet, Lang</p>
+                                    <p><strong>Products:</strong></p>
+                                    <ul>
+                                        <li>product A</li>
+                                        <li>product B</li>
+                                        <li>product C</li>
+                                        <li>product D</li>
+                                        <li>product E</li>
+                                        <li>product F</li>
+                                    </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
                 </div>
             </div>
             <!-- /.container-fluid -->
@@ -231,6 +291,15 @@
     <script src="../dist/js/sb-admin-2.js"></script>
  
     <script>
+
+        var supliers_data = {
+            'data': [
+                [
+                    "lanka panels",
+                    ""    
+                ]
+            ]
+        }
 
         $(document).ready(function (){
             var table = $('#suplier_list').DataTable({
