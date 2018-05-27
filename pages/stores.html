@@ -147,7 +147,7 @@
                             <a href="supliers.html"><i class="fa fa-table fa-fw" style="font-size: 25px"></i> Supliers</a>
                         </li>
                         <li>
-                            <a href="stores.html"><i class="fa fa-edit fa-fw" style="font-size: 25px"></i> Stores</a>
+                            <a href="stores.html" id="storeslink"><i class="fa fa-edit fa-fw" style="font-size: 25px"></i> Stores</a>
                         </li>
                         <li>
                             <a href="por.html"><i class="fa fa-bar-chart-o fa-fw" style="font-size: 25px"></i> Purchase order records</a>
@@ -510,8 +510,10 @@
         $(document).ready(function() {
             onCardView();
 
+            $('#storeslink').addClass('active');
+
             // table handling for list view
-            $('#store_table').DataTable({
+            $('#store_table ').DataTable({
                 responsize: true,
                 stateSave: true,
                 select: true
