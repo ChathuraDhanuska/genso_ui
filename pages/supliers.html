@@ -181,87 +181,22 @@
                 <!-- input buttons for Add, edit, delete -->
                 <div class="row">
                     <button type="button" class="btn btn-default" id="add_button" onclick="onClickAddButton()">Add</button>
-                    <button type="button" class="btn btn-default" id="edit_button" onclick="onClickEditButton()">Edit</button>
-                    <button type="button" class="btn btn-default" id="delete_button" onclick="onClickDeleteButton()">Delete</button>
+                    <!-- <button type="button" class="btn btn-default" id="edit_button" onclick="onClickEditButton()">Edit</button> -->
+                    <!-- <button type="button" class="btn btn-default" id="delete_button" onclick="onClickDeleteButton()">Delete</button> -->
                 </div>
                 <div class="row">
                     <br>
                 </div>
-                <div class="row">
-                    <div class="panel-group" id="accordion">
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Alpha</a>
-                                </h4>
-                              </div>
-                              <div id="collapse1" class="panel-collapse collapse in">
-                                <div class="panel-body"><p><strong>Name: </strong>Alpha</p>
-                                    <p><strong>Phone: </strong>0112224445</p>
-                                    <p><strong>email: </strong>alpha@suplier.com</p>
-                                    <p><strong>Address: </strong>No: 1, Greck Alphabet, Lang</p>
-                                    <p><strong>Products:</strong></p>
-                                    <ul>
-                                        <li>product A</li>
-                                        <li>product B</li>
-                                        <li>product C</li>
-                                        <li>product D</li>
-                                        <li>product E</li>
-                                        <li>product F</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                            <div class="panel panel-default">
-                              <div class="panel-heading">
-                                <h4 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Beta</a>
-                                </h4>
-                              </div>
-                              <div id="collapse2" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                        <p><strong>Name: </strong>Beta</p>
-                                        <p><strong>Phone: </strong>0112224445</p>
-                                        <p><strong>email: </strong>beta@suplier.com</p>
-                                        <p><strong>Address: </strong>No: 2, Greck Alphabet, Lang</p>
-                                        <p><strong>Products:</strong></p>
-                                        <ul>
-                                            <li>product A</li>
-                                            <li>product B</li>
-                                            <li>product C</li>
-                                            <li>product D</li>
-                                            <li>product E</li>
-                                            <li>product F</li>
-                                        </ul>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="panel panel-default">
-                              <div class="panel-heading">
-                                <h4 class="panel-title">
-                                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Gamma</a>
-                                </h4>
-                              </div>
-                              <div id="collapse3" class="panel-collapse collapse">
-                                <div class="panel-body"><p><strong>Name: </strong>Gamma</p>
-                                    <p><strong>Phone: </strong>0112224445</p>
-                                    <p><strong>email: </strong>gamma@suplier.com</p>
-                                    <p><strong>Address: </strong>No: 3, Greck Alphabet, Lang</p>
-                                    <p><strong>Products:</strong></p>
-                                    <ul>
-                                        <li>product A</li>
-                                        <li>product B</li>
-                                        <li>product C</li>
-                                        <li>product D</li>
-                                        <li>product E</li>
-                                        <li>product F</li>
-                                    </ul>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
 
-                </div>
+                <!-- Start new section for table of supliers -->
+                <table id="supliers_table" class="table table-striped table-borderd table-hover" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <td><strong>Supliers</strong></td>
+                        </tr>
+                    </thead>
+                </table>
+
             </div>
             <!-- /.container-fluid -->
         </div>
@@ -292,54 +227,57 @@
  
     <script>
 
-        var supliers_data = {
-            'data': [
-                [
-                    "lanka panels",
-                    ""    
-                ]
-            ]
-        }
+        var supliers_data = [
+            {
+                'name': 'Alpha Suplier',
+                'phone': '0184561876',
+                'email': 'alphasupliers@sup.com',
+                'address': 'main market, supliers',
+                'products': ['product A', 'product B', 'product C']
+            },
+            {
+                'name': 'Beta Suplier',
+                'phone': '0184561876',
+                'email': 'betax@sup.com',
+                'address': 'main market, supliers',
+                'products': ['product A', 'product B', 'product C', 'product E', 'product G', 'product H']
+            },
+            {
+                'name': 'Gamma Suplier',
+                'phone': '0184561876',
+                'email': 'gammasup@sup.com',
+                'address': 'main market, supliers',
+                'products': ['product D', 'product G', 'product I']
+            },
+            {
+                'name': 'Delta Suplier',
+                'phone': '0184561876',
+                'email': 'suplierdelta@sup.com',
+                'address': 'main market, supliers',
+                'products': ['product D', 'product F', 'product X']
+            },
+            {
+                'name': 'Ceta Suplier',
+                'phone': '0184561876',
+                'email': 'cetaofceat@sup.com',
+                'address': 'main market, supliers',
+                'products': ['product X', 'product Y', 'product Z']
+            }
+        ]
 
         $(document).ready(function (){
-            var table = $('#suplier_list').DataTable({
-                'ajax': "../ajax/suplier_list.txt",
-                'columnDefs': [
-                    {
-                        'targets': 0,
-                        'checkboxes': {
-                            'selectRow': true
-                        }
-                    }
+            var table = $('#supliers_table').DataTable({
+                data: supliers_data,
+                columns: [
+                    {data: "name"}
                 ],
-                'select': {
-                    'style': 'multi'
-                },
-                'order': [[1, 'asc']]
+                responsize: true,
+                paging: false
             });
-        });
 
-        $('#suplier_list tbody').on('click', 'tr', function() {
-            var data = table.row(this).data();
-            console.log('row click: data-> ' + data);
-        })
-
-
-        // Handle form submission event
-        $('#frm-example').on('submit', function(e){
-            var form = this;
-
-            var rows_selected = table.column(0).checkboxes.selected();
-
-            // Iterate over all selected checkboxes
-            $.each(rows_selected, function(index, rowId){
-                // Create a hidden element
-                $(form).append(
-                    $('<input>')
-                        .attr('type', 'hidden')
-                        .attr('name', 'id[]')
-                        .val(rowId)
-                );
+            $('#supliers_table tbody').on('click', 'tr', function() {
+                var data = table.row(this).data();
+                console.log('row click: data-> ' + data['name']);
             });
         });
 
