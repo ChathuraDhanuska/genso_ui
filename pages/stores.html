@@ -481,6 +481,58 @@
                 </div>
             </div>
             <!-- /.container-fluid -->
+
+            <!-- Overlay section -->
+
+            <div class="modal" id="add_new_product_cat">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <!-- do nothing -->
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong>Add new product catagory</strong>
+                            </div>
+                            <div class="panel-body">
+                                <form role="form" id="add_product_from">
+                                    <div class="form-group">
+                                        <label>Catagory Type:</label>
+                                        <select name="catagory_type" id="catagory_type" class="form-control">
+                                            <option value="main">Main Catagory</option>
+                                            <option value="sub">Sub Catagory</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Product Main Catagory:</label>
+                                        <input type="text" value="" id="product_main_cat_input" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Product Sub Catagory:</label>
+                                        <input type="text" value="" id="product_sub_cat_input" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <button type="button" id="btn_save_product_cat" class="btn btn-default" onclick="onClickSaveProduct()">Save</button>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <button type="button" id="btn_clear_product_cat" class="btn btn-default" onclick="onClickClearProduct()">Clear</button>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <button type="button" id="btn_close_cat" class="btn btn-default" onclick="onClickCloseProduct()">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /# Overlay section -->
+
         </div>
         <!-- /#page-wrapper -->
 
@@ -500,6 +552,9 @@
     <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+    <!-- Datatables checkboxes JavaScript -->
+    <script src="../vendor/datatables/js/dataTables.checkboxes.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
@@ -569,7 +624,7 @@
                 list = list + '</li>';
             }
 
-            list = list + '<li><a href="#"><strong>+add new</strong></a></li>';
+            list = list + '<li><button type="button" id="item_add" class="btn btn-link" onclick="onClickAddNew()"><strong>+add new</strong></button></li>';
 
             side_menu.innerHTML = list; // change side menu
 
@@ -584,6 +639,44 @@
         function onCardView() {
             document.getElementById("list_view").style.display = "none";
             document.getElementById("card_view").style.display = "block";
+        }
+
+        function onClickAddNew() {
+            console.log('on click add new for the store list');
+            $('#add_new_product_cat').modal();
+        }
+
+        // functions for add catagoty overlay
+        function onClickSaveProduct() {
+            console.log('on click save product');
+            // location.reload();
+
+            // console log form elements
+            console.log('------------------------- output -----------------------------');
+            console.log('POST request');
+            console.log(' ~ Type: ' + document.getElementById('catagory_type').value)
+            console.log(' ~ Main: ' + document.getElementById('product_main_cat_input').value);
+            console.log(' ~ SubC: ' + document.getElementById('product_sub_cat_input').value);
+            console.log('--------------------------------------------------------------');
+
+            document.getElementById('product_main_cat_input').value = "";
+            document.getElementById('product_sub_cat_input').value = "";
+
+            $('#add_new_product_cat').modal('hide');
+
+        }
+
+        function onClickClearProduct() {
+            console.log('on click clear from');
+            document.getElementById('product_main_cat_input').value = "";
+            document.getElementById('product_sub_cat_input').value = "";
+        }
+
+        function onClickCloseProduct() {
+            console.log('on click close modal');
+            document.getElementById('product_main_cat_input').value = "";
+            document.getElementById('product_sub_cat_input').value = "";
+            $('#add_new_product_cat').modal('hide');
         }
 
     </script>
