@@ -29,6 +29,9 @@
     <!-- Custom Fonts -->
     <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!-- DataTables checkboxes CSS -->
+    <link href="../vendor/datatables/css/dataTables.checkboxes.css" rel="stylesheet" type="text/css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -189,7 +192,7 @@
                             
                             <div class="row">
                                 <button type="button" class="btn btn-default" style="margin-left: 1%" id="add_button" onclick="onClickAddButton()">Add</button>
-                                <button type="button" class="btn btn-default" style="margin-left: 1%" id="delete_button" onclick="onClickDeleteButton()">Delete</button>
+                                <!-- <button type="button" class="btn btn-default" style="margin-left: 1%" id="delete_button" onclick="onClickDeleteButton()">Delete</button> -->
                             </div>
                             <div class="row">
                                 <p></p>
@@ -212,7 +215,7 @@
                                             <td>100</td>
                                             <td>1000</td>
                                             <td>10000</td>
-                                            <td>10/05/18</td>
+                                            <td>2018-05-10</td>
                                             <td>created</td>
                                         </tr>
                                         <tr>
@@ -220,7 +223,7 @@
                                             <td>5</td>
                                             <td>125</td>
                                             <td>625</td>
-                                            <td>08/06/18</td>
+                                            <td>2018-06-04</td>
                                             <td>created</td>
                                         </tr>
                                     </tbody>
@@ -253,7 +256,7 @@
                                             <td>100</td>
                                             <td>1000</td>
                                             <td>10000</td>
-                                            <td>10/05/18</td>
+                                            <td>2018-05-07</td>
                                             <td>suplier informed</td>
                                         </tr>
                                         <tr>
@@ -261,7 +264,7 @@
                                             <td>5</td>
                                             <td>125</td>
                                             <td>625</td>
-                                            <td>08/06/18</td>
+                                            <td>2018-06-08</td>
                                             <td>suplier informed</td>
                                         </tr>
                                     </tbody>
@@ -294,7 +297,7 @@
                                             <td>100</td>
                                             <td>1000</td>
                                             <td>10000</td>
-                                            <td>10/05/18</td>
+                                            <td>2018-05-10</td>
                                             <td>approved</td>
                                         </tr>
                                         <tr>
@@ -302,7 +305,7 @@
                                             <td>5</td>
                                             <td>125</td>
                                             <td>625</td>
-                                            <td>08/06/18</td>
+                                            <td>2018-06-09</td>
                                             <td>approved</td>
                                         </tr>
                                     </tbody>
@@ -313,6 +316,256 @@
                 </div>
             </div>
             <!-- /.container-fluid -->
+
+            <!-- por created overlay -->
+
+            <div class="modal" id="created_modal">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong id="por_created_heading">Add new purchase order record</strong>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label>Name:</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="text" value="" class="from-control" id="por_created_name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label>Quantity:</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="number" value="" class="from-control" id="por_created_qty">
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label>Unit price:</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="number" value="" class="from-control" id="por_created_unitp">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label>Total Price:</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="number" value="" class="from-control" id="por_created_total" disabled>
+                                        </div> 
+                                    </div>                                   
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label>Created Date:</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="date" value="" class="from-control" id="por_created_date">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-3">
+                                        <button type="button" class="btn btn-default" id="por_created_create_btn" onclick="onClickCreate()">Create</button>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <button type="button" class="btn btn-default" id="por_created_edit_btn" onclick="onClickEdit()">Edit</button>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <button type="button" class="btn btn-default" id="por_created_delete_btn" onclick="onClickDelete()">Delete</button>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <button type="button" class="btn btn-default" id="por_created_close_btn" onclick="onClickClose()">Close</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /#por created overlay -->
+
+            <!-- por suplier informed overlay -->
+
+            <div class="modal" id="suplier_informed_modal">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong>Suplier informed purchase order record</strong>
+                            </div>
+                            <div class="panel-body">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Name:</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="text" value="" class="from-control" id="por_suplier_informed_name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Quantity:</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="number" value="" class="from-control" id="por_suplier_informed_qty">
+                                            </div>
+                                        </div>                                    
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Unit price:</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="number" value="" class="from-control" id="por_suplier_informed_unitp">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Total Price:</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="number" value="" class="from-control" id="por_suplier_informed_total" disabled>
+                                            </div> 
+                                        </div>                                   
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Created Date:</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="date" value="" class="from-control" id="por_suplier_informed_date">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default" id="por_suplier_informed_create_btn" onclick="onClickSupCreate()">Create</button>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default" id="por_suplier_informed_edit_btn" onclick="onClickSupEdit()">Edit</button>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default" id="por_suplier_informed_delete_btn" onclick="onClickSupDelete()">Delete</button>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default" id="por_suplier_informed_close_btn" onclick="onClickSupClose()">Close</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- /#por suplier informed overlay -->
+
+            <!-- por approved overlay -->
+            
+            <div class="modal" id="approved_modal">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong>Approved purchase order record</strong>
+                            </div>
+                            <div class="panel-body">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Name:</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="text" value="" class="from-control" id="por_approved_name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Quantity:</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="number" value="" class="from-control" id="por_approved_qty">
+                                            </div>
+                                        </div>                                    
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Unit price:</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="number" value="" class="from-control" id="por_approved_unitp">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Total Price:</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="number" value="" class="from-control" id="por_approved_total" disabled>
+                                            </div> 
+                                        </div>                                   
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Created Date:</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="date" value="" class="from-control" id="por_approved_date">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default" id="por_approved_create_btn" onclick="onClickApprovedCreate()">Create</button>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default" id="por_approved_edit_btn" onclick="onClickApprovedEdit()">Edit</button>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default" id="por_approved_delete_btn" onclick="onClickApprovedDelete()">Delete</button>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default" id="por_approved_close_btn" onclick="onClickApprovedClose()">Close</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- /#por approved overlay -->
+
         </div>
         <!-- /#page-wrapper -->
 
@@ -333,30 +586,208 @@
     <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
 
+    <!-- Datatables checkboxes JavaScript -->
+    <script src="../vendor/datatables/js/dataTables.checkboxes.min.js"></script>
+
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
     <script>
 
         $(document).ready(function() {
-            $('#created_table').DataTable({
+            var table1 = $('#created_table').DataTable({
                 responsize: true,
                 stateSave: true,
                 select: true
             });
 
-            $('#suplier_inf_table').DataTable({
+            // on click table click
+            $('#created_table tbody').on('click', 'tr', function() {
+                var data = table1.row(this).data();
+                console.log('data = ' + data);
+                $('#created_modal').modal();
+
+                document.getElementById('por_created_name').value = data[0];
+                document.getElementById('por_created_qty').value = data[1];
+                document.getElementById('por_created_unitp').value = data[2];
+                document.getElementById('por_created_total').value = data[3];
+                document.getElementById('por_created_date').value = data[4];
+                document.getElementById('por_created_heading').innerHTML = "Purchase order record";
+
+                document.getElementById('por_created_name').disabled = true;
+                document.getElementById('por_created_qty').disabled = true;
+                document.getElementById('por_created_unitp').disabled = true;
+                document.getElementById('por_created_total').disabled = true;
+                document.getElementById('por_created_date').disabled = true;
+
+                document.getElementById('por_created_create_btn').disabled = true;
+            });
+
+            var table2 = $('#suplier_inf_table').DataTable({
                 responsize: true,
                 stateSave: true,
                 select: true
             });
 
-            $('#approved_table').DataTable({
+            // on click table click
+            $('#suplier_inf_table tbody').on('click', 'tr', function() {
+                var data = table2.row(this).data();
+                console.log('data = ' + data);
+                $('#suplier_informed_modal').modal();
+
+                document.getElementById('por_suplier_informed_name').value = data[0];
+                document.getElementById('por_suplier_informed_qty').value = data[1];
+                document.getElementById('por_suplier_informed_unitp').value = data[2];
+                document.getElementById('por_suplier_informed_total').value = data[3];
+                document.getElementById('por_suplier_informed_date').value = data[4];
+
+                document.getElementById('por_suplier_informed_name').disabled = true;
+                document.getElementById('por_suplier_informed_qty').disabled = true;
+                document.getElementById('por_suplier_informed_unitp').disabled = true;
+                document.getElementById('por_suplier_informed_total').disabled = true;
+                document.getElementById('por_suplier_informed_date').disabled = true;
+
+                document.getElementById('por_suplier_informed_create_btn').disabled = true;
+            });
+
+            var table3 = $('#approved_table').DataTable({
                 responsize: true,
                 stateSave: true,
                 select: true
+            });
+
+            // on click table click
+            $('#approved_table tbody').on('click', 'tr', function() {
+                var data = table3.row(this).data();
+                console.log('data = ' + data);
+                $('#approved_modal').modal();
+
+                document.getElementById('por_approved_name').value = data[0];
+                document.getElementById('por_approved_qty').value = data[1];
+                document.getElementById('por_approved_unitp').value = data[2];
+                document.getElementById('por_approved_total').value = data[3];
+                document.getElementById('por_approved_date').value = data[4];
+
+                document.getElementById('por_approved_name').disabled = true;
+                document.getElementById('por_approved_qty').disabled = true;
+                document.getElementById('por_approved_unitp').disabled = true;
+                document.getElementById('por_approved_total').disabled = true;
+                document.getElementById('por_approved_date').disabled = true;
+
+                document.getElementById('por_approved_create_btn').disabled = true;
             });
         });
+
+        // actions for buttons on created tab
+        function onClickAddButton() {
+            console.log('add button pressed on created tab');
+            $('#created_modal').modal();
+            document.getElementById('por_created_edit_btn').disabled = true;
+            document.getElementById('por_created_delete_btn').disabled = true;
+
+            document.getElementById('por_created_name').value = "";
+            document.getElementById('por_created_qty').value = "";
+            document.getElementById('por_created_unitp').value = "";
+            document.getElementById('por_created_total').value = "";
+            document.getElementById('por_created_date').value = "";
+            document.getElementById('por_created_heading').innerHTML = "Add new purchase order record";
+        }
+
+        // handling created overlay
+        function onClickCreate() {
+            console.log('create btn clicked');
+        }
+
+        function onClickEdit() {
+            console.log('edit btn clicked');
+
+            document.getElementById('por_created_name').disabled = false;
+            document.getElementById('por_created_qty').disabled = false;
+            document.getElementById('por_created_unitp').disabled = false;
+            document.getElementById('por_created_total').disabled = false;
+            document.getElementById('por_created_date').disabled = false;
+
+            document.getElementById('por_created_create_btn').disabled = false;
+        }
+
+        function onClickDelete() {
+            console.log('delete btn clicked');
+            location.reload();
+        }
+
+        function onClickClose() {
+            console.log('close btn clicked');
+            $('#created_modal').modal('hide');
+            document.getElementById('por_created_name').value = "";
+            document.getElementById('por_created_qty').value = "";
+            document.getElementById('por_created_unitp').value = "";
+            document.getElementById('por_created_total').value = "";
+            document.getElementById('por_created_date').value = "";
+        }
+
+        // handling suplier informed overlay
+        function onClickSupCreate() {
+            console.log('create btn clicked');
+        }
+
+        function onClickSupEdit() {
+            console.log('edit btn clicked');
+
+            document.getElementById('por_suplier_informed_name').disabled = false;
+            document.getElementById('por_suplier_informed_qty').disabled = false;
+            document.getElementById('por_suplier_informed_unitp').disabled = false;
+            document.getElementById('por_suplier_informed_total').disabled = false;
+            document.getElementById('por_suplier_informed_date').disabled = false;
+
+            document.getElementById('por_suplier_informed_create_btn').disabled = false;
+        }
+
+        function onClickSupDelete() {
+            console.log('delete btn clicked');
+            location.reload();
+        }
+
+        function onClickSupClose() {
+            console.log('close btn clicked');
+            $('#suplier_informed_modal').modal('hide');
+            document.getElementById('por_suplier_informed_name').value = "";
+            document.getElementById('por_suplier_informed_qty').value = "";
+            document.getElementById('por_suplier_informed_unitp').value = "";
+            document.getElementById('por_suplier_informed_total').value = "";
+            document.getElementById('por_suplier_informed_date').value = "";
+        }
+
+        // handling approved overlay
+        function onClickApprovedCreate() {
+            console.log('create btn clicked');
+        }
+
+        function onClickApprovedEdit() {
+            console.log('edit btn clicked');
+
+            document.getElementById('por_approved_name').disabled = false;
+            document.getElementById('por_approved_qty').disabled = false;
+            document.getElementById('por_approved_unitp').disabled = false;
+            document.getElementById('por_approved_total').disabled = false;
+            document.getElementById('por_approved_date').disabled = false;
+
+            document.getElementById('por_approved_create_btn').disabled = false;
+        }
+
+        function onClickApprovedDelete() {
+            console.log('delete btn clicked');
+            location.reload();
+        }
+
+        function onClickApprovedClose() {
+            console.log('close btn clicked');
+            $('#approved_modal').modal('hide');
+            document.getElementById('por_approved_name').value = "";
+            document.getElementById('por_approved_qty').value = "";
+            document.getElementById('por_approved_unitp').value = "";
+            document.getElementById('por_approved_total').value = "";
+            document.getElementById('por_approved_date').value = "";
+        }
 
     </script>
 
