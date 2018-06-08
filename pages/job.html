@@ -879,6 +879,14 @@
 
     <script>
 
+        // function for get url parameter
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        };
+
         // data for system table selected row data
         var system_table_row_data = null;
 
@@ -903,6 +911,13 @@
                     $(this).addClass('selected');
                 }
             });
+
+            // read data from the url and act accordingly
+            if(getUrlParameter('task') == "view") {
+                document.getElementById('job_no').value = getUrlParameter('id');
+                document.getElementById('job_no').disabled = true;
+            }
+
         });
 
         // handling functions on system details table
