@@ -189,7 +189,7 @@
                                 
                             <div class="row">
                                 <button type="button" class="btn btn-default" style="margin-left: 1%" id="add_button" onclick="onClickAddButton()">Add</button>
-                                <button type="button" class="btn btn-default" style="margin-left: 1%" id="delete_button" onclick="onClickDeleteButton()">Delete</button>
+                                <!-- <button type="button" class="btn btn-default" style="margin-left: 1%" id="delete_button" onclick="onClickDeleteButton()">Delete</button> -->
                             </div>
                             <div class="row">
                                 <p></p>
@@ -199,16 +199,19 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
+                                            <th>Job ID</th>
                                             <th>Started date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>ABC D</td>
+                                            <td>jb-5425</td>
                                             <td>10/05/18</td>
                                         </tr>
                                         <tr>
                                             <td>XYZ</td>
+                                            <td>jb-96</td>
                                             <td>5/02/18</td>
                                         </tr>
                                     </tbody>
@@ -228,6 +231,7 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
+                                            <th>Job ID</th>
                                             <th>Created date</th>
                                             <th>Started date</th>
                                         </tr>
@@ -235,11 +239,13 @@
                                     <tbody>
                                         <tr>
                                             <td>WZYX</td>
+                                            <td>jb-231</td>
                                             <td>3/05/18</td>
                                             <td>10/05/18</td>
                                         </tr>
                                         <tr>
                                             <td>NMKDL</td>
+                                            <td>jb-56</td>
                                             <td>3/02/18</td>
                                             <td>10/03/18</td>
                                         </tr>
@@ -260,6 +266,7 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
+                                            <th>Job ID</th>
                                             <th>Created date</th>
                                             <th>Started date</th>
                                             <th>Completed date</th>
@@ -268,12 +275,14 @@
                                     <tbody>
                                         <tr>
                                             <td>SDBGS</td>
+                                            <td>jb-234</td>
                                             <td>10/01/18</td>
                                             <td>10/02/18</td>
                                             <td>10/04/18</td>
                                         </tr>
                                         <tr>
                                             <td>YUHYJ</td>
+                                            <td>jb-3674</td>
                                             <td>10/02/18</td>
                                             <td>10/03/18</td>
                                             <td>10/05/18</td>
@@ -311,10 +320,16 @@
 
     <script>
         $(document).ready(function() {
-            $('#created_table').DataTable({
+            var table1 = $('#created_table').DataTable({
                 responsize: true,
                 stateSave: true,
                 select: true
+            });
+
+            $('#created_table tbody').on('click', 'tr', function() {
+                var data =  table1.row(this).data();
+                console.log(data);
+                location.replace('job.html?task=view&id=' + data[1]);
             });
 
             $('#ongoing_table').DataTable({
@@ -323,12 +338,29 @@
                 select: true
             });
 
+            $('#ongoing_table tbody').on('click', 'tr', function() {
+                var data =  table1.row(this).data();
+                console.log(data);
+                location.replace('job.html?task=view&id=' + data[1]);
+            });
+
             $('#completed_table').DataTable({
                 responsize: true,
                 stateSave: true,
                 select: true
             });
+
+            $('#completed_table tbody').on('click', 'tr', function() {
+                var data =  table1.row(this).data();
+                console.log(data);
+                location.replace('job.html?task=view&id=' + data[1]);
+            });
         });
+
+        // handling add button for created tab
+        function onClickAddButton() {
+            location.replace('job.html?task=add');
+        }
     </script>
 
 </body>
