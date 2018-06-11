@@ -540,6 +540,47 @@
                 select: true
             });
 
+            // -------------------------------------------------------------------------------------------------------------------------------
+            // -------------------------------------------- Get Products and generate products list ------------------------------------------
+            // -------------------------------------------------------------------------------------------------------------------------------
+            
+            $.ajax({
+                url: 'http://18.218.167.32:8080/genso_backend/genso/invmgtservice/getProducts',
+                type: 'GET',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Authorization', 'Basic YWRtaW46YWRtaW4=')
+                },
+                success: function(response) {
+                    console.log('response length: ' + response.length);
+                    console.log('response[0]: ' + response[0].name);
+
+                    var product_display = document.getElementById('card_view');
+                    var product_list = "";
+
+                    for(var i = 0; i < response.length; i++) {
+  
+                        product_list += '<div class="col-lg-3"><div class="panel panel-default"><div class="panel-heading"><strong>';
+                        product_list += response[i].name + " - " + response[i].brand + " " + response[i].model;
+                        product_list += '</strong></div><div class="panel-body"><div class="card" style="width: 200px"><img class="card-img-top" style="margin-left: auto; margin-right: auto;" src="';
+                        product_list += response[i].imagePath;
+                        product_list += '" width="150px"><div class="card-body"><p class="card-text"><strong>Quantity:</strong> ';
+                        product_list += response[i].stock;
+                        product_list += '</p><p class="card-text"><strong>Re-order level:</strong> ';
+                        product_list += response[i].reorderlevel;
+                        product_list += '</p><a href="#" class="btn btn-primary">View details</a></div></div></div></div></div>';
+                    }
+
+                    product_display.innerHTML = product_list;
+                },
+                error: function(xhr) {
+                    console.log('error: ' + xhr);
+                }
+            });
+
+            // -------------------------------------------------------------------------------------------------------------------------------
+            // -------------------------------------------------------------------------------------------------------------------------------
+            // -------------------------------------------------------------------------------------------------------------------------------
+
             var side_menu_data = [
                 {
                     'name': 'panels'
