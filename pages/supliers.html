@@ -234,24 +234,16 @@
                                         <label>Products:</label>
                                         
                                         <button type="button" id="suplier_item_add" class="btn btn-link" onclick="onClickAddProduct()">Add product</button>
-                                        <button type="button" id="suplier_item_delete" class="btn btn-link" onclick="onClickDeleteProduct()">Delete product</button>
+                                        <!-- <button type="button" id="suplier_item_delete" class="btn btn-link" onclick="onClickDeleteProduct()">Delete product</button> -->
 
                                         <table id="suplier_items" class="table table-striped table-borderd table-hover" style="width: 100%">
                                             <thead>
-                                                <tr>
+                                                <tr style="display: none">
                                                     <td></td>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Sample Product 1</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Sample Product 2</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Sample Product 3</td>
-                                                </tr>
+                                            <tbody id="table_products">
+                                                
                                             </tbody>
                                         </table>
                                     </div>
@@ -283,9 +275,7 @@
             <!-- add product overlay -->
             <div class="modal" id="product_add">
                 <div class="row">
-                    <div class="col-lg-4">
-                        <!-- do nothing -->
-                    </div>
+                    <div class="col-lg-4"></div>
                     <div class="col-lg-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -340,76 +330,84 @@
  
     <script>
 
-        var supliers_data = [
-            {
-                'name': 'Alpha Suplier',
-                'phone': '0184561876',
-                'email': 'alphasupliers@sup.com',
-                'address': 'main market, supliers',
-                'products': ['product A', 'product B', 'product C']
-            },
-            {
-                'name': 'Beta Suplier',
-                'phone': '0184561876',
-                'email': 'betax@sup.com',
-                'address': 'main market, supliers',
-                'products': ['product A', 'product B', 'product C', 'product E', 'product G', 'product H']
-            },
-            {
-                'name': 'Gamma Suplier',
-                'phone': '0184561876',
-                'email': 'gammasup@sup.com',
-                'address': 'main market, supliers',
-                'products': ['product D', 'product G', 'product I']
-            },
-            {
-                'name': 'Delta Suplier',
-                'phone': '0184561876',
-                'email': 'suplierdelta@sup.com',
-                'address': 'main market, supliers',
-                'products': ['product D', 'product F', 'product X']
-            },
-            {
-                'name': 'Ceta Suplier',
-                'phone': '0184561876',
-                'email': 'cetaofceat@sup.com',
-                'address': 'main market, supliers',
-                'products': ['product X', 'product Y', 'product Z']
-            }
-        ]
+        var supliers_data = [];
 
         // Global variable set of selected row data
         var data = null;
 
+        // Global variable for product list from add/update suplier
+        var product_list = [];
+        var selected_product = null;
+
         $(document).ready(function (){
-            var table = $('#supliers_table').DataTable({
-                data: supliers_data,
-                columns: [
-                    {data: "name"}
-                ],
-                responsize: true,
-                paging: false
+            // -------------------------------------------------------------------------------------------------------
+            // --------------------------------- Get Suplier information from backend --------------------------------
+            // -------------------------------------------------------------------------------------------------------
+            $.ajax({
+                url: 'http://18.218.167.32:8080/genso_backend/genso/invmgtservice/getSuppliers',
+                type: 'GET',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Authorization', 'Basic YWRtaW46YWRtaW4=')
+                },
+                success: function(response) {
+                    for(var i = 0; i < response.length; i++) {
+                        supliers_data.push(response[i]);
+                    }
+                    
+                    var table = $('#supliers_table').DataTable({
+                        data: supliers_data,
+                        columns: [
+                            {data: "name"}
+                        ],
+                        responsize: true,
+                        paging: false
+                    });
+
+                    $('#supliers_table tbody').on('click', 'tr', function() {
+                        data = table.row(this).data();
+                        
+                        $('#suplier_modal').modal();
+                        // fill data
+                        document.getElementById('form_input_name').value = data['name'];
+                        document.getElementById('form_input_name').disabled = true;
+
+                        document.getElementById('form_input_phone').value = data['phone'];
+                        document.getElementById('form_input_phone').disabled = true;
+
+                        document.getElementById('form_input_email').value = data['email'];
+                        document.getElementById('form_input_email').disabled = true;
+
+                        document.getElementById('form_input_address').value = data['address'];
+                        document.getElementById('form_input_address').disabled = true;
+
+                        document.getElementById('suplier_modal_save').disabled = true;
+
+                        // append product list
+                        var tempString = "";
+
+                        if(data['products'] != null) {
+                            for(var i = 0; i < data['products'].length; i++) {
+                                tempString += "<tr><td>" + data['products'][i]['name'] + "</td></tr>";
+                                product_list.push(data['products'][i]['name']);
+                            }
+
+                            document.getElementById("table_products").innerHTML = tempString;
+                        }
+                    });
+                },
+                error: function(xhr) {
+                    console.log('error: ' + xhr);
+                }
             });
+            // -------------------------------------------------------------------------------------------------------
+            // -------------------------------------------------------------------------------------------------------
+            // -------------------------------------------------------------------------------------------------------
+            
+        });
 
-            $('#supliers_table tbody').on('click', 'tr', function() {
-                data = table.row(this).data();
-                
-                $('#suplier_modal').modal();
-                // fill data
-                document.getElementById('form_input_name').value = data['name'];
-                document.getElementById('form_input_name').disabled = true;
-
-                document.getElementById('form_input_phone').value = data['phone'];
-                document.getElementById('form_input_phone').disabled = true;
-
-                document.getElementById('form_input_email').value = data['email'];
-                document.getElementById('form_input_email').disabled = true;
-
-                document.getElementById('form_input_address').value = data['address'];
-                document.getElementById('form_input_address').disabled = true;
-
-                document.getElementById('suplier_modal_save').disabled = true;
-            });
+        // suplier table datatable creation
+        $('#suplier_items tbody').on('click', 'tr', function() {
+            console.log(this);
         });
 
 
@@ -418,6 +416,7 @@
             $('#suplier_modal').modal();
             document.getElementById('suplier_delete').disabled = true;
             document.getElementById('suplier_modal_edit').disabled = true;
+            document.getElementById('suplier_modal_save').disabled = false;
 
             document.getElementById('form_input_name').value = "";
             document.getElementById('form_input_phone').value = "";
@@ -443,6 +442,37 @@
         // inner form functions
         function onClickSaveModal() {
             console.log('on click modal save button');
+            // ---------------------------------------------------------------------------------------
+            // --------------------------- POST call to add suplier ----------------------------------
+            // ---------------------------------------------------------------------------------------
+
+            var settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/addSupplier",
+                "method": "POST",
+                "headers": {
+                    "Authorization": "Basic YWRtaW46YWRtaW4=",
+                    "Content-Type": "application/json",
+                    "Cache-Control": "no-cache",
+                    "Postman-Token": "624f2f3d-c92c-4130-aeab-443f516dab3e"
+                },
+                "processData": false,
+                "data": "{\n\t\"name\": \"" + document.getElementById('form_input_name').value 
+                + "\",\n\t\"email\": \"" + document.getElementById('form_input_email').value 
+                + "\",\n\t\"phone\": \"" + document.getElementById('form_input_phone').value 
+                + "\",\n\t\"address\": \"" + document.getElementById('form_input_address').value 
+                + "\",\n\t\"products\": []\n}"
+            }
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+                location.reload();
+            });
+
+            // ---------------------------------------------------------------------------------------
+            // ---------------------------------------------------------------------------------------
+            // ---------------------------------------------------------------------------------------
         }
 
         // enable edit in modal
@@ -460,8 +490,8 @@
         // close overlay
         function onClickCloseModal() {
             console.log('on click modal close button')
-            window.print();
-            // location.reload();
+            // window.print();
+            location.reload();
         }
 
         // delete modal (delete suplier)
@@ -472,6 +502,12 @@
         // product add modal
         function onClickProductAddBtn() {
             console.log('on click product add: send data to backend');
+
+            var available_products = document.getElementById("table_products").innerHTML;
+            available_products += "<tr><td>" + document.getElementById("product_name").value + "</td></tr>";
+            document.getElementById("table_products").innerHTML = available_products;
+
+            product_list.push(document.getElementById("product_name").value);
 
             $('#product_add').modal('hide');
             $('#suplier_modal').modal('show');

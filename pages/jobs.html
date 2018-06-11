@@ -319,42 +319,99 @@
     <script src="../dist/js/sb-admin-2.js"></script>
 
     <script>
+        // variables holding all data
+        var created_list = [];
+        var ongoing_list = [];
+        var completed_list = [];
+
         $(document).ready(function() {
-            var table1 = $('#created_table').DataTable({
-                responsize: true,
-                stateSave: true,
-                select: true
+
+            // ----------------------------------------------------------------------------------------------------
+            // ----------------------------------- Get jobs list --------------------------------------------------
+            // ----------------------------------------------------------------------------------------------------
+
+            $.ajax({
+                url: 'http://18.218.167.32:8080/genso_backend/genso/invmgtservice/getJobs',
+                type: 'GET',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Authorization', 'Basic YWRtaW46YWRtaW4=')
+                },
+                success: function(response) {
+                    for(var i = 0; i < response.length; i++) {
+                        if(response[i].status == "created") {
+                            created_list.push(response[i]);
+                        } else if(response[i].status == "ongoing") {
+                            ongoing_list.push(response[i]);
+                        } else if(response[i].status == "completed") {
+                            completed_list.push(response[i]);
+                        } else {
+                            console.log('un-recognized por status');
+                        }
+                    }
+
+                    // handling all tables
+                    var table1 = $('#created_table').DataTable({
+                        data: created_list,
+                        responsize: true,
+                        stateSave: true,
+                        select: true,
+                        columns: [
+                            { data: "name" },
+                            { data: "Id" },
+                            { data: "createdDate" }
+                        ]
+                    });
+
+                    $('#created_table tbody').on('click', 'tr', function() {
+                        var data =  table1.row(this).data();
+                        console.log(data);
+                        location.replace('job.html?task=view&id=' + data[1]);
+                    });
+
+                    $('#ongoing_table').DataTable({
+                        data: ongoing_list,
+                        responsize: true,
+                        stateSave: true,
+                        select: true,
+                        columns: [
+                            { data: "name" },
+                            { data: "Id" },
+                            { data: "createdDate" },
+                            { data: "agreementSignedDate" }
+                        ]
+                    });
+
+                    $('#ongoing_table tbody').on('click', 'tr', function() {
+                        var data =  table1.row(this).data();
+                        console.log(data);
+                        location.replace('job.html?task=view&id=' + data[1]);
+                    });
+
+                    $('#completed_table').DataTable({
+                        data: completed_list,
+                        responsize: true,
+                        stateSave: true,
+                        select: true,
+                        columns: [
+                            { data: "name" },
+                            { data: "Id" },
+                            { data: "createdDate" },
+                            { data: "agreementSignedDate" },
+                            { data: "expectedInstallationDate" }
+                        ]
+                    });
+
+                    $('#completed_table tbody').on('click', 'tr', function() {
+                        var data =  table1.row(this).data();
+                        console.log(data);
+                        location.replace('job.html?task=view&id=' + data[1]);
+                    });
+                }
             });
 
-            $('#created_table tbody').on('click', 'tr', function() {
-                var data =  table1.row(this).data();
-                console.log(data);
-                location.replace('job.html?task=view&id=' + data[1]);
-            });
-
-            $('#ongoing_table').DataTable({
-                responsize: true,
-                stateSave: true,
-                select: true
-            });
-
-            $('#ongoing_table tbody').on('click', 'tr', function() {
-                var data =  table1.row(this).data();
-                console.log(data);
-                location.replace('job.html?task=view&id=' + data[1]);
-            });
-
-            $('#completed_table').DataTable({
-                responsize: true,
-                stateSave: true,
-                select: true
-            });
-
-            $('#completed_table tbody').on('click', 'tr', function() {
-                var data =  table1.row(this).data();
-                console.log(data);
-                location.replace('job.html?task=view&id=' + data[1]);
-            });
+            // ----------------------------------------------------------------------------------------------------
+            // ----------------------------------------------------------------------------------------------------
+            // ----------------------------------------------------------------------------------------------------
         });
 
         // handling add button for created tab
