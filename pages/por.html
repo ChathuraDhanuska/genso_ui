@@ -595,87 +595,154 @@
     <script>
 
         $(document).ready(function() {
-            var table1 = $('#created_table').DataTable({
-                responsize: true,
-                stateSave: true,
-                select: true
-            });
 
-            // on click table click
-            $('#created_table tbody').on('click', 'tr', function() {
-                var data = table1.row(this).data();
-                console.log('data = ' + data);
-                $('#created_modal').modal();
+            var created_list = [];
+            var suplier_informed_list = [];
+            var approved_list = [];
 
-                document.getElementById('por_created_name').value = data[0];
-                document.getElementById('por_created_qty').value = data[1];
-                document.getElementById('por_created_unitp').value = data[2];
-                document.getElementById('por_created_total').value = data[3];
-                document.getElementById('por_created_date').value = data[4];
-                document.getElementById('por_created_heading').innerHTML = "Purchase order record";
+            // --------------------------------------------------------------------------------------------------------------------
+            // ------------------------------------------ Get purchase order list -------------------------------------------------
+            // --------------------------------------------------------------------------------------------------------------------
+            $.ajax({
+                url: 'http://18.218.167.32:8080/genso_backend/genso/invmgtservice/getPORs',
+                type: 'GET',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Authorization', 'Basic YWRtaW46YWRtaW4=')
+                },
+                success: function(response) {
 
-                document.getElementById('por_created_name').disabled = true;
-                document.getElementById('por_created_qty').disabled = true;
-                document.getElementById('por_created_unitp').disabled = true;
-                document.getElementById('por_created_total').disabled = true;
-                document.getElementById('por_created_date').disabled = true;
+                    console.log('get response with length: ' + response.length);
 
-                document.getElementById('por_created_create_btn').disabled = true;
-            });
+                    for(var i = 0; i < response.length; i++) {
+                        if(response[i].status == "Approved") {
+                            console.log('added to approved list');
+                            approved_list.push(response[i]);
+                        } else if(response[i].status == "Suplier informed") {
+                            suplier_informed_list.push(response[i]);
+                        } else if(response[i].status == "Created") {
+                            created_list.push(response[i]);
+                        } else {
+                            console.log('un-recognized por status');
+                        }
+                    }
 
-            var table2 = $('#suplier_inf_table').DataTable({
-                responsize: true,
-                stateSave: true,
-                select: true
-            });
+                    // ---------------------- update tables from new data ------------------------------
+                    var table1 = $('#created_table').DataTable({
+                    data: created_list,
+                    responsize: true,
+                    stateSave: true,
+                    select: true,
+                    columns: [
+                        { data: "name" },
+                        { data: "quantity" },
+                        { data: "unitPrice" },
+                        { data: "totalPrice" },
+                        { data: "dateCreated" },
+                        { data: "status" }
+                    ]
+                });
 
-            // on click table click
-            $('#suplier_inf_table tbody').on('click', 'tr', function() {
-                var data = table2.row(this).data();
-                console.log('data = ' + data);
-                $('#suplier_informed_modal').modal();
+                // on click table click
+                $('#created_table tbody').on('click', 'tr', function() {
+                    var data = table1.row(this).data();
+                    console.log('data = ' + data);
+                    $('#created_modal').modal();
 
-                document.getElementById('por_suplier_informed_name').value = data[0];
-                document.getElementById('por_suplier_informed_qty').value = data[1];
-                document.getElementById('por_suplier_informed_unitp').value = data[2];
-                document.getElementById('por_suplier_informed_total').value = data[3];
-                document.getElementById('por_suplier_informed_date').value = data[4];
+                    document.getElementById('por_created_name').value = data[0];
+                    document.getElementById('por_created_qty').value = data[1];
+                    document.getElementById('por_created_unitp').value = data[2];
+                    document.getElementById('por_created_total').value = data[3];
+                    document.getElementById('por_created_date').value = data[4];
+                    document.getElementById('por_created_heading').innerHTML = "Purchase order record";
 
-                document.getElementById('por_suplier_informed_name').disabled = true;
-                document.getElementById('por_suplier_informed_qty').disabled = true;
-                document.getElementById('por_suplier_informed_unitp').disabled = true;
-                document.getElementById('por_suplier_informed_total').disabled = true;
-                document.getElementById('por_suplier_informed_date').disabled = true;
+                    document.getElementById('por_created_name').disabled = true;
+                    document.getElementById('por_created_qty').disabled = true;
+                    document.getElementById('por_created_unitp').disabled = true;
+                    document.getElementById('por_created_total').disabled = true;
+                    document.getElementById('por_created_date').disabled = true;
 
-                document.getElementById('por_suplier_informed_create_btn').disabled = true;
-            });
+                    document.getElementById('por_created_create_btn').disabled = true;
+                });
 
-            var table3 = $('#approved_table').DataTable({
-                responsize: true,
-                stateSave: true,
-                select: true
-            });
+                var table2 = $('#suplier_inf_table').DataTable({
+                    data: suplier_informed_list,
+                    responsize: true,
+                    stateSave: true,
+                    select: true,
+                    columns: [
+                        { data: "name" },
+                        { data: "quantity" },
+                        { data: "unitPrice" },
+                        { data: "totalPrice" },
+                        { data: "dateCreated" },
+                        { data: "status" }
+                    ]
+                });
 
-            // on click table click
-            $('#approved_table tbody').on('click', 'tr', function() {
-                var data = table3.row(this).data();
-                console.log('data = ' + data);
-                $('#approved_modal').modal();
+                // on click table click
+                $('#suplier_inf_table tbody').on('click', 'tr', function() {
+                    var data = table2.row(this).data();
+                    console.log('data = ' + data);
+                    $('#suplier_informed_modal').modal();
 
-                document.getElementById('por_approved_name').value = data[0];
-                document.getElementById('por_approved_qty').value = data[1];
-                document.getElementById('por_approved_unitp').value = data[2];
-                document.getElementById('por_approved_total').value = data[3];
-                document.getElementById('por_approved_date').value = data[4];
+                    document.getElementById('por_suplier_informed_name').value = data[0];
+                    document.getElementById('por_suplier_informed_qty').value = data[1];
+                    document.getElementById('por_suplier_informed_unitp').value = data[2];
+                    document.getElementById('por_suplier_informed_total').value = data[3];
+                    document.getElementById('por_suplier_informed_date').value = data[4];
 
-                document.getElementById('por_approved_name').disabled = true;
-                document.getElementById('por_approved_qty').disabled = true;
-                document.getElementById('por_approved_unitp').disabled = true;
-                document.getElementById('por_approved_total').disabled = true;
-                document.getElementById('por_approved_date').disabled = true;
+                    document.getElementById('por_suplier_informed_name').disabled = true;
+                    document.getElementById('por_suplier_informed_qty').disabled = true;
+                    document.getElementById('por_suplier_informed_unitp').disabled = true;
+                    document.getElementById('por_suplier_informed_total').disabled = true;
+                    document.getElementById('por_suplier_informed_date').disabled = true;
 
-                document.getElementById('por_approved_create_btn').disabled = true;
-            });
+                    document.getElementById('por_suplier_informed_create_btn').disabled = true;
+                });
+
+                var table3 = $('#approved_table').DataTable({
+                    data: approved_list,
+                    responsize: true,
+                    stateSave: true,
+                    select: true,
+                    columns: [
+                        { data: "name" },
+                        { data: "quantity" },
+                        { data: "unitPrice" },
+                        { data: "totalPrice" },
+                        { data: "dateCreated" },
+                        { data: "status" }
+                    ]
+                });
+
+                // on click table click
+                $('#approved_table tbody').on('click', 'tr', function() {
+                    var data = table3.row(this).data();
+                    console.log('data = ' + data);
+                    $('#approved_modal').modal();
+
+                    document.getElementById('por_approved_name').value = data[0];
+                    document.getElementById('por_approved_qty').value = data[1];
+                    document.getElementById('por_approved_unitp').value = data[2];
+                    document.getElementById('por_approved_total').value = data[3];
+                    document.getElementById('por_approved_date').value = data[4];
+
+                    document.getElementById('por_approved_name').disabled = true;
+                    document.getElementById('por_approved_qty').disabled = true;
+                    document.getElementById('por_approved_unitp').disabled = true;
+                    document.getElementById('por_approved_total').disabled = true;
+                    document.getElementById('por_approved_date').disabled = true;
+
+                    document.getElementById('por_approved_create_btn').disabled = true;
+                });
+                },
+                error: function(xhr) {
+                    console.log('error: ' + xhr);
+                }
+            })
+            // --------------------------------------------------------------------------------------------------------------------    
+            // --------------------------------------------------------------------------------------------------------------------
+            // --------------------------------------------------------------------------------------------------------------------
         });
 
         // actions for buttons on created tab
