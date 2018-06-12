@@ -379,30 +379,19 @@
                             <div class="panel-body">
                                 <form role="form" id="add_product_from">
                                     <div class="form-group">
-                                        <label>Catagory Type:</label>
-                                        <select name="catagory_type" id="catagory_type" class="form-control">
-                                            <option value="main">Main Catagory</option>
-                                            <option value="sub">Sub Catagory</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Product Main Catagory:</label>
+                                        <label>Product Catagory:</label>
                                         <input type="text" value="" id="product_main_cat_input" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Product Sub Catagory:</label>
-                                        <input type="text" value="" id="product_sub_cat_input" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-lg-4">
-                                                <button type="button" id="btn_save_product_cat" class="btn btn-default" onclick="onClickSaveProduct()">Save</button>
+                                                <button type="button" id="btn_save_product_cat" class="btn btn-default btn-block" onclick="onClickSaveProduct()">Save</button>
                                             </div>
                                             <div class="col-lg-4">
-                                                <button type="button" id="btn_clear_product_cat" class="btn btn-default" onclick="onClickClearProduct()">Clear</button>
+                                                <button type="button" id="btn_clear_product_cat" class="btn btn-default btn-block" onclick="onClickClearProduct()">Clear</button>
                                             </div>
                                             <div class="col-lg-4">
-                                                <button type="button" id="btn_close_cat" class="btn btn-default" onclick="onClickCloseProduct()">Close</button>
+                                                <button type="button" id="btn_close_cat" class="btn btn-default btn-block" onclick="onClickCloseProduct()">Close</button>
                                             </div>
                                         </div>
                                     </div>
@@ -412,6 +401,40 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal" id="delete_product_cat">
+                    <div>
+                        <div class="col-lg-4">
+                            <!-- do nothing -->
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <strong>Delete product catagory</strong>
+                                </div>
+                                <div class="panel-body">
+                                    <form role="form" id="add_product_from">
+                                        <div class="form-group">
+                                            <label>Product Catagory:</label>
+                                            <select id="catagory_selection" class="form-control"></select>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <button type="button" id="btn_save_product_cat" class="btn btn-default btn-block" onclick="onClickDeleteProduct()">Delete</button>
+                                                </div>
+                                                <div class="col-lg-4"></div>
+                                                <div class="col-lg-4">
+                                                    <button type="button" id="btn_close_cat" class="btn btn-default btn-block" onclick="onClickCloseDelProduct()">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             <!-- /# Overlay section -->
 
@@ -425,15 +448,15 @@
                     <div class="col-lg-4">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <strong id="item_overlay_heading">Item name</strong>
+                                <strong id="item_overlay_heading">Item</strong>
                             </div>
                             <div class="panel-body">
-                                <img id="item_overlay_image" style="margin-left: auto; margin-right: auto;" src="../data/cube1.png" width="200px">
+                                <!-- <img id="item_overlay_image" style="margin-left: auto; margin-right: auto;" src="../data/cube1.png" width="200px"> -->
                                 <form role="form">
-                                    <div id="edit_enable" class="form-group">
+                                    <!-- <div id="edit_enable" class="form-group">
                                         <label>Image file:</label>
                                         <input type="file" id="item_overlay_image_file">
-                                    </div>
+                                    </div> -->
                                     <div class="form-group">
                                         <label>Name:</label>
                                         <input type="text" class="form-control" id="item_overlay_name">
@@ -460,31 +483,30 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Barcode:</label>
-                                        <input type="number" class="form-control" item-height="item_overlay_barcode">
+                                        <input type="number" class="form-control" id="item_overlay_barcode">
                                     </div>
-                                    <div id="view_only">
+                                    <!-- <div id="view_only">
                                         <label>Specfication file: </label>
-                                        <!-- create a new line -->
                                         <br>    
                                         <a href="#" id="item_overlay_filepath">FilePath</a>
                                     </div>
                                     <div id="edit_only" class="form-group">
                                         <label>Specfication file:</label>
                                         <input type="file" id="item_overlay_spec_file">
-                                    </div>
+                                    </div> -->
                                     <div class="form-group">
                                         <label>Remark:</label>
                                         <input type="text" class="form-control" id="item_overlay_remark">
                                     </div>
                                     <div class="form-group">
                                         <div class="col-lg-3">
-                                            <button type="button" class="btn btn-default" onclick="onItmOvrSave()">Save</button>
+                                            <button type="button" class="btn btn-default" onclick="onItmOvrSave()" id="add_save_btn">Save</button>
                                         </div>
                                         <div class="col-lg-3">
-                                            <button type="button" class="btn btn-default" onclick="onItmOvrEdit()">Edit</button>
+                                            <button type="button" class="btn btn-default" onclick="onItmOvrEdit()" id="add_edit_btn">Edit</button>
                                         </div>
                                         <div class="col-lg-3">
-                                            <button type="button" class="btn btn-default" onclick="onItmOvrClear()">Clear</button>
+                                            <button type="button" class="btn btn-default" onclick="onItmOveDel()" id="add_delete_btn">Delete</button>
                                         </div>
                                         <div class="col-lg-3">
                                             <button type="button" class="btn btn-default" onclick="onItmOvrClose()">Close</button>
@@ -562,12 +584,13 @@
                         product_list += '<div class="col-lg-3"><div class="panel panel-default"><div class="panel-heading"><strong>';
                         product_list += response[i].name + " - " + response[i].brand + " " + response[i].model;
                         product_list += '</strong></div><div class="panel-body"><div class="card" style="width: 200px"><img class="card-img-top" style="margin-left: auto; margin-right: auto;" src="';
-                        product_list += response[i].imagePath;
+                        // product_list += response[i].imagePath;
+                        product_list += '../data/cube1.png';        // added default for viewing purposes
                         product_list += '" width="150px"><div class="card-body"><p class="card-text"><strong>Quantity:</strong> ';
                         product_list += response[i].stock;
                         product_list += '</p><p class="card-text"><strong>Re-order level:</strong> ';
                         product_list += response[i].reorderlevel;
-                        product_list += '</p><a href="#" class="btn btn-primary">View details</a></div></div></div></div></div>';
+                        product_list += '</p><button type="button" class="btn btn-primary" onclick="onViewDetails(\'' + response[i].name + '\')">View Details</button></div></div></div></div></div>';
                     }
 
                     product_display.innerHTML = product_list;
@@ -581,41 +604,44 @@
             // -------------------------------------------------------------------------------------------------------------------------------
             // -------------------------------------------------------------------------------------------------------------------------------
 
-            var side_menu_data = [
-                {
-                    'name': 'panels'
+            var side_menu_data = [];
+
+            $.ajax({
+                url: 'http://18.218.167.32:8080/genso_backend/genso/invmgtservice/getTypeRecords?key=productcategory',
+                type: 'GET',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Authorization', 'Basic YWRtaW46YWRtaW4=')
                 },
-                {
-                    'name': 'Inverters'
-                },
-                {
-                    'name': 'cables'
-                }
-            ]
+                success: function(response) {
+                    side_menu_data = response;
 
-            var side_menu = document.getElementById('side-menu-store');
-            var list = "";
+                    var side_menu = document.getElementById('side-menu-store');
+                    var list = "";
 
-            for(var i = 0; i < side_menu_data.length; i++) {
-                list = list + '<li>';
-                list = list + '<a href="stores.html?main=' + side_menu_data[i].name + '"><strong>' + side_menu_data[i].name + '</strong></a>';
+                    for(var i = 0; i < side_menu_data.length; i++) {
+                        list = list + '<li>';
+                        list = list + '<a href="stores.html?main=' + side_menu_data[i].name + '"><strong>' + side_menu_data[i].name + '</strong></a>';
 
-                if(side_menu_data[i].sub != null) {
-                    list = list + '<ul>';
-                    for(var j = 0; j < side_menu_data[i].sub.length; j++) {
-                        var sub_item = side_menu_data[i].sub[j];
-                        list = list + '<li><a href="stores.html?main=' + side_menu_data[i].name + '&sub=' + sub_item.name + '">' + sub_item.name + '</a>';
+                        if(side_menu_data[i].sub != null) {
+                            list = list + '<ul>';
+                            for(var j = 0; j < side_menu_data[i].sub.length; j++) {
+                                var sub_item = side_menu_data[i].sub[j];
+                                list = list + '<li><a href="stores.html?main=' + side_menu_data[i].name + '&sub=' + sub_item.name + '">' + sub_item.name + '</a>';
+                            }
+                            list = list + '</ul>';
+                        }
+                        list = list + '</li>';
                     }
-                    list = list + '</ul>';
+
+                    list = list + '<li><button type="button" id="item_add" class="btn btn-link" onclick="onClickAddNew()"><strong>+add new</strong></button></li>';
+                    list = list + '<li><button type="button" id="item_add" class="btn btn-link" onclick="onClickDeleteCat()"><strong>-delete</strong></button></li>';
+
+                    side_menu.innerHTML = list; // change side menu
+                },
+                error: function(xhr) {
+
                 }
-                list = list + '</li>';
-            }
-
-            list = list + '<li><button type="button" id="item_add" class="btn btn-link" onclick="onClickAddNew()"><strong>+add new</strong></button></li>';
-            list = list + '<li><button type="button" id="item_add" class="btn btn-link" onclick="onClickAddNew()"><strong>-delete</strong></button></li>';
-
-            side_menu.innerHTML = list; // change side menu
-
+            });
         });
 
         // functions for controling views
@@ -634,36 +660,65 @@
             $('#add_new_product_cat').modal();
         }
 
+        function onClickDeleteCat() {
+            console.log('delete catagory start');
+            $('#delete_product_cat').modal();
+
+            $.ajax({
+                url: 'http://18.218.167.32:8080/genso_backend/genso/invmgtservice/getTypeRecords?key=productcategory',
+                type: 'GET',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Authorization', 'Basic YWRtaW46YWRtaW4=')
+                },
+                success: function(response) {
+                    var select = document.getElementById("catagory_selection");
+
+                    for(var i = 0; i < response.length; i++) {
+                        var option = document.createElement("option");
+                        option.value = option.text = response[i].name;
+                        select.add(option);
+                    }
+                },
+                error: function(response) {
+
+                }
+            });
+        }
+
         // functions for add catagoty overlay
         function onClickSaveProduct() {
             console.log('on click save product');
-            // location.reload();
-
-            // console log form elements
-            console.log('------------------------- output -----------------------------');
-            console.log('POST request');
-            console.log(' ~ Type: ' + document.getElementById('catagory_type').value)
-            console.log(' ~ Main: ' + document.getElementById('product_main_cat_input').value);
-            console.log(' ~ SubC: ' + document.getElementById('product_sub_cat_input').value);
-            console.log('--------------------------------------------------------------');
-
-            document.getElementById('product_main_cat_input').value = "";
-            document.getElementById('product_sub_cat_input').value = "";
-
             $('#add_new_product_cat').modal('hide');
+
+            $.ajax({
+                "async": true,
+                "crossDomain": true,
+                "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/addTypeRecord",
+                "method": "POST",
+                "headers": {
+                    "Authorization": "Basic YWRtaW46YWRtaW4=",
+                    "Content-Type": "application/json",
+                    "Cache-Control": "no-cache",
+                    "Postman-Token": "6f7cec35-7547-428d-965c-b6a0f83c4e20"
+                },
+                "processData": false,
+                "data": "{\n\t\"key\": \"productcategory\",\n\t\"name\": \"" + document.getElementById("product_main_cat_input").value + "\"\n}"
+            }).done(function (response) {
+                location.reload();
+            }).fail(function (xhr) {
+                location.reload();
+            })
 
         }
 
         function onClickClearProduct() {
             console.log('on click clear from');
             document.getElementById('product_main_cat_input').value = "";
-            document.getElementById('product_sub_cat_input').value = "";
         }
 
         function onClickCloseProduct() {
             console.log('on click close modal');
             document.getElementById('product_main_cat_input').value = "";
-            document.getElementById('product_sub_cat_input').value = "";
             $('#add_new_product_cat').modal('hide');
         }
 
@@ -679,6 +734,166 @@
 
         function onClickAddBtn() {
             $('#item_overlay').modal();
+            document.getElementById("add_edit_btn").disabled = true;
+            document.getElementById("add_delete_btn").disabled = true;
+        }
+
+        // delete overlay functions
+        function onClickDeleteProduct() {
+            console.log('on click delete item');
+            $.ajax({
+                "async": true,
+                "crossDomain": true,
+                "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/removeTypeRecord",
+                "method": "DELETE",
+                "headers": {
+                    "Authorization": "Basic YWRtaW46YWRtaW4=",
+                    "Content-Type": "application/json",
+                    "Cache-Control": "no-cache",
+                    "Postman-Token": "8d53b0eb-da88-4136-b081-12f506d440cb"
+                },
+                "processData": false,
+                "data": "{\n\t\"key\": \"productcategory\",\n\t\"name\": \"" + document.getElementById("catagory_selection").value + "\"\n}"
+            }).done(function (response) {
+                location.reload();
+            }).fail(function(xhr) {
+                location.reload();
+            });
+        }
+
+        function onClickCloseDelProduct() {
+            $('#delete_product_cat').modal('hide');
+        }
+
+        // functions for store overlay for items
+        var edit_enabled = false;
+
+        function onItmOvrSave() {
+            console.log('save selected data');
+            if(edit_enabled) {
+                $.ajax({
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/addProduct",
+                    "method": "PUT",
+                    "headers": {
+                        "Authorization": "Basic YWRtaW46YWRtaW4=",
+                        "Content-Type": "application/json",
+                        "Cache-Control": "no-cache",
+                        "Postman-Token": "8d53b0eb-da88-4136-b081-12f506d440cb"
+                    },
+                    "processData": false,
+                    "data": "{\n\t\"key\": \"productcategory\",\n\t\"name\": \"" + document.getElementById("catagory_selection").value + "\"\n}"
+                }).done(function (response) {
+                    location.reload();
+                }).fail(function(xhr) {
+                    location.reload();
+                });
+            } else {
+                $.ajax({
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/addProduct",
+                    "method": "POST",
+                    "headers": {
+                        "Authorization": "Basic YWRtaW46YWRtaW4=",
+                        "Content-Type": "application/json",
+                        "Cache-Control": "no-cache",
+                        "Postman-Token": "e7b62c7a-f81a-499d-bb8f-af3cd439b3d4"
+                    },
+                    "processData": false,
+                    "data": "{ \n\t\"barcode\": \"" + document.getElementById("item_overlay_barcode").value 
+                    + "\", \n\t\"capacity\": "+ document.getElementById("item_overlay_capacity").value
+                    +", \n\t\"catId\": \"plumbing\", \n\t\"imagePath\": \"/home/psd\", "
+                    +"\n\t\"model\": \"" + document.getElementById("item_overlay_model").value
+                    + "\", \n\t\"name\": \"" + document.getElementById("item_overlay_name").value
+                    + "\", \n\t\"remark\": \"" + document.getElementById("item_overlay_remark").value 
+                    + "\", \n\t\"reorderlevel\": " + document.getElementById("item_overlay_reorder_level").value 
+                    + ", \n\t\"specFilePath\": \"/home/isuru/asd\", \n\t\"stock\": " + document.getElementById("item_overlay_stock").value
+                    + ", \n\t\"unitPrice\": " + document.getElementById("item_overlay_unit_price").value
+                    + ", \n\t\"brand\":\"genso\", \n\t\"wattage\":\"good\" \n}"
+                }).done(function (response) {
+                    location.reload();
+                }).fail(function(xhr) {
+                    location.reload();
+                });
+            }
+        }
+
+        function onItmOvrEdit() {
+            console.log('edit btn clicked');
+            edit_enabled = true;
+        }
+
+        function onItmOveDel() {
+            console.log('clear btn clicked');
+
+            $.ajax({
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/deleteProduct",
+                    "method": "DELETE",
+                    "headers": {
+                        "Authorization": "Basic YWRtaW46YWRtaW4=",
+                        "Content-Type": "application/json",
+                        "Cache-Control": "no-cache",
+                        "Postman-Token": "e7b62c7a-f81a-499d-bb8f-af3cd439b3d4"
+                    },
+                    "processData": false,
+                    "data": "{ \n\t\"name\": \"" + document.getElementById("item_overlay_name").value + "\" \n}"
+                }).done(function (response) {
+                    location.reload();
+                }).fail(function(xhr) {
+                    location.reload();
+                });
+        }
+
+        function onItmOvrClose() {
+            console.log('close btn clicked');
+            $('#item_overlay').modal('hide');
+        }
+
+        // view details function
+        function onViewDetails(input) {
+           console.log('view details of ' + input);
+
+           $.ajax({
+                url: 'http://18.218.167.32:8080/genso_backend/genso/invmgtservice/getProducts',
+                type: 'GET',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Authorization', 'Basic YWRtaW46YWRtaW4=')
+                },
+                success: function(response) {
+                    for(var i = 0; i < response.length; i++) {
+                        if(response[i].name == input) {
+                            document.getElementById("item_overlay_barcode").value = response[i].barcode;
+                            document.getElementById("item_overlay_capacity").value = response[i].capacity;
+                            document.getElementById("item_overlay_model").value = response[i].model;
+                            document.getElementById("item_overlay_name").value = response[i].name;
+                            document.getElementById("item_overlay_remark").value = response[i].remark;
+                            document.getElementById("item_overlay_reorder_level").value = response[i].reorderlevel;
+                            document.getElementById("item_overlay_stock").value = response[i].stock;
+                            document.getElementById("item_overlay_unit_price").value = response[i].uniPrice;
+
+                            document.getElementById("item_overlay_barcode").disabled = true;
+                            document.getElementById("item_overlay_capacity").disabled = true;
+                            document.getElementById("item_overlay_model").disabled = true;
+                            document.getElementById("item_overlay_name").disabled = true;
+                            document.getElementById("item_overlay_remark").disabled = true;
+                            document.getElementById("item_overlay_reorder_level").disabled = true;
+                            document.getElementById("item_overlay_stock").disabled = true;
+                            document.getElementById("item_overlay_unit_price").disabled = true;
+
+                            $('#item_overlay').modal();
+
+                            document.getElementById("add_save_btn").disabled = true;
+                        }
+                    }
+                },
+                error: function(xhr) {
+                    console.log('error: ' + xhr);
+                }
+           });
         }
 
     </script>
