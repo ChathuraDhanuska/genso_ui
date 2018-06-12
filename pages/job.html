@@ -414,28 +414,13 @@
                                                         <td><strong>Item</strong></td>
                                                         <td><strong>Qty</strong></td>
                                                         <td><strong>Stock</strong></td>
-                                                        <td><strong>Capacity</strong></td>
+                                                        <!-- <td><strong>Capacity</strong></td> -->
                                                         <td><strong>Brand</strong></td>
                                                         <td><strong>Wattage</strong></td>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>Panel</td>
-                                                        <td>1</td>
-                                                        <td>5</td>
-                                                        <td>200</td>
-                                                        <td>Bosch</td>
-                                                        <td>250</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Inverter</td>
-                                                        <td>1</td>
-                                                        <td>8</td>
-                                                        <td>300</td>
-                                                        <td>Philips</td>
-                                                        <td>500</td>
-                                                    </tr>
+
                                                 </tbody>
                                             </table>
 
@@ -854,6 +839,109 @@
                 </div>
             </div>
             <!-- /# system details table -->
+
+            <!-- Yes No answer box -->
+
+            <div class="modal" id="yes_no_modal">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <strong id="question">You have allocated more than the amount available in the inventory. Do you want to create a new purchase record?</strong>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <button type="button" class="btn btn-default btn-block" onclick="onClickYes()">Yes</button>
+                                </div>
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-4">
+                                    <button type="button" class="btn btn-default btn-block" onclick="onClickNo()">No</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+
+            <!-- /#Yes No answer box -->
+
+            <!-- por created overlay -->
+
+            <div class="modal" id="create_modal">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong id="por_created_heading">Add new purchase order record</strong>
+                            </div>
+                            <div class="panel-body">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Name:</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="text" value="" class="from-control" id="por_created_name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Quantity:</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="number" value="" class="from-control" id="por_created_qty">
+                                            </div>
+                                        </div>                                    
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Unit price:</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="number" value="" class="from-control" id="por_created_unitp">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Total Price:</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="number" value="" class="from-control" id="por_created_total" disabled>
+                                            </div> 
+                                        </div>                                   
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <label>Created Date:</label>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input type="date" value="" class="from-control" id="por_created_date">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default btn-block" id="por_created_create_btn" onclick="onClickCreate()">Create</button>
+                                        </div>
+                                        <div class="col-lg-6"></div>
+                                        <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default btn-block" id="por_created_close_btn" onclick="onClickClose()">Close</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- /#por created overlay -->
+
         </div>
         <!-- /#page-wrapper -->
 
@@ -889,6 +977,7 @@
 
         // data for system table selected row data
         var system_table_row_data = null;
+        var system_table_data = [];
 
         $(document).ready(function() {
 
@@ -914,6 +1003,39 @@
                             document.getElementById("provider").value = response[i].billInfo.type;
                             document.getElementById("bill_area").value = response[i].billInfo.billArea;
                             document.getElementById("meter_shifting").value = response[i].billInfo.meterShifting;
+
+                            console.log(system_table_data);
+                            console.log(response[i].siteSystem.siteInventories.length);
+
+                            var system_table = $('#system_table').DataTable({
+                                data: response[i].siteSystem.siteInventories,
+                                responsize: true,
+                                stateSave: true,
+                                select: true,
+                                paging: false,
+                                searching: false,
+                                columns: [
+                                    { data: "productName" },
+                                    { data: "requiredQuantity" },
+                                    { data: "capacity" },
+                                    { data: "brand" },
+                                    { data: "wattage" }
+                                ]
+                            });
+
+                            $('#system_table tbody').on('click', 'tr', function() {
+                                system_table_row_data = system_table.row(this).data();
+                                console.log(system_table_row_data);
+
+                                if ( $(this).hasClass('selected') ) {
+                                    $(this).removeClass('selected');
+                                }
+                                else {
+                                    system_table.$('tr.selected').removeClass('selected');
+                                    $(this).addClass('selected');
+                                }
+                            });
+
                             // document.getElementById("date").value = response[i].createdDate;
                             // document.getElementById("date").value = response[i].createdDate;
                             // document.getElementById("date").value = response[i].createdDate;
@@ -937,26 +1059,7 @@
                 }
             });
 
-            var system_table = $('#system_table').DataTable({
-                responsize: true,
-                stateSave: true,
-                select: true,
-                paging: false,
-                searching: false
-            });
-
-            $('#system_table tbody').on('click', 'tr', function() {
-                system_table_row_data = system_table.row(this).data();
-                console.log(system_table_row_data);
-
-                if ( $(this).hasClass('selected') ) {
-                    $(this).removeClass('selected');
-                }
-                else {
-                    system_table.$('tr.selected').removeClass('selected');
-                    $(this).addClass('selected');
-                }
-            });
+            
 
             // read data from the url and act accordingly
             if(getUrlParameter('task') == "view") {
@@ -971,7 +1074,6 @@
             $('#system_details_modal').modal();
             document.getElementById('system_details_item').value = "";
             document.getElementById('system_details_qty').value = "";
-            location.reload();
         }
 
         function onClickDelItm() {
@@ -980,13 +1082,51 @@
 
         // handling system details table overlay buttons
         function onClickAddItem() {
+            var has_to_pass_user = false;
             console.log('on click add item to system table clicked');
             console.log('item = ' + document.getElementById('system_details_item').value);
             console.log('qty  = ' + document.getElementById('system_details_qty').value);
+
+            // get products
+            $.ajax({
+                url: 'http://18.218.167.32:8080/genso_backend/genso/invmgtservice/getProducts',
+                type: 'GET',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Authorization', 'Basic YWRtaW46YWRtaW4=')
+                },
+                success: function(response) {
+                    for(var i = 0; i < response.length; i++) {
+                        if(response[i].name == document.getElementById('system_details_item').value) {
+                            if(response[i].stock < document.getElementById('system_details_qty').value) {
+                                has_to_pass_user = true;
+                                $('#yes_no_modal').modal();
+                                $('#system_details_modal').modal('hide');
+                            }
+                        }
+                    }
+
+                    // if we don't need user concent we move to adding new item
+                    if(!has_to_pass_user) {
+
+                    }
+                },
+                error: function(xhr) {
+                    console.log('error: ' + xhr);
+                }
+            });
         }
 
         function onClickCloseItem() {
             $('#system_details_modal').modal('hide');
+        }
+
+        // yes no modal functions
+        function onClickYes() {
+            $('#create_modal').modal();
+        }
+
+        function onClickNo() {
+
         }
 
     </script>
