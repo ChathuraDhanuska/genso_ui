@@ -624,6 +624,17 @@
                         } else {
                             console.log('un-recognized por status');
                         }
+                    }for(var i = 0; i < response.length; i++) {
+                        if(response[i].status == "Approved") {
+                            console.log('added to approved list');
+                            approved_list.push(response[i]);
+                        } else if(response[i].status == "Suplier informed") {
+                            suplier_informed_list.push(response[i]);
+                        } else if(response[i].status == "Created") {
+                            created_list.push(response[i]);
+                        } else {
+                            console.log('un-recognized por status');
+                        }
                     }
 
                     // ---------------------- update tables from new data ------------------------------
@@ -648,11 +659,11 @@
                     console.log('data = ' + data);
                     $('#created_modal').modal();
 
-                    document.getElementById('por_created_name').value = data[0];
-                    document.getElementById('por_created_qty').value = data[1];
-                    document.getElementById('por_created_unitp').value = data[2];
-                    document.getElementById('por_created_total').value = data[3];
-                    document.getElementById('por_created_date').value = data[4];
+                    document.getElementById('por_created_name').value = data["name"];
+                    document.getElementById('por_created_qty').value = data["quantity"];
+                    document.getElementById('por_created_unitp').value = data["unitPrice"];
+                    document.getElementById('por_created_total').value = data["totalPrice"];
+                    document.getElementById('por_created_date').value = data["dateCreated"];
                     document.getElementById('por_created_heading').innerHTML = "Purchase order record";
 
                     document.getElementById('por_created_name').disabled = true;
@@ -685,11 +696,11 @@
                     console.log('data = ' + data);
                     $('#suplier_informed_modal').modal();
 
-                    document.getElementById('por_suplier_informed_name').value = data[0];
-                    document.getElementById('por_suplier_informed_qty').value = data[1];
-                    document.getElementById('por_suplier_informed_unitp').value = data[2];
-                    document.getElementById('por_suplier_informed_total').value = data[3];
-                    document.getElementById('por_suplier_informed_date').value = data[4];
+                    document.getElementById('por_suplier_informed_name').value = data["name"];
+                    document.getElementById('por_suplier_informed_qty').value = data["quantity"];
+                    document.getElementById('por_suplier_informed_unitp').value = data["unitPrice"];
+                    document.getElementById('por_suplier_informed_total').value = data["totalPrice"];
+                    document.getElementById('por_suplier_informed_date').value = data["dateCreated"];
 
                     document.getElementById('por_suplier_informed_name').disabled = true;
                     document.getElementById('por_suplier_informed_qty').disabled = true;
@@ -721,11 +732,11 @@
                     console.log('data = ' + data);
                     $('#approved_modal').modal();
 
-                    document.getElementById('por_approved_name').value = data[0];
-                    document.getElementById('por_approved_qty').value = data[1];
-                    document.getElementById('por_approved_unitp').value = data[2];
-                    document.getElementById('por_approved_total').value = data[3];
-                    document.getElementById('por_approved_date').value = data[4];
+                    document.getElementById('por_approved_name').value = data["name"];
+                    document.getElementById('por_approved_qty').value = data["quantity"];
+                    document.getElementById('por_approved_unitp').value = data["unitPrice"];
+                    document.getElementById('por_approved_total').value = data["totalPrice"];
+                    document.getElementById('por_approved_date').value = data["dateCreated"];
 
                     document.getElementById('por_approved_name').disabled = true;
                     document.getElementById('por_approved_qty').disabled = true;
@@ -763,6 +774,36 @@
         // handling created overlay
         function onClickCreate() {
             console.log('create btn clicked');
+            console.log("{ \n\t\"name\":\"" + document.getElementById('por_created_name').value 
+                + "\", \n\t\"dateApproved\":\"-\", \n\t\"quantity\":" + document.getElementById('por_created_qty').value 
+                + ", \n\t\"unitPrice\":" + document.getElementById('por_created_unitp').value 
+                + ", \n\t\"dateCreated\":\"" + document.getElementById('por_created_date').value 
+                + "\", \n\t\"dateSupInformed\":\"-\", \n\t\"approvedBy\":\"\", \n\t\"status\":\"Created\", \n\t\"supplierinformedBy\":\"\" \n}");
+
+            $.ajax({
+                "async": true,
+                "crossDomain": true,
+                "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/addPOR",
+                "method": "POST",
+                "headers": {
+                    "Authorization": "Basic YWRtaW46YWRtaW4=",
+                    "Content-Type": "application/json",
+                    "Cache-Control": "no-cache",
+                    "Postman-Token": "bcb3db21-0bb6-4920-a8b6-742f901efc61"
+                },
+                "processData": false,
+                "data": "{ \n\t\"name\":\"" + document.getElementById('por_created_name').value 
+                + "\", \n\t\"dateApproved\":\"" + document.getElementById('por_created_date').value 
+                + "\", \n\t\"quantity\":" + document.getElementById('por_created_qty').value 
+                + ", \n\t\"unitPrice\":" + document.getElementById('por_created_unitp').value 
+                + ", \n\t\"dateCreated\":\"" + document.getElementById('por_created_date').value 
+                + "\", \n\t\"dateSupInformed\":\"" + document.getElementById('por_created_date').value 
+                + "\", \n\t\"approvedBy\":\"\", \n\t\"status\":\"Created\", \n\t\"supplierinformedBy\":\"\" \n}"
+                }).done(function (response) {
+                    location.reload();
+                }).fail(function(xhr) {
+                    location.reload();
+                });
         }
 
         function onClickEdit() {
