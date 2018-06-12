@@ -446,28 +446,46 @@
             // --------------------------- POST call to add suplier ----------------------------------
             // ---------------------------------------------------------------------------------------
 
-            var settings = {
-                "async": true,
-                "crossDomain": true,
+            // var settings = {
+            //     "async": true,
+            //     "crossDomain": true,
+            //     "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/addSupplier",
+            //     "method": "POST",
+            //     "headers": {
+            //         "Authorization": "Basic YWRtaW46YWRtaW4=",
+            //         "Content-Type": "application/json",
+            //         "Cache-Control": "no-cache",
+            //         "Postman-Token": "624f2f3d-c92c-4130-aeab-443f516dab3e"
+            //     },
+            //     "processData": false,
+            //     "data": "{\n\t\"name\": \"" + document.getElementById('form_input_name').value 
+            //     + "\",\n\t\"email\": \"" + document.getElementById('form_input_email').value 
+            //     + "\",\n\t\"phone\": \"" + document.getElementById('form_input_phone').value 
+            //     + "\",\n\t\"address\": \"" + document.getElementById('form_input_address').value 
+            //     + "\",\n\t\"products\": []\n}"
+            // }
+
+            // $.ajax(settings).done(function (response) {
+            //     console.log(response);
+            //     location.reload();
+            // });
+
+            $.ajax({
                 "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/addSupplier",
                 "method": "POST",
                 "headers": {
                     "Authorization": "Basic YWRtaW46YWRtaW4=",
-                    "Content-Type": "application/json",
-                    "Cache-Control": "no-cache",
-                    "Postman-Token": "624f2f3d-c92c-4130-aeab-443f516dab3e"
+                    "Content-Type": "application/json"
                 },
-                "processData": false,
                 "data": "{\n\t\"name\": \"" + document.getElementById('form_input_name').value 
                 + "\",\n\t\"email\": \"" + document.getElementById('form_input_email').value 
                 + "\",\n\t\"phone\": \"" + document.getElementById('form_input_phone').value 
                 + "\",\n\t\"address\": \"" + document.getElementById('form_input_address').value 
-                + "\",\n\t\"products\": []\n}"
-            }
+                + "\",\n\t\"products\": []\n}",
 
-            $.ajax(settings).done(function (response) {
-                console.log(response);
-                location.reload();
+                success: function(response) {
+                    location.reload();
+                }
             });
 
             // ---------------------------------------------------------------------------------------
@@ -496,7 +514,26 @@
 
         // delete modal (delete suplier)
         function onClickDeleteModal() {
-            console.log('on click modal delete button');
+            console.log('delete: ' + document.getElementById("form_input_name").value);
+
+            $.ajax({
+                "async": true,
+                "crossDomain": true,
+                "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/removeSupplier",
+                "method": "DELETE",
+                "headers": {
+                    "Authorization": "Basic YWRtaW46YWRtaW4=",
+                    "Content-Type": "application/json",
+                    "Cache-Control": "no-cache"
+                },
+                "processData": false,
+                "data": "{\n\t\"name\": \"" + document.getElementById("form_input_name").value + "\"\n}"
+            }).done(function (response) {
+                console.log(response);
+                location.reload();
+            }).fail(function() {
+                location.reload();
+            })
         }
 
         // product add modal

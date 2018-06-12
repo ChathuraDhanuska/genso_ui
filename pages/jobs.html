@@ -357,7 +357,7 @@
                         select: true,
                         columns: [
                             { data: "name" },
-                            { data: "Id" },
+                            { data: "id" },
                             { data: "createdDate" }
                         ]
                     });
@@ -365,7 +365,7 @@
                     $('#created_table tbody').on('click', 'tr', function() {
                         var data =  table1.row(this).data();
                         console.log(data);
-                        location.replace('job.html?task=view&id=' + data[1]);
+                        location.replace('job.html?task=view&id=' + data['id']);
                     });
 
                     $('#ongoing_table').DataTable({
@@ -384,7 +384,7 @@
                     $('#ongoing_table tbody').on('click', 'tr', function() {
                         var data =  table1.row(this).data();
                         console.log(data);
-                        location.replace('job.html?task=view&id=' + data[1]);
+                        location.replace('job.html?task=view&id=' + data['id']);
                     });
 
                     $('#completed_table').DataTable({
@@ -404,7 +404,7 @@
                     $('#completed_table tbody').on('click', 'tr', function() {
                         var data =  table1.row(this).data();
                         console.log(data);
-                        location.replace('job.html?task=view&id=' + data[1]);
+                        location.replace('job.html?task=view&id=' + data['id']);
                     });
                 }
             });

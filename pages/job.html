@@ -891,6 +891,52 @@
         var system_table_row_data = null;
 
         $(document).ready(function() {
+
+            $.ajax({
+                url: 'http://18.218.167.32:8080/genso_backend/genso/invmgtservice/getJobs',
+                type: 'GET',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Authorization', 'Basic YWRtaW46YWRtaW4=')
+                },
+                success: function(response) {
+                    for(var i = 0; i < response.length; i++) {
+                        if(response[i].id == getUrlParameter('id')) {
+                            // if we got the correct job id fill the from
+                            document.getElementById("date").value = response[i].createdDate;
+                            document.getElementById("marketing_person").value = response[i].marketingPerson;
+                            document.getElementById("agrement_signed_date").value = response[i].agreementSignedDate;
+                            document.getElementById("expected_installation_date").value = response[i].expectedInstallationDate;
+                            document.getElementById("name").value = response[i].name;
+                            document.getElementById("address").value = response[i].siteAddress;
+                            document.getElementById("site_address").value = response[i].siteAddress;
+                            document.getElementById("contct_no").value = response[i].phone;
+                            document.getElementById("email").value = response[i].email;
+                            document.getElementById("provider").value = response[i].billInfo.type;
+                            document.getElementById("bill_area").value = response[i].billInfo.billArea;
+                            document.getElementById("meter_shifting").value = response[i].billInfo.meterShifting;
+                            // document.getElementById("date").value = response[i].createdDate;
+                            // document.getElementById("date").value = response[i].createdDate;
+                            // document.getElementById("date").value = response[i].createdDate;
+                            // document.getElementById("date").value = response[i].createdDate;
+                            // document.getElementById("date").value = response[i].createdDate;
+                            // document.getElementById("date").value = response[i].createdDate;
+                            // document.getElementById("date").value = response[i].createdDate;
+                            // document.getElementById("date").value = response[i].createdDate;
+                            // document.getElementById("date").value = response[i].createdDate;
+                            // document.getElementById("date").value = response[i].createdDate;
+                            // document.getElementById("date").value = response[i].createdDate;
+                            // document.getElementById("date").value = response[i].createdDate;
+                            // document.getElementById("date").value = response[i].createdDate;
+                            // document.getElementById("date").value = response[i].createdDate;
+                            // document.getElementById("date").value = response[i].createdDate;
+                        }
+                    }
+                },
+                error: function(xhr) {
+
+                }
+            });
+
             var system_table = $('#system_table').DataTable({
                 responsize: true,
                 stateSave: true,
