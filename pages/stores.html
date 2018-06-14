@@ -181,8 +181,9 @@
                     <div class="col-lg-11"></div>
                     <div class="col-lg-1">
                         <div class="row">
-                            <button class="btn btn-default" id="list" onclick="onListView()"><i class="fa fa-th-list"></i></button>
-                            <button class="btn btn-default" id="card" onclick="onCardView()"><i class="fa fa-th"></i></button>
+                            <!-- disabled view selection -->
+                            <!-- <button class="btn btn-default" id="list" onclick="onListView()"><i class="fa fa-th-list"></i></button> -->
+                            <!-- <button class="btn btn-default" id="card" onclick="onCardView()"><i class="fa fa-th"></i></button> -->
                         </div>
                     </div>
                 </div>
@@ -240,125 +241,7 @@
     
                     <!-- card view div -->
                     <div id="card_view">
-                        <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <strong>Rubic Cube 1</strong>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="card" style="width: 200px">
-                                        <img class="card-img-top" style="margin-left: auto; margin-right: auto;" src="../data/cube1.png" width="150px">
-                                        <div class="card-body">
-                                            <p class="card-text"><strong>Quantity:</strong> 10</p>
-                                            <p class="card-text"    ><strong>Re-order level:</strong> 5</p>
-                                            <a href="#" class="btn btn-primary">View details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <strong>Rubic Cube 2</strong>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="card" style="width: 200px">
-                                        <img class="card-img-top" style="margin-left: auto; margin-right: auto;" src="../data/cube1.png" width="150px">
-                                        <div class="card-body">
-                                            <p class="card-text"><strong>Quantity:</strong> 10</p>
-                                            <p class="card-text"    ><strong>Re-order level:</strong> 5</p>
-                                            <a href="#" class="btn btn-primary">View details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <strong>Rubic Cube 3</strong>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="card" style="width: 200px">
-                                        <img class="card-img-top" style="margin-left: auto; margin-right: auto;" src="../data/cube1.png" width="150px">
-                                        <div class="card-body">
-                                            <p class="card-text"><strong>Quantity:</strong> 10</p>
-                                            <p class="card-text"    ><strong>Re-order level:</strong> 5</p>
-                                            <a href="#" class="btn btn-primary">View details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <strong>Rubic Cube 4</strong>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="card" style="width: 200px">
-                                        <img class="card-img-top" style="margin-left: auto; margin-right: auto;" src="../data/cube1.png" width="150px">
-                                        <div class="card-body">
-                                            <p class="card-text"><strong>Quantity:</strong> 10</p>
-                                            <p class="card-text"    ><strong>Re-order level:</strong> 5</p>
-                                            <a href="#" class="btn btn-primary">View details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <strong>Rubic Cube 5</strong>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="card" style="width: 200px">
-                                        <img class="card-img-top" style="margin-left: auto; margin-right: auto;" src="../data/cube1.png" width="150px">
-                                        <div class="card-body">
-                                            <p class="card-text"><strong>Quantity:</strong> 10</p>
-                                            <p class="card-text"    ><strong>Re-order level:</strong> 5</p>
-                                            <a href="#" class="btn btn-primary">View details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <strong>Rubic Cube 6</strong>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="card" style="width: 200px">
-                                        <img class="card-img-top" style="margin-left: auto; margin-right: auto;" src="../data/cube1.png" width="150px">
-                                        <div class="card-body">
-                                            <p class="card-text"><strong>Quantity:</strong> 10</p>
-                                            <p class="card-text"    ><strong>Re-order level:</strong> 5</p>
-                                            <a href="#" class="btn btn-primary">View details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <strong>Rubic Cube 7</strong>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="card" style="width: 200px">
-                                        <img class="card-img-top" style="margin-left: auto; margin-right: auto;" src="../data/cube1.png" width="150px">
-                                        <div class="card-body">
-                                            <p class="card-text"><strong>Quantity:</strong> 10</p>
-                                            <p class="card-text"    ><strong>Re-order level:</strong> 5</p>
-                                            <a href="#" class="btn btn-primary">View details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- items goes here -->
                     </div>
                 </div>
             </div>
@@ -549,6 +432,9 @@
 
     <script>
 
+        // global variables for page
+        var edit_enabled = false;
+
         // document preparation functions
         $(document).ready(function() {
             onCardView();
@@ -585,7 +471,7 @@
                         product_list += response[i].name + " - " + response[i].brand + " " + response[i].model;
                         product_list += '</strong></div><div class="panel-body"><div class="card" style="width: 200px"><img class="card-img-top" style="margin-left: auto; margin-right: auto;" src="';
                         // product_list += response[i].imagePath;
-                        product_list += '../data/cube1.png';        // added default for viewing purposes
+                        product_list += '../data/default2.png';        // added default for viewing purposes
                         product_list += '" width="150px"><div class="card-body"><p class="card-text"><strong>Quantity:</strong> ';
                         product_list += response[i].stock;
                         product_list += '</p><p class="card-text"><strong>Re-order level:</strong> ';
@@ -731,9 +617,11 @@
         });
 
         function onClickAddBtn() {
+            edit_enabled = false;
             $('#item_overlay').modal();
             document.getElementById("add_edit_btn").disabled = true;
             document.getElementById("add_delete_btn").disabled = true;
+            document.getElementById("add_save_btn").disabled = false;
         }
 
         // delete overlay functions
@@ -762,22 +650,27 @@
         }
 
         // functions for store overlay for items
-        var edit_enabled = false;
-
         function onItmOvrSave() {
-            console.log('save selected data');
+            // console.log('save selected data');
             if(edit_enabled) {
                 $.ajax({
                     "async": true,
                     "crossDomain": true,
-                    "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/addProduct",
+                    "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/updateProduct",
                     "method": "PUT",
                     "headers": {
                         "Authorization": "Basic YWRtaW46YWRtaW4=",
                         "Content-Type": "application/json"
                     },
                     "processData": false,
-                    "data": "{\n\t\"key\": \"productcategory\",\n\t\"name\": \"" + document.getElementById("catagory_selection").value + "\"\n}"
+                    "data": "{ \n\t\"barcode\": \"" + document.getElementById("item_overlay_barcode").value 
+                    + "\",\n\t\"capacity\": " + document.getElementById("item_overlay_capacity").value 
+                    + ",\n\t\"model\": \"" + document.getElementById("item_overlay_model").value 
+                    + "\",\n\t\"name\": \"" + document.getElementById("item_overlay_name").value 
+                    + "\",\n\t\"remark\": \"" + document.getElementById("item_overlay_remark").value  
+                    + "\",\n\t\"reorderlevel\": " + document.getElementById("item_overlay_reorder_level").value  
+                    + ",\n\t\"stock\": " + document.getElementById("item_overlay_stock").value 
+                    + ",\n\t\"unitPrice\": " + document.getElementById("item_overlay_unit_price").value + "\n}"
                 }).done(function (response) {
                     location.reload();
                 }).fail(function(xhr) {
@@ -815,6 +708,17 @@
         function onItmOvrEdit() {
             console.log('edit btn clicked');
             edit_enabled = true;
+
+            document.getElementById("item_overlay_barcode").disabled = false;
+            document.getElementById("item_overlay_capacity").disabled = false;
+            document.getElementById("item_overlay_model").disabled = false;
+            document.getElementById("item_overlay_name").disabled = true;
+            document.getElementById("item_overlay_remark").disabled = false;
+            document.getElementById("item_overlay_reorder_level").disabled = false;
+            document.getElementById("item_overlay_stock").disabled = false;
+            document.getElementById("item_overlay_unit_price").disabled = false;
+
+            document.getElementById("add_save_btn").disabled = false;
         }
 
         function onItmOveDel() {
@@ -863,7 +767,7 @@
                             document.getElementById("item_overlay_remark").value = response[i].remark;
                             document.getElementById("item_overlay_reorder_level").value = response[i].reorderlevel;
                             document.getElementById("item_overlay_stock").value = response[i].stock;
-                            document.getElementById("item_overlay_unit_price").value = response[i].uniPrice;
+                            document.getElementById("item_overlay_unit_price").value = response[i].unitPrice;
 
                             document.getElementById("item_overlay_barcode").disabled = true;
                             document.getElementById("item_overlay_capacity").disabled = true;
