@@ -379,18 +379,24 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="col-lg-3">
-                                        <button type="button" class="btn btn-default" id="por_created_create_btn" onclick="onClickCreate()">Create</button>
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default btn-block" id="por_created_create_btn" onclick="onClickCreate()">Save</button>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default btn-block" id="por_created_edit_btn" onclick="onClickEdit()">Edit</button>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default btn-block" id="por_created_delete_btn" onclick="onClickDelete()">Delete</button>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default btn-block" id="por_created_close_btn" onclick="onClickClose()">Close</button>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-3">
-                                        <button type="button" class="btn btn-default" id="por_created_edit_btn" onclick="onClickEdit()">Edit</button>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <button type="button" class="btn btn-default" id="por_created_delete_btn" onclick="onClickDelete()">Delete</button>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <button type="button" class="btn btn-default" id="por_created_close_btn" onclick="onClickClose()">Close</button>
-                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-default btn-block" onclick="onClickInformSuplier()">Inform Suplier >></button>
                                 </div>
                             </form>
                         </div>
@@ -594,6 +600,9 @@
 
     <script>
 
+        var data = null;
+        var edit_enabled = false;
+
         $(document).ready(function() {
 
             var created_list = [];
@@ -624,17 +633,6 @@
                         } else {
                             console.log('un-recognized por status');
                         }
-                    }for(var i = 0; i < response.length; i++) {
-                        if(response[i].status == "Approved") {
-                            console.log('added to approved list');
-                            approved_list.push(response[i]);
-                        } else if(response[i].status == "Suplier informed") {
-                            suplier_informed_list.push(response[i]);
-                        } else if(response[i].status == "Created") {
-                            created_list.push(response[i]);
-                        } else {
-                            console.log('un-recognized por status');
-                        }
                     }
 
                     // ---------------------- update tables from new data ------------------------------
@@ -655,7 +653,7 @@
 
                 // on click table click
                 $('#created_table tbody').on('click', 'tr', function() {
-                    var data = table1.row(this).data();
+                    data = table1.row(this).data();
                     console.log('data = ' + data);
                     $('#created_modal').modal();
 
@@ -692,7 +690,7 @@
 
                 // on click table click
                 $('#suplier_inf_table tbody').on('click', 'tr', function() {
-                    var data = table2.row(this).data();
+                    data = table2.row(this).data();
                     console.log('data = ' + data);
                     $('#suplier_informed_modal').modal();
 
@@ -728,7 +726,7 @@
 
                 // on click table click
                 $('#approved_table tbody').on('click', 'tr', function() {
-                    var data = table3.row(this).data();
+                    data = table3.row(this).data();
                     console.log('data = ' + data);
                     $('#approved_modal').modal();
 
@@ -760,6 +758,7 @@
         function onClickAddButton() {
             console.log('add button pressed on created tab');
             $('#created_modal').modal();
+            edit_enabled = false;
             document.getElementById('por_created_edit_btn').disabled = true;
             document.getElementById('por_created_delete_btn').disabled = true;
 
@@ -774,51 +773,99 @@
         // handling created overlay
         function onClickCreate() {
             console.log('create btn clicked');
-            console.log("{ \n\t\"name\":\"" + document.getElementById('por_created_name').value 
-                + "\", \n\t\"dateApproved\":\"-\", \n\t\"quantity\":" + document.getElementById('por_created_qty').value 
-                + ", \n\t\"unitPrice\":" + document.getElementById('por_created_unitp').value 
-                + ", \n\t\"dateCreated\":\"" + document.getElementById('por_created_date').value 
-                + "\", \n\t\"dateSupInformed\":\"-\", \n\t\"approvedBy\":\"\", \n\t\"status\":\"Created\", \n\t\"supplierinformedBy\":\"\" \n}");
+            console.log("{\"dateApproved\": \"" + data["dateApproved"] 
+                        + "\",\"dateCreated\": \"" + document.getElementById('por_created_date').value
+                        + "\",\"dateSupInformed\": \"" + data["dateSupInformed"] 
+                        + "\",\"name\": \"" + data["name"] 
+                        + "\",\"id\": " + data["id"]
+                        + ",\"quantity\": " + document.getElementById('por_created_qty').value 
+                        + ",\"restoreInventory\": false,\"status\": \"Created\",\"unitPrice\": " 
+                        + document.getElementById("por_created_unitp").value + "}");
 
-            $.ajax({
-                "async": true,
-                "crossDomain": true,
-                "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/addPOR",
-                "method": "POST",
-                "headers": {
-                    "Authorization": "Basic YWRtaW46YWRtaW4=",
-                    "Content-Type": "application/json"
-                },
-                "processData": false,
-                "data": "{ \n\t\"name\":\"" + document.getElementById('por_created_name').value 
-                + "\", \n\t\"dateApproved\":\"" + document.getElementById('por_created_date').value 
-                + "\", \n\t\"quantity\":" + document.getElementById('por_created_qty').value 
-                + ", \n\t\"unitPrice\":" + document.getElementById('por_created_unitp').value 
-                + ", \n\t\"dateCreated\":\"" + document.getElementById('por_created_date').value 
-                + "\", \n\t\"dateSupInformed\":\"" + document.getElementById('por_created_date').value 
-                + "\", \n\t\"approvedBy\":\"\", \n\t\"status\":\"Created\", \n\t\"supplierinformedBy\":\"\" \n}"
-                }).done(function (response) {
+            if(edit_enabled) {
+                $.ajax({
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/updatePOR",
+                    "method": "PUT",
+                    "headers": {
+                        "Authorization": "Basic YWRtaW46YWRtaW4=",
+                        "Content-Type": "application/json"
+                    },
+                    "processData": false,
+                    "data": "{\"dateApproved\": \"" + data["dateApproved"] 
+                        + "\",\"dateCreated\": \"" + document.getElementById('por_created_date').value
+                        + "\",\"dateSupInformed\": \"" + data["dateSupInformed"] 
+                        + "\",\"name\": \"" + data["name"] 
+                        + "\",\"id\": " + data["id"]
+                        + ",\"quantity\": " + document.getElementById('por_created_qty').value 
+                        + ",\"restoreInventory\": false,\"status\": \"Created\",\"unitPrice\": " 
+                        + document.getElementById("por_created_unitp").value + "}"
+                }).done(function(response) {
                     location.reload();
                 }).fail(function(xhr) {
                     location.reload();
                 });
+            } else {
+                $.ajax({
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/addPOR",
+                    "method": "POST",
+                    "headers": {
+                        "Authorization": "Basic YWRtaW46YWRtaW4=",
+                        "Content-Type": "application/json"
+                    },
+                    "processData": false,
+                    "data": "{ \"name\":\"" + document.getElementById('por_created_name').value 
+                        + "\", \"dateApproved\":\"" + document.getElementById('por_created_date').value 
+                        + "\", \"quantity\":" + document.getElementById('por_created_qty').value 
+                        + ", \"unitPrice\":" + document.getElementById('por_created_unitp').value 
+                        + ", \"dateCreated\":\"" + document.getElementById('por_created_date').value 
+                        + "\", \"dateSupInformed\":\"" + document.getElementById('por_created_date').value 
+                        + "\", \"approvedBy\":\"\", \"status\":\"Created\", \"supplierinformedBy\":\"\" }"
+                }).done(function (response) {
+                    location.reload();
+                }).fail(function(xhr) {
+                    // location.reload();
+                    alert('fail');
+                });
+            }
         }
 
         function onClickEdit() {
             console.log('edit btn clicked');
 
-            document.getElementById('por_created_name').disabled = false;
+            // document.getElementById('por_created_name').disabled = false;
             document.getElementById('por_created_qty').disabled = false;
             document.getElementById('por_created_unitp').disabled = false;
-            document.getElementById('por_created_total').disabled = false;
+            // document.getElementById('por_created_total').disabled = false;
             document.getElementById('por_created_date').disabled = false;
 
             document.getElementById('por_created_create_btn').disabled = false;
+            edit_enabled = true;
         }
 
         function onClickDelete() {
             console.log('delete btn clicked');
-            location.reload();
+
+            // send delete request to the servver
+            $.ajax({
+                "async": true,
+                "crossDomain": true,
+                "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/deletePOR",
+                "method": "DELETE",
+                "headers": {
+                    "Authorization": "Basic YWRtaW46YWRtaW4=",
+                    "Content-Type": "application/json"
+                },
+                "processData": false,
+                "data": "{\"name\": \""+ data["name"] +"\",\"id\": " + data["id"] + "}"
+            }).done(function (response) {
+                locaion.reload();
+            }).fail(function (xhr) {
+                locaion.reload();
+            });
         }
 
         function onClickClose() {
@@ -893,6 +940,59 @@
             document.getElementById('por_approved_unitp').value = "";
             document.getElementById('por_approved_total').value = "";
             document.getElementById('por_approved_date').value = "";
+        }
+
+        function getCurrentDate() {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; // month is zero based
+            var yyyy = today.getFullYear();
+
+            // make sure date has two decimal places
+            if(dd < 10) {
+                dd = '0' + dd;
+            }
+
+            // make sure month has two decimal places
+            if(mm < 10) {
+                mm = '0' + mm;
+            }
+
+            return yyyy + '-' + mm + '-' + dd;
+        }
+
+        // function for handling to transfer suplier inform
+        function onClickInformSuplier() {
+            console.log('suplier informed selected');
+
+            if(edit_enabled) {
+                alert('Save changes before inform supliers');
+            } else {
+                $.ajax({
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/updatePOR",
+                    "method": "PUT",
+                    "headers": {
+                        "Authorization": "Basic YWRtaW46YWRtaW4=",
+                        "Content-Type": "application/json"
+                    },
+                    "processData": false,
+                    "data": "{\"dateApproved\": \"" + data["dateApproved"] 
+                        + "\",\"dateCreated\": \"" + document.getElementById('por_created_date').value
+                        + "\",\"dateSupInformed\": \"" + getCurrentDate() 
+                        + "\",\"name\": \"" + data["name"] 
+                        + "\",\"id\": " + data["id"]
+                        + ",\"quantity\": " + document.getElementById('por_created_qty').value 
+                        + ",\"restoreInventory\": false,\"status\": \"Suplier informed\",\"unitPrice\": " 
+                        + document.getElementById("por_created_unitp").value 
+                        + "}"
+                }).done(function(response) {
+                    location.reload();
+                }).fail(function(xhr) {
+                    location.reload();
+                });
+            }
         }
 
     </script>
