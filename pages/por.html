@@ -440,8 +440,11 @@
                                         </div>
                                     </div>
                                     <hr>
+                                    <div class="row">
+                                        <hr>
+                                    </div>
                                     <div class="form-group">
-                                        <button type="button" class="btn btn-default btn-block" onclick="onClickApprovel()">Approve</button>
+                                        <button type="button" class="btn btn-default btn-block" onclick="onClickApprovel()">Approve >></button>
                                     </div>
                                 </form>
                             </div>
@@ -614,11 +617,8 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-lg-8">
-                                            <label><strong>Print</strong></label>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <p>:</p>
+                                        <div class="col-lg-11">
+                                            <label><strong>Print a copy of request for supplier:</strong></label>
                                         </div>
                                         <div class="col-lg-1">
                                             <input type="checkbox" id="print_permission">
@@ -1092,10 +1092,12 @@
                     xhr.setRequestHeader('Authorization', 'Basic YWRtaW46YWRtaW4=')
                 },
                 success: function(response) {
-                    var option = document.createElement("option");
-                    option.text = data["name"];
-                    option.value = data["email"];
-                    document.getElementById('por_created_name').add(option);
+                    for(var i = 0; i < response.length; i++) {
+                        var option = document.createElement("option");
+                        option.text = response[i]["name"];
+                        option.value = response[i]["email"];
+                        document.getElementById('emailing_suplier').add(option);
+                    }
                 },
                 error: function(xhr) {
                     console.log('error loading suppliers list');
@@ -1104,6 +1106,10 @@
         }
 
         function runSuplierInfo() {
+
+            // if(document.getElementById("print_permission").checked) {
+            //     printInfo();
+            // }
             $.ajax({
                 "async": true,
                 "crossDomain": true,
@@ -1124,11 +1130,15 @@
                     + document.getElementById("por_created_unitp").value 
                     + "}"
             }).done(function(response) {
-                printInfo();
-                // location.reload();
+                if(document.getElementById("print_permission").checked) {
+                    printInfo();
+                }
+                location.reload();
             }).fail(function(xhr) {
-                printInfo();
-                // location.reload();
+                if(document.getElementById("print_permission").checked) {
+                    printInfo();
+                }
+                location.reload();
             });
         }
 
