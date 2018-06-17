@@ -1086,7 +1086,7 @@
             });
 
             $.ajax({
-                url: 'http://18.218.167.32:8080/genso_backend/genso/invmgtservice/getSuppliers',
+                url: 'http://18.218.167.32:8080/genso_backend/genso/invmgtservice/getSuppliersByProduct?name=' + data["name"],
                 type: 'GET',
                 beforeSend: function(xhr) {
                     xhr.setRequestHeader('Authorization', 'Basic YWRtaW46YWRtaW4=')
