@@ -218,15 +218,15 @@
                                         </div>
                                         <br>
                                         <div class="row">
-                                            <div class="col-lg-8">                 
-                                                <div class="col-lg-6">
-                                                    <p>Marketing Person:</p>
+                                            <!-- <div class="col-lg-12">                  -->
+                                                <div class="col-lg-4">
+                                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;Marketing Person:</p>
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-8">
                                                     <input id="marketing_person" type="text" class="form-control">
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-4">
+                                            <!-- </div> -->
+                                            <!-- <div class="col-lg-4">
                                                 <div class="row">
                                                     <div class="col-lg-4">
                                                         <p>Code:</p>
@@ -235,7 +235,7 @@
                                                         <input id="code" type="text" class="form-control">
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <br>
                                         <div class="row">
@@ -247,7 +247,7 @@
                                             </div>
                                         </div>
                                         <br>
-                                        <div class="row">
+                                        <!-- <div class="row">
                                             <div class="col-lg-8">                 
                                                 <div class="col-lg-6">
                                                     <p>Initial payment received:</p>
@@ -271,7 +271,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <br>
+                                        <br> -->
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <p>&nbsp;&nbsp;&nbsp;&nbsp;Expected installation date:</p>
@@ -281,7 +281,7 @@
                                             </div>
                                         </div>
                                         <br>
-                                        <div class="row">
+                                        <!-- <div class="row">
                                             <div class="col-lg-2">
                                                 <div class="col-lg-6">
                                                     <p>NIC</p>
@@ -314,331 +314,194 @@
                                                     <input id="net_metering_application" type="checkbox">
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <!-- Start second section -->
                                 <hr>
                                 
-                                <!-- Customer details -->
-                                <div class="col-lg-4">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <strong>Customer details</strong>
-                                        </div>
-                                        <div class="panel-body">
-                                            <p>Name:</p>
-                                            <input id="name" type="text" class="form-control">
-                                            <br>
-                                            <p>Address:</p>
-                                            <input id="address" type="text" class="form-control">
-                                            <br>
-                                            <p>Site Address:</p>
-                                            <input id="site_address" type="text" class="form-control">
-                                            <br>
-                                            <p>Contact No:</p>
-                                            <input id="contct_no" type="number" class="form-control">
-                                            <br>
-                                            <p>email:</p>
-                                            <input id="email" type="email" class="form-control">
-                                            <br>
-                                            <p>Connectio type:</p>
-                                            <select id="connection_type" class="form-control">
-                                                <option value="domestic">Domestic</option>
-                                                <option value="commercial">Commercial</option>
-                                                <option value="industrial">Industrial</option>
-                                                <option value="government">Government</option>
-                                                <option value="other">Other</option>
-                                            </select>
-                                            <br>
-                                            <p>Provider:</p>
-                                            <select id="provider" class="form-control">
-                                                <option value="ceb">CEB</option>
-                                                <option value="leco">LECO</option>
-                                            </select>
-                                            <br>
-                                            <p>Bill area:</p>
-                                            <input id="bill_area" type="text" class="form-control">
-                                            <br>
-                                            <p>Connection type:</p>
-                                            <select id="connection_type" class="form-control">
-                                                <option value="sp">Single Phase -SP</option>
-                                                <option value="tp30a">Three Phase -TP 30A</option>
-                                                <option value="tp60a">Three Phase -TP 60A</option>
-                                                <option value="transformers">Transformers/Bulk</option>
-                                            </select>
-                                            <br>
-                                            <p>If transformers/bulk</p>
-                                            <div class="row">
-                                                <div class="col-lg-10">
-                                                    <input id="bulk" class="form-control">
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <p>kVA</p>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <p>Name change:</p>
-                                            <select id="name_change" class="form-control">
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
-                                            </select>
-                                            <br>
-                                            <p>Connection change:</p>
-                                            <select id="connection_change" class="form-control">
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
-                                            </select>
-                                            <br>
-                                            <p>Meter shifting:</p>
-                                            <input id="meter_shifting" type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- System details -->
-                                <div class="col-lg-5">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <strong>System details</strong>
-                                        </div>
-                                        <div class="panel-body">
-                                            <button type="button" class="btn btn-default" onclick="onClickAddItm()">Add</button>
-                                            <button type="button" class="btn btn-default" onclick="onClickDelItm()">Delete</button>
-                                    
-                                            <p>&nbsp;</p>
-
-                                            <table class="table table-striped table-bordered table-hover" id="system_table" >
-                                                <thead>
-                                                    <tr>
-                                                        <td><strong>Item</strong></td>
-                                                        <td><strong>Qty</strong></td>
-                                                        <td><strong>Stock</strong></td>
-                                                        <!-- <td><strong>Capacity</strong></td> -->
-                                                        <td><strong>Brand</strong></td>
-                                                        <td><strong>Wattage</strong></td>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                </tbody>
-                                            </table>
-
-                                            <!-- <div class="row">
-                                                <div class="col-lg-3">
-                                                    <p>Panel</p>
-                                                    <input id="panel_blank" type="text" class="form-control">
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <p>&nbsp;</p>
-                                                    <input id="panel_capacity" type="text" class="form-control">
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <p>&nbsp;</p>
-                                                    <input id="panel_brand" type="text" class="form-control">
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <p>&nbsp;</p>
-                                                    <input id="panel_wattage" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-lg-3">
-                                                    <p>Inverter</p>
-                                                    <input id="inverter_blank" type="text" class="form-control">
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <p>&nbsp;</p>
-                                                    <input id="inverter_capacity" type="text" class="form-control">
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <p>&nbsp;</p>
-                                                    <input id="inverter_brand" type="text" class="form-control">
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <p>&nbsp;</p>
-                                                    <input id="inverter_wattage" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-lg-3">
-                                                    <p>Hybrid</p>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <input id="hybrid_capacity" type="text" class="form-control">
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <input id="hybrid_brand" type="text" class="form-control">
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <input id="hybrid_wattage" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-lg-3">
-                                                    <p>Battery Bank</p>
-                                                    <input id="battery_blank" type="text" class="form-control">
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <p>&nbsp;</p>
-                                                    <input id="battery_capacity" type="text" class="form-control">
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <p>&nbsp;</p>
-                                                    <input id="battery_brand" type="text" class="form-control">
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <p>&nbsp;</p>
-                                                    <input id="battery_wattage" type="text" class="form-control">
-                                                </div>
-                                            </div> -->
-                                            <hr>    
-                                            
-                                            <p>Grid solution:</p>
-                                            <select id="grid_solution" class="form-control">
-                                                <option value="na">NA</option>
-                                                <option value="nm">NM</option>
-                                                <option value="np">NP</option>
-                                            </select>
-                                            <hr>
-                                            <p>Future expand:</p>
-                                            <select id="Future_expand" class="form-control">
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
-                                            </select>
-                                            <br>
-                                            <p>If yes:</p>
-                                            <input id="Future_expand_yes" type="text" class="form-control">
-                                            <hr>
-                                            <p>Generator availability:</p>
-                                            <select id="generator_availability" class="form-control">
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
-                                            </select>
-                                            <br>
-                                            <p>Capacity:</p>
-                                            <input id="generator_capacity" type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Roof details -->
-                                <div class="col-lg-3">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <strong>Roof details</strong>
-                                        </div>
-                                        <div class="panel-body">
-                                            <p>Type:</p>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <p>Sheet</p>
-                                                </div>
-                                                <div class="col-lg-8">
-                                                    <input id="sheet" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <p>Amano</p>
-                                                </div>
-                                                <div class="col-lg-8">
-                                                    <input id="amano" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <p>Tile</p>
-                                                </div>
-                                                <div class="col-lg-8">
-                                                    <input id="tile" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <p>Slab</p>
-                                                </div>
-                                                <div class="col-lg-8">
-                                                    <input id="slab" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <p>Structure by:</p>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <p>Customer</p>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <input id="structure_by_customer" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <p>Genso</p>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <input id="structure_by_genso" type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <hr>
-
-                                            <p>Water proof:</p>
-                                            <select id="water_proof" class="form-control">
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
-                                            </select>
-                                            <hr>
-                                            <p>Height:</p>
-                                            <input id="height" type="text" class="form-control">
-                                            <br>
-                                            <p>Width:</p>
-                                            <input id="width" type="text" class="form-control">
-                                            <br>
-                                            <p>Length:</p>
-                                            <input id="length" type="text" class="form-control">
-                                            <br>
-                                            <p>Angel:</p>
-                                            <input id="angel" type="text" class="form-control">
-                                            <br>
-                                            <p>Direction:</p>
-                                            <input id="direction" type="text" class="form-control">
-                                            <br>
-                                            <p>Possiable shade:</p>
-                                            <input id="possiable_shade" type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Authorization -->
-                                <hr>
-
                                 <div class="row">
-                                    <div class="col-lg-2">
-                                        <p>Authorized by:</p>
+                                    <!-- Customer details -->
+                                <div class="col-lg-4">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <strong>Customer details</strong>
+                                            </div>
+                                            <div class="panel-body">
+                                                <p>Name:</p>
+                                                <input id="name" type="text" class="form-control">
+                                                <br>
+                                                <p>Address:</p>
+                                                <input id="address" type="text" class="form-control">
+                                                <br>
+                                                <p>Site Address:</p>
+                                                <input id="site_address" type="text" class="form-control">
+                                                <br>
+                                                <p>Contact No:</p>
+                                                <input id="contct_no" type="number" class="form-control">
+                                                <br>
+                                                <p>email:</p>
+                                                <input id="email" type="email" class="form-control">
+                                                <br>
+                                                <!-- <p>Connection type:</p>
+                                                <select id="connection_type" class="form-control">
+                                                    <option value="domestic">Domestic</option>
+                                                    <option value="commercial">Commercial</option>
+                                                    <option value="industrial">Industrial</option>
+                                                    <option value="government">Government</option>
+                                                    <option value="other">Other</option>
+                                                </select>
+                                                <br> -->
+                                                <p>Provider:</p>
+                                                <select id="provider" class="form-control">
+                                                    <option value="CEB">CEB</option>
+                                                    <option value="LECO">LECO</option>
+                                                </select>
+                                                <br>
+                                                <p>Bill area:</p>
+                                                <input id="bill_area" type="text" class="form-control">
+                                                <br>
+                                                <p>Connection type:</p>
+                                                <select id="connection_type" class="form-control">
+                                                    <option value="sp">Single Phase -SP</option>
+                                                    <option value="tp30a">Three Phase -TP 30A</option>
+                                                    <option value="tp60a">Three Phase -TP 60A</option>
+                                                    <option value="transformers">Transformers/Bulk</option>
+                                                </select>
+                                                <br>
+                                                <!-- <p>If transformers/bulk</p>
+                                                <div class="row">
+                                                    <div class="col-lg-10">
+                                                        <input id="bulk" class="form-control">
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <p>kVA</p>
+                                                    </div>
+                                                </div>
+                                                <br> -->
+                                                <p>Name change:</p>
+                                                <select id="name_change" class="form-control">
+                                                    <option value="false">Yes</option>
+                                                    <option value="true">No</option>
+                                                </select>
+                                                <br>
+                                                <p>Connection change:</p>
+                                                <select id="connection_change" class="form-control">
+                                                    <option value="false">Yes</option>
+                                                    <option value="true">No</option>
+                                                </select>
+                                                <br>
+                                                <p>Meter shifting:</p>
+                                                <input id="meter_shifting" type="text" class="form-control">
+                                            </div>
+                                        </div>
                                     </div>
+    
+                                    <!-- System details -->
                                     <div class="col-lg-5">
-                                        <div class="col-lg-3">
-                                            <p>Name:</p>
-                                        </div>
-                                        <div class="col-lg-9">
-                                            <input id="auth_name" type="text" class="form-control">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <strong>System details</strong>
+                                            </div>
+                                            <div class="panel-body">
+                                                <button type="button" class="btn btn-default" onclick="onClickAddItm()">Add</button>
+                                                <button type="button" class="btn btn-default" onclick="onClickDelItm()">Delete</button>
+                                        
+                                                <p>&nbsp;</p>
+    
+                                                <table class="table table-striped table-bordered table-hover" id="system_table" >
+                                                    <thead>
+                                                        <tr>
+                                                            <td><strong>Item</strong></td>
+                                                            <td><strong>Qty</strong></td>
+                                                            <td><strong>Stock</strong></td>
+                                                            <!-- <td><strong>Capacity</strong></td> -->
+                                                            <td><strong>Brand</strong></td>
+                                                            <td><strong>Wattage</strong></td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+    
+                                                    </tbody>
+                                                </table>
+                                                <hr>    
+                                                
+                                                <p>Grid solution:</p>
+                                                <select id="grid_solution" class="form-control">
+                                                    <option value="NA">NA</option>
+                                                    <option value="NM">NM</option>
+                                                    <option value="NP">NP</option>
+                                                </select>
+                                                <hr>
+                                                <p>Future expand:</p>
+                                                <select id="Future_expand" class="form-control">
+                                                    <option value=false>Yes</option>
+                                                    <option value=true>No</option>
+                                                </select>
+                                                <!-- <br>
+                                                <p>If yes:</p>
+                                                <input id="Future_expand_yes" type="text" class="form-control"> -->
+                                                <hr>
+                                                <p>Generator availability:</p>
+                                                <select id="generator_availability" class="form-control">
+                                                    <option value="true">No</option>
+                                                    <option value="false">Yes</option>
+                                                </select>
+                                                <!-- <br> -->
+                                                <!-- <p>Capacity:</p>
+                                                <input id="generator_capacity" type="text" class="form-control"> -->
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-5">
-                                        <div class="col-lg-3">
-                                            <p>Date:</p>
-                                        </div>
-                                        <div class="col-lg-9">
-                                            <input id="auth_date" type="date" class="form-control">
+    
+                                    <!-- Roof details -->
+                                    <div class="col-lg-3">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <strong>Roof details</strong>
+                                            </div>
+                                            <div class="panel-body">
+                                                <!-- roof selection -->
+                                                <p>Type:</p>
+                                                <select id="roof_type" class="form-control">
+                                                    <option value="sheet">sheet</option>
+                                                    <option value="amano">amano</option>
+                                                    <option value="tile">tile</option>
+                                                    <option value="slab">slab</option>
+                                                </select>
+                                                <br>
+    
+                                                <p>Structure by:</p>
+                                                <select id="structure_by" class="form-control">
+                                                    <option value="genso">genso</option>
+                                                    <option value="customer">customer</option>
+                                                </select>
+                                                <br>
+                                                
+                                                <p>Water proof:</p>
+                                                <select id="water_proof" class="form-control">
+                                                    <option value="false">Yes</option>
+                                                    <option value="true">No</option>
+                                                </select>
+                                                <hr>
+                                                <p>Height:</p>
+                                                <input id="height" type="text" class="form-control">
+                                                <br>
+                                                <p>Width:</p>
+                                                <input id="width" type="text" class="form-control">
+                                                <br>
+                                                <p>Length:</p>
+                                                <input id="length" type="text" class="form-control">
+                                                <br>
+                                                <p>Angle:</p>
+                                                <input id="angel" type="text" class="form-control">
+                                                <br>
+                                                <p>Direction:</p>
+                                                <input id="direction" type="text" class="form-control">
+                                                <br>
+                                                <p>Possiable shade:</p>
+                                                <input id="possiable_shade" type="text" class="form-control">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -647,160 +510,69 @@
                                 <hr>
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <strong><p style="text-align: center;">Operation planning</p></strong>
+                                        <strong><p style="text-align: center;">Operations planning</p></strong>
                                     </div>
                                     <div class="panel-body">
-                                        <!-- material availability -->
-                                        <div class="col-lg-6">
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <p>Material availability</p>
-                                                </div>
-                                                <div class="col-lg-8">
-                                                    <div class="row">
-                                                        <div class="col-lg-4">Panel:</div>
-                                                        <div class="col-lg-8">
-                                                            <select id="panel_availability" class="form-control">
-                                                                <option value="yes">Yes</option>
-                                                                <option value="no">No</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <br>
-                                                    <div class="row">
-                                                        <div class="col-lg-4">Inverter:</div>
-                                                        <div class="col-lg-8">
-                                                            <select id="inverter_availability" class="form-control">
-                                                                <option value="yes">Yes</option>
-                                                                <option value="no">No</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <p>Project Deadline:</p>
-                                                </div>
-                                                <div class="col-lg-8">
-                                                    <input id="project_deadline" type="date" class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <button type="button" class="btn btn-default btn-default" onclick="onClickAddOpr()">Add</button>
+                                        <button type="button" class="btn btn-default btn-default" onclick="onClickDelOpr()">Delete</button>
+                                        
+                                        <p>&nbsp;</p>
 
-                                        <!-- planning installation -->
-                                        <div class="col-lg-6">
-                                            <div class="col-lg-4">
-                                                <p>Planned install (date):</p>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <p>Railing:</p>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <input id="railing_installation_date" type="date" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <p>Roof structure:</p>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <input id="roof_structure_installation_date" type="date" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <p>Wiring:</p>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <input id="wiring_installation_date" type="date" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <p>Inverter:</p>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <input id="inverter_installation_date" type="date" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <p>Panel:</p>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <input id="panel_installation_date" type="date" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <p>Commission:</p>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <input id="commission_date" type="date" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <table class="table table-striped table-bordered table-hover" id="operations_table" >
+                                            <thead>
+                                                <tr>
+                                                    <td><strong>Operation</strong></td>
+                                                    <td><strong>Date</strong></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+    
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
 
                                 <!-- Finance -->
-                                <!-- <div class="panel panel-default">
+                                <hr>
+                                <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <strong><p style="text-align: center">Finance</p></strong>
+                                        <strong><p style="text-align: center;">Finance</p></strong>
                                     </div>
                                     <div class="panel-body">
-                                        <table id="finance_table" class="table table-striped table-bordered table-bordered" width="100%">
+                                        <!-- <label>Payments:</label>
+                                        <p></p> -->
+                                        <button type="button" class="btn btn-default btn-default" onclick="onClickAddFinance()">Add</button>
+                                        <button type="button" class="btn btn-default btn-default" onclick="onClickDelFinance()">Delete</button>
+                                        
+                                        <p>&nbsp;</p>
+
+                                        <table class="table table-striped table-bordered table-hover" id="finance_table" >
                                             <thead>
                                                 <tr>
-                                                    <td>Payment terms</td>
-                                                    <td>Accecpt/ Not</td>
+                                                    <td><strong>Accecpted by</strong></td>
+                                                    <td><strong>Amount</strong></td>
+                                                    <td><strong>Date</strong></td>
+                                                    <td><strong>Remarks</strong></td>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td><input id="payment_method" type="text" class="form-control"></td>
-                                                    <td>
-                                                        <select id="payment_accecptance" class="form-control">
-                                                            <option value="accecpt">Accecpt</option>
-                                                            <option value="decline">Decline</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input id="payment_method" type="text" class="form-control"></td>
-                                                    <td>
-                                                        <select id="payment_accecptance" class="form-control">
-                                                            <option value="accecpt">Accecpt</option>
-                                                            <option value="decline">Decline</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><input id="payment_method" type="text" class="form-control"></td>
-                                                    <td>
-                                                        <select id="payment_accecptance" class="form-control">
-                                                            <option value="accecpt">Accecpt</option>
-                                                            <option value="decline">Decline</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
+    
                                             </tbody>
                                         </table>
                                     </div>
-                                </div> -->
-                                <hr>
+                                </div>
 
+                                <!-- end of section buttons -->
+                                <hr>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <button type="button" class="btn btn-block btn-default" onclick="onClickSaveBtn()" id="save_btn">Save</button>        
+                                    </div>
+                                    <div class="col-lg-6"></div>
+                                    <div class="col-lg-3">
+                                        <button type="button" class="btn btn-block btn-default" onclick="onClickCloseBtn()">Close</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -819,7 +591,8 @@
                         <div class="panel-body">
                             <form role="form">
                                 <label>Item</label>
-                                <input id="system_details_item" class="form-control" type="text">
+                                <!-- <input id="system_details_item" class="form-control" type="text"> -->
+                                <select id="system_details_item" class="form-control"></select>
                                 <br>
                                 <label>Quantity</label>
                                 <input id="system_details_qty" class="form-control" type="number">
@@ -942,6 +715,37 @@
     
                 <!-- /#por created overlay -->
 
+                <!-- add operation overlay -->
+                <div class="modal" id="operation_modal">
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <strong>Add Operation</strong>
+                                </div>
+                                <div class="panel-body">
+                                    <form role="form">
+                                        <label>Operation</label>
+                                        <input id="operation_operation" class="form-control" type="text">
+                                        <br>
+                                        <label>Date</label>
+                                        <input id="operation_date" class="form-control" type="date">
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <button type="button" class="form-control" onclick="addOperation()">Add</button>
+                                            </div>
+                                            <div class="col-lg-4"></div>
+                                            <div class="col-lg-4">
+                                                <button type="button" class="form-control" onclick="closeOperation()">Close</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- /# add operation overlay -->
         </div>
         <!-- /#page-wrapper -->
 
@@ -978,8 +782,22 @@
         // data for system table selected row data
         var system_table_row_data = null;
         var system_table_data = [];
+        var site_inventories = null;
+
+        var system_table;
+        var operations_table;
+        var finance_table;
+        var selected_system_row = null;
+        var selected_operations_row = null;
+        var selected_finance_row = null;
 
         $(document).ready(function() {
+
+            // test section
+            
+            // document.getElementById("roof_type").value = "amano";
+
+            // end test section
 
             $.ajax({
                 url: 'http://18.218.167.32:8080/genso_backend/genso/invmgtservice/getJobs',
@@ -1003,11 +821,23 @@
                             document.getElementById("provider").value = response[i].billInfo.type;
                             document.getElementById("bill_area").value = response[i].billInfo.billArea;
                             document.getElementById("meter_shifting").value = response[i].billInfo.meterShifting;
+                            document.getElementById("provider").value = response[i].billInfo.type;
+
+                            document.getElementById("grid_solution").value = response[i].siteSystem.gridSol;
+                            document.getElementById("Future_expand").value = response[i].siteSystem.futureExpansion;
+                            document.getElementById("generator_availability").value = response[i].siteSystem.generatorAvailable;
+
+                            document.getElementById("height").value = response[i].roof.height;
+                            document.getElementById("width").value = response[i].roof.width;
+                            document.getElementById("length").value = response[i].roof.length;
+                            document.getElementById("angel").value = response[i].roof.angle;
+                            document.getElementById("direction").value = response[i].roof.direction;
+                            document.getElementById("possiable_shade").value = response[i].roof.shade;
 
                             console.log(system_table_data);
-                            console.log(response[i].siteSystem.siteInventories.length);
+                            console.log(response[i].siteSystem.siteInventories);
 
-                            var system_table = $('#system_table').DataTable({
+                            system_table = $('#system_table').DataTable({
                                 data: response[i].siteSystem.siteInventories,
                                 responsize: true,
                                 stateSave: true,
@@ -1027,6 +857,8 @@
                                 system_table_row_data = system_table.row(this).data();
                                 console.log(system_table_row_data);
 
+                                selected_system_row = this;
+
                                 if ( $(this).hasClass('selected') ) {
                                     $(this).removeClass('selected');
                                 }
@@ -1036,21 +868,58 @@
                                 }
                             });
 
-                            // document.getElementById("date").value = response[i].createdDate;
-                            // document.getElementById("date").value = response[i].createdDate;
-                            // document.getElementById("date").value = response[i].createdDate;
-                            // document.getElementById("date").value = response[i].createdDate;
-                            // document.getElementById("date").value = response[i].createdDate;
-                            // document.getElementById("date").value = response[i].createdDate;
-                            // document.getElementById("date").value = response[i].createdDate;
-                            // document.getElementById("date").value = response[i].createdDate;
-                            // document.getElementById("date").value = response[i].createdDate;
-                            // document.getElementById("date").value = response[i].createdDate;
-                            // document.getElementById("date").value = response[i].createdDate;
-                            // document.getElementById("date").value = response[i].createdDate;
-                            // document.getElementById("date").value = response[i].createdDate;
-                            // document.getElementById("date").value = response[i].createdDate;
-                            // document.getElementById("date").value = response[i].createdDate;
+                            // operations_table
+                            operations_table = $('#operations_table').DataTable({
+                                data: response[i].operationPlan.operations,
+                                responsize: true,
+                                stateSave: true,
+                                select: true,
+                                paging: false,
+                                searching: false,
+                                columns: [
+                                    { data: "operation" },
+                                    { data: "date" }
+                                ]
+                            });
+
+                            $('#operations_table tbody').on('click', 'tr', function() {
+                                selected_operations_row = this;
+
+                                if ( $(this).hasClass('selected') ) {
+                                    $(this).removeClass('selected');
+                                }
+                                else {
+                                    operations_table.$('tr.selected').removeClass('selected');
+                                    $(this).addClass('selected');
+                                }
+                            });
+
+                            finance_table = $('#finance_table').DataTable({
+                                data: response[i].sitePayment.payments,
+                                responsize: true,
+                                stateSave: true,
+                                select: true,
+                                paging: false,
+                                searching: false,
+                                columns: [
+                                    { data: "acceptedBy" },
+                                    { data: "amount" },
+                                    { data: "date" },
+                                    { data: "remarks" }
+                                ]
+                            });
+
+                            $('#finance_table tbody').on('click', 'tr', function() {
+                                selected_finance_row = this;
+
+                                if ( $(this).hasClass('selected') ) {
+                                    $(this).removeClass('selected');
+                                }
+                                else {
+                                    finance_table.$('tr.selected').removeClass('selected');
+                                    $(this).addClass('selected');
+                                }
+                            });
                         }
                     }
                 },
@@ -1059,12 +928,13 @@
                 }
             });
 
-            
-
             // read data from the url and act accordingly
             if(getUrlParameter('task') == "view") {
                 document.getElementById('job_no').value = getUrlParameter('id');
                 document.getElementById('job_no').disabled = true;
+            } else {
+                // perform tasks which specfic to add job
+
             }
 
         });
@@ -1072,20 +942,44 @@
         // handling functions on system details table
         function onClickAddItm() {
             $('#system_details_modal').modal();
-            document.getElementById('system_details_item').value = "";
+            document.getElementById('system_details_item').innerHTML = "";
             document.getElementById('system_details_qty').value = "";
+
+            // load data from backend
+            $.ajax({
+                url: 'http://18.218.167.32:8080/genso_backend/genso/invmgtservice/getProducts',
+                type: 'GET',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('Authorization', 'Basic YWRtaW46YWRtaW4=')
+                },
+                success: function(response) {
+                    for(var i = 0; i < response.length; i++) {
+                        var option = document.createElement("option");
+                        option.value = option.text = response[i]["name"];
+                        document.getElementById('system_details_item').add(option);
+                    }
+                },
+                error: function(xhr) {
+                    console.log('error: ' + xhr);
+                }
+            });
         }
 
         function onClickDelItm() {
             console.log('on click delete button');
+            system_table.row(selected_system_row).remove().draw();
         }
 
         // handling system details table overlay buttons
+        var selected_inv = null;
+
         function onClickAddItem() {
             var has_to_pass_user = false;
             console.log('on click add item to system table clicked');
             console.log('item = ' + document.getElementById('system_details_item').value);
             console.log('qty  = ' + document.getElementById('system_details_qty').value);
+
+            $('#system_details_modal').modal('hide');
 
             // get products
             $.ajax({
@@ -1097,18 +991,26 @@
                 success: function(response) {
                     for(var i = 0; i < response.length; i++) {
                         if(response[i].name == document.getElementById('system_details_item').value) {
+                            selected_inv = response[i];
+
                             if(response[i].stock < document.getElementById('system_details_qty').value) {
                                 has_to_pass_user = true;
                                 $('#yes_no_modal').modal();
-                                $('#system_details_modal').modal('hide');
                             }
                         }
                     }
 
                     // if we don't need user concent we move to adding new item
-                    if(!has_to_pass_user) {
-
-                    }
+                    // if(!has_to_pass_user) {
+                        // currently removed condition that we just pop up create new por but either it added or not is not checked
+                        system_table.row.add({
+                            "productName": selected_inv.name,
+                            "requiredQuantity": document.getElementById("system_details_qty").value,
+                            "capacity": selected_inv.stock,
+                            "brand": selected_inv.brand,
+                            "wattage": selected_inv.wattage
+                        }).draw();
+                    // }
                 },
                 error: function(xhr) {
                     console.log('error: ' + xhr);
@@ -1126,7 +1028,71 @@
         }
 
         function onClickNo() {
+            $('#system_details_modal').modal('hide');
+            $('#create_modal').modal('hide');
+        }
 
+        // operations handling functions
+        function onClickAddOpr() {
+            $('#operation_modal').modal();
+
+            document.getElementById("operation_operation").value = "";
+            document.getElementById("operation_date").value = "";
+        }
+
+        function onClickDelOpr() {
+            console.log('clicked on delete operations table row btn');
+            operations_table.row(selected_operations_row).remove().draw();
+        }
+
+        function addOperation() {
+            $('#operation_modal').modal('hide');
+
+            operations_table.row.add({
+                "operation": document.getElementById("operation_operation").value,
+                "date": document.getElementById("operation_date").value
+            }).draw();
+        }
+
+        function closeOperation() {
+            $('#operation_modal').modal('hide');
+        }
+
+        // on main form buttons
+
+        var site_inventories_string = "";
+
+        function onClickSaveBtn() {
+            // generate list for inventory
+            var i = 0;
+            system_table.rows().every(function(rowIdx, tableLoop, rowLoop) {
+                console.log(this.data());
+                var temp = "";
+
+                if(i < 1) {
+                    temp = "{";
+                } else {
+                    temp = ",{";
+                }
+
+                i+=1;
+
+                temp += "\"brand\":\"" + this.data().brand + "\",";
+                temp += "\"requiredQuantity\":\"" + this.data().requiredQuantity + "\",";
+                temp += "\"capacity\":" + this.data().capacity + "\",";
+                temp += "\"brand\":" + this.data().brand + "\",";
+                temp += "\"wattage\":" + this.data().wattage + "\"";
+
+                temp += "}";
+
+                site_inventories_string += temp;
+            });
+
+            console.log(site_inventories_string);
+        }
+
+        function onClickCloseBtn() {
+            location.replace('jobs.html');
         }
 
     </script>
