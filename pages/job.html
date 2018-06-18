@@ -791,11 +791,13 @@
         var selected_operations_row = null;
         var selected_finance_row = null;
 
+        var edit_enabled = false;
+
         $(document).ready(function() {
 
             // test section
             
-            // document.getElementById("roof_type").value = "amano";
+            //  = "amano";
 
             // end test section
 
@@ -814,7 +816,7 @@
                             document.getElementById("agrement_signed_date").value = response[i].agreementSignedDate;
                             document.getElementById("expected_installation_date").value = response[i].expectedInstallationDate;
                             document.getElementById("name").value = response[i].name;
-                            document.getElementById("address").value = response[i].siteAddress;
+                            document.getElementById("address").value = response[i].address;
                             document.getElementById("site_address").value = response[i].siteAddress;
                             document.getElementById("contct_no").value = response[i].phone;
                             document.getElementById("email").value = response[i].email;
@@ -822,6 +824,9 @@
                             document.getElementById("bill_area").value = response[i].billInfo.billArea;
                             document.getElementById("meter_shifting").value = response[i].billInfo.meterShifting;
                             document.getElementById("provider").value = response[i].billInfo.type;
+                            document.getElementById("connection_type").value = response[i].billInfo.conType;
+                            document.getElementById("connection_change").value = response[i].billInfo.connectionChange;
+                            document.getElementById("name_change").value = response[i].billInfo.nameChange;
 
                             document.getElementById("grid_solution").value = response[i].siteSystem.gridSol;
                             document.getElementById("Future_expand").value = response[i].siteSystem.futureExpansion;
@@ -833,6 +838,9 @@
                             document.getElementById("angel").value = response[i].roof.angle;
                             document.getElementById("direction").value = response[i].roof.direction;
                             document.getElementById("possiable_shade").value = response[i].roof.shade;
+                            document.getElementById("structure_by").value = response[i].roof.structuredBy;
+                            document.getElementById("roof_type").value = response[i].roof.type;
+                            document.getElementById("water_proof").value = response[i].roof.waterProof;
 
                             console.log(system_table_data);
                             console.log(response[i].siteSystem.siteInventories);
@@ -932,9 +940,10 @@
             if(getUrlParameter('task') == "view") {
                 document.getElementById('job_no').value = getUrlParameter('id');
                 document.getElementById('job_no').disabled = true;
+                edit_enabled = true;
             } else {
                 // perform tasks which specfic to add job
-
+                edit_enabled = false;
             }
 
         });
@@ -1061,6 +1070,8 @@
         // on main form buttons
 
         var site_inventories_string = "";
+        var operation_planning_string = "";
+        var finance_string = "";
 
         function onClickSaveBtn() {
             // generate list for inventory
@@ -1088,7 +1099,220 @@
                 site_inventories_string += temp;
             });
 
-            console.log(site_inventories_string);
+            // console.log(site_inventories_string);
+
+            // generate list for operation planning
+            var i = 0;
+            operations_table.rows().every(function(rowIdx, tableLoop, rowLoop) {
+                console.log(this.data());
+                var temp = "";
+
+                if(i < 1) {
+                    temp = "{";
+                } else {
+                    temp = ",{";
+                }
+
+                i+=1;
+
+                temp += "\"operation\":\"" + this.data().operation + "\",";
+                temp += "\"date\":\"" + this.data().date + "\"";
+
+                temp += "}";
+
+                operation_planning_string += temp;
+            });
+
+            // console.log(operation_planning_string);
+
+            // generate list for finance
+            var i = 0;
+            finance_table.rows().every(function(rowIdx, tableLoop, rowLoop) {
+                console.log(this.data());
+                var temp = "";
+
+                if(i < 1) {
+                    temp = "{";
+                } else {
+                    temp = ",{";
+                }
+
+                i+=1;
+
+                temp += "\"acceptedBy\":\"" + this.data().acceptedBy + "\",";
+                temp += "\"amount\":\"" + this.data().amount + "\",";
+                temp += "\"date\": \"" + this.data().date + "\",";
+                temp += "\"remarks\": \"" + this.data().remarks + "\"";
+
+                temp += "}";
+
+                finance_string += temp;
+            });
+
+            // console.log(finance_string);
+
+            console.log('----------------------------------------------------------------------------------------');
+
+            console.log("{ \"address\": \"" + document.getElementById("address").value
+                    + "\", \"agreementSignedDate\": \"" + document.getElementById("agrement_signed_date").value
+                    + "\", \"authorized\": false,"
+                    +" \"awardedPrice\": 0,"
+                    +" \"billInfo\": {"
+                    +"     \"billArea\": \"" + document.getElementById("bill_area").value
+                    +"\",     \"conType\": \"" + document.getElementById("connection_type").value
+                    + "\",     \"connectionChange\": " + document.getElementById("connection_change").value
+                    + ",     \"meterShifting\": \"" + document.getElementById("meter_shifting").value
+                    + "\",     \"nameChange\": " + document.getElementById("name_change").value
+                    + ",     \"type\": \"" + document.getElementById("provider").value
+                    + "\" }, "
+                    +"\"createdBy\": \"Raji\", \"createdDate\": \"" + document.getElementById("date").value
+                    + "\", \"email\": \"" + document.getElementById("email").value
+                    + "\", \"expectedInstallationDate\": \"" + document.getElementById("expected_installation_date").value
+                    + "\", \"id\": \"" + document.getElementById('job_no').value
+                    + "\", \"marketingPerson\": \"" + document.getElementById("marketing_person").value
+                    + "\", \"name\": \"" + document.getElementById("name").value
+                    + "\", \"operationPlan\": {\"operations\": [" + operation_planning_string + "] }, " 
+                    + "\"phone\": \"" + document.getElementById("contct_no").value
+                    + "\", \"restoreInventories\": false, "
+                    + "\"roof\": {\"angle\": " + document.getElementById("angel").value
+                    + ", \"direction\": \"" + document.getElementById("direction").value
+                    + "\",     \"height\": " + document.getElementById("height").value
+                    + ",     \"length\": " + document.getElementById("length").value
+                    + ",     \"shade\": \"" + document.getElementById("possiable_shade").value
+                    + "\",     \"structuredBy\": \"" + document.getElementById("structure_by").value
+                    + "\",     \"type\": \"" + document.getElementById("roof_type").value
+                    + "\",     \"waterProof\": " + document.getElementById("water_proof").value
+                    + ",     \"width\": " + document.getElementById("width").value
+                    + " }, \"siteAddress\": \"" + document.getElementById("site_address").value + "\", "
+                    //+ " \"siteNote\": { \"notes\": [{ \"department\": \"operation\", \"message\": \"msg\"}] }, " 
+                    + "\"sitePayment\": {\"payments\": [" + finance_string + "]},"
+                    +" \"siteSystem\": {"
+                    +"\"capacity\": 3000, \"expansionRemark\": \"good\", "
+                    +"\"futureExpansion\": " + document.getElementById("Future_expand").value 
+                    + ", \"generatorAvailable\": " + document.getElementById("generator_availability").value
+                    + ", \"gridSol\": \"" + document.getElementById("grid_solution").value
+                    + "\", \"siteInventories\": [" + operation_planning_string + "]},"
+                    +" \"status\": \"created\", \"totalCost\": 130100, \"totalExpensesCost\": 0, \"totalInventoryCost\": 130100 }");
+
+            console.log('----------------------------------------------------------------------------------------');
+
+            // save form data
+
+            if(edit_enabled) {
+                // Send PUT request
+                $.ajax({
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/updateJob",
+                    "method": "PUT",
+                    "headers": {
+                        "Authorization": "Basic YWRtaW46YWRtaW4=",
+                        "Content-Type": "application/json"
+                    },
+                    "processData": false,
+                    "data": "{ \"address\": \"" + document.getElementById("address").value
+                    + "\", \"agreementSignedDate\": \"" + document.getElementById("agrement_signed_date").value
+                    + "\", \"authorized\": false,"
+                    +" \"awardedPrice\": 0,"
+                    +" \"billInfo\": {"
+                    +"     \"billArea\": \"" + document.getElementById("bill_area").value
+                    +"\",     \"conType\": \"" + document.getElementById("connection_type").value
+                    + "\",     \"connectionChange\": " + document.getElementById("connection_change").value
+                    + ",     \"meterShifting\": \"" + document.getElementById("meter_shifting").value
+                    + "\",     \"nameChange\": " + document.getElementById("name_change").value
+                    + ",     \"type\": \"" + document.getElementById("provider").value
+                    + "\" }, "
+                    +"\"createdBy\": \"Raji\", \"createdDate\": \"" + document.getElementById("date").value
+                    + "\", \"email\": \"" + document.getElementById("email").value
+                    + "\", \"expectedInstallationDate\": \"" + document.getElementById("expected_installation_date").value
+                    + "\", \"id\": \"" + document.getElementById('job_no').value
+                    + "\", \"marketingPerson\": \"" + document.getElementById("marketing_person").value
+                    + "\", \"name\": \"" + document.getElementById("name").value
+                    + "\", \"operationPlan\": {\"operations\": [" + operation_planning_string + "] }, " 
+                    + "\"phone\": \"" + document.getElementById("contct_no").value
+                    + "\", \"restoreInventories\": false, "
+                    + "\"roof\": {\"angle\": " + document.getElementById("angel").value
+                    + ", \"direction\": \"" + document.getElementById("direction").value
+                    + "\",     \"height\": " + document.getElementById("height").value
+                    + ",     \"length\": " + document.getElementById("length").value
+                    + ",     \"shade\": \"" + document.getElementById("possiable_shade").value
+                    + "\",     \"structuredBy\": \"" + document.getElementById("structure_by").value
+                    + "\",     \"type\": \"" + document.getElementById("roof_type").value
+                    + "\",     \"waterProof\": " + document.getElementById("water_proof").value
+                    + ",     \"width\": " + document.getElementById("width").value
+                    + " }, \"siteAddress\": \"" + document.getElementById("site_address").value + "\", "
+                    //+ " \"siteNote\": { \"notes\": [{ \"department\": \"operation\", \"message\": \"msg\"}] }, " 
+                    + "\"sitePayment\": {\"payments\": [" + finance_string + "]},"
+                    +" \"siteSystem\": {"
+                    +"\"capacity\": 3000, \"expansionRemark\": \"good\", "
+                    +"\"futureExpansion\": " + document.getElementById("Future_expand").value 
+                    + ", \"generatorAvailable\": " + document.getElementById("generator_availability").value
+                    + ", \"gridSol\": \"" + document.getElementById("grid_solution").value
+                    + "\", \"siteInventories\": [" + operation_planning_string + "]},"
+                    +" \"status\": \"created\", \"totalCost\": 130100, \"totalExpensesCost\": 0, \"totalInventoryCost\": 130100 }"
+                }).done(function (response) {
+                    location.replace('jobs.html');
+                }).fail(function (xhr) {
+                    // locaion.replace('jobs.html');
+                });
+            } else {
+                // send POST request
+                $.ajax({
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/addJob",
+                    "method": "POST",
+                    "headers": {
+                        "Authorization": "Basic YWRtaW46YWRtaW4=",
+                        "Content-Type": "application/json"
+                    },
+                    "processData": false,
+                    "data": "{ \"address\": \"" + document.getElementById("address").value
+                    + "\", \"agreementSignedDate\": \"" + document.getElementById("agrement_signed_date").value
+                    + "\", \"authorized\": false,"
+                    +" \"awardedPrice\": 0,"
+                    +" \"billInfo\": {"
+                    +"     \"billArea\": \"" + document.getElementById("bill_area").value
+                    +"\",     \"conType\": \"" + document.getElementById("connection_type").value
+                    + "\",     \"connectionChange\": " + document.getElementById("connection_change").value
+                    + ",     \"meterShifting\": \"" + document.getElementById("meter_shifting").value
+                    + "\",     \"nameChange\": " + document.getElementById("name_change").value
+                    + ",     \"type\": \"" + document.getElementById("provider").value
+                    + "\" }, "
+                    +"\"createdBy\": \"Raji\", \"createdDate\": \"" + document.getElementById("date").value
+                    + "\", \"email\": \"" + document.getElementById("email").value
+                    + "\", \"expectedInstallationDate\": \"" + document.getElementById("expected_installation_date").value
+                    + "\", \"id\": \"" + document.getElementById('job_no').value
+                    + "\", \"marketingPerson\": \"" + document.getElementById("marketing_person").value
+                    + "\", \"name\": \"" + document.getElementById("name").value
+                    + "\", \"operationPlan\": {\"operations\": [" + operation_planning_string + "] }, " 
+                    + "\"phone\": \"" + document.getElementById("contct_no").value
+                    + "\", \"restoreInventories\": false, "
+                    + "\"roof\": {\"angle\": " + document.getElementById("angel").value
+                    + ", \"direction\": \"" + document.getElementById("direction").value
+                    + "\",     \"height\": " + document.getElementById("height").value
+                    + ",     \"length\": " + document.getElementById("length").value
+                    + ",     \"shade\": \"" + document.getElementById("possiable_shade").value
+                    + "\",     \"structuredBy\": \"" + document.getElementById("structure_by").value
+                    + "\",     \"type\": \"" + document.getElementById("roof_type").value
+                    + "\",     \"waterProof\": " + document.getElementById("water_proof").value
+                    + ",     \"width\": " + document.getElementById("width").value
+                    + " }, \"siteAddress\": \"" + document.getElementById("site_address").value + "\", "
+                    //+ " \"siteNote\": { \"notes\": [{ \"department\": \"operation\", \"message\": \"msg\"}] }, " 
+                    + "\"sitePayment\": {\"payments\": [" + finance_string + "]},"
+                    +" \"siteSystem\": {"
+                    +"\"capacity\": 3000, \"expansionRemark\": \"good\", "
+                    +"\"futureExpansion\": " + document.getElementById("Future_expand").value 
+                    + ", \"generatorAvailable\": " + document.getElementById("generator_availability").value
+                    + ", \"gridSol\": \"" + document.getElementById("grid_solution").value
+                    + "\", \"siteInventories\": [" + operation_planning_string + "]},"
+                    +" \"status\": \"created\", \"totalCost\": 130100, \"totalExpensesCost\": 0, \"totalInventoryCost\": 130100 }"
+                }).done(function (response) {
+                    location.replace('jobs.html');
+                }).fail(function (xhr) {
+                    // locaion.replace('jobs.html');
+                });
+            }
         }
 
         function onClickCloseBtn() {
