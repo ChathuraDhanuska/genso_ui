@@ -568,7 +568,12 @@
                                     <div class="col-lg-3">
                                         <button type="button" class="btn btn-block btn-default" onclick="onClickSaveBtn()" id="save_btn">Save</button>        
                                     </div>
-                                    <div class="col-lg-6"></div>
+                                    <div class="col-lg-3">
+                                        <button type="button" class="btn btn-block btn-default" onclick="onClickApproveBtn()" id="approve_btn">Approve</button>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <button type="button" class="btn btn-block btn-default" onclick="onClickDeleteBtn()" id="delete_btn">Delete</button>
+                                    </div>
                                     <div class="col-lg-3">
                                         <button type="button" class="btn btn-block btn-default" onclick="onClickCloseBtn()">Close</button>
                                     </div>
@@ -1075,79 +1080,85 @@
 
         function onClickSaveBtn() {
             // generate list for inventory
-            var i = 0;
-            system_table.rows().every(function(rowIdx, tableLoop, rowLoop) {
-                console.log(this.data());
-                var temp = "";
+            if(system_table) {
+                var i = 0;
+                system_table.rows().every(function(rowIdx, tableLoop, rowLoop) {
+                    console.log(this.data());
+                    var temp = "";
 
-                if(i < 1) {
-                    temp = "{";
-                } else {
-                    temp = ",{";
-                }
+                    if(i < 1) {
+                        temp = "{";
+                    } else {
+                        temp = ",{";
+                    }
 
-                i+=1;
+                    i+=1;
 
-                temp += "\"brand\":\"" + this.data().brand + "\",";
-                temp += "\"requiredQuantity\":\"" + this.data().requiredQuantity + "\",";
-                temp += "\"capacity\":" + this.data().capacity + "\",";
-                temp += "\"brand\":" + this.data().brand + "\",";
-                temp += "\"wattage\":" + this.data().wattage + "\"";
+                    temp += "\"brand\":\"" + this.data().brand + "\",";
+                    temp += "\"requiredQuantity\":\"" + this.data().requiredQuantity + "\",";
+                    temp += "\"capacity\":" + this.data().capacity + "\",";
+                    temp += "\"brand\":" + this.data().brand + "\",";
+                    temp += "\"wattage\":" + this.data().wattage + "\"";
 
-                temp += "}";
+                    temp += "}";
 
-                site_inventories_string += temp;
-            });
+                    site_inventories_string += temp;
+                });
+            }
 
             // console.log(site_inventories_string);
 
             // generate list for operation planning
-            var i = 0;
-            operations_table.rows().every(function(rowIdx, tableLoop, rowLoop) {
-                console.log(this.data());
-                var temp = "";
+            if(operations_table) {
+                var i = 0;
+                operations_table.rows().every(function(rowIdx, tableLoop, rowLoop) {
+                    console.log(this.data());
+                    var temp = "";
 
-                if(i < 1) {
-                    temp = "{";
-                } else {
-                    temp = ",{";
-                }
+                    if(i < 1) {
+                        temp = "{";
+                    } else {
+                        temp = ",{";
+                    }
 
-                i+=1;
+                    i+=1;
 
-                temp += "\"operation\":\"" + this.data().operation + "\",";
-                temp += "\"date\":\"" + this.data().date + "\"";
+                    temp += "\"operation\":\"" + this.data().operation + "\",";
+                    temp += "\"date\":\"" + this.data().date + "\"";
 
-                temp += "}";
+                    temp += "}";
 
-                operation_planning_string += temp;
-            });
+                    operation_planning_string += temp;
+                });
+            }
 
             // console.log(operation_planning_string);
 
             // generate list for finance
-            var i = 0;
-            finance_table.rows().every(function(rowIdx, tableLoop, rowLoop) {
-                console.log(this.data());
-                var temp = "";
+            if(finance_table) {
+                var i = 0;
+                finance_table.rows().every(function(rowIdx, tableLoop, rowLoop) {
+                    console.log(this.data());
+                    var temp = "";
 
-                if(i < 1) {
-                    temp = "{";
-                } else {
-                    temp = ",{";
-                }
+                    if(i < 1) {
+                        temp = "{";
+                    } else {
+                        temp = ",{";
+                    }
 
-                i+=1;
+                    i+=1;
 
-                temp += "\"acceptedBy\":\"" + this.data().acceptedBy + "\",";
-                temp += "\"amount\":\"" + this.data().amount + "\",";
-                temp += "\"date\": \"" + this.data().date + "\",";
-                temp += "\"remarks\": \"" + this.data().remarks + "\"";
+                    temp += "\"acceptedBy\":\"" + this.data().acceptedBy + "\",";
+                    temp += "\"amount\":\"" + this.data().amount + "\",";
+                    temp += "\"date\": \"" + this.data().date + "\",";
+                    temp += "\"remarks\": \"" + this.data().remarks + "\"";
 
-                temp += "}";
+                    temp += "}";
 
-                finance_string += temp;
-            });
+                    finance_string += temp;
+                });
+            }
 
             // console.log(finance_string);
 
@@ -1204,7 +1215,7 @@
                     "async": true,
                     "crossDomain": true,
                     "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/updateJob",
-                    "method": "PUT",
+                    "method": "POST",
                     "headers": {
                         "Authorization": "Basic YWRtaW46YWRtaW4=",
                         "Content-Type": "application/json"
@@ -1318,6 +1329,14 @@
         function onClickCloseBtn() {
             location.replace('jobs.html');
         }
+
+        function onClickApproveBtn() {
+            console.log('on click approve btn');
+        }
+
+        function onClickDeleteBtn() {
+            console.log('on click delete btn');
+        }        
 
     </script>
 
