@@ -683,80 +683,79 @@
             <!-- por created overlay -->
 
             <div class="modal" id="create_modal">
-                    <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <strong id="por_created_heading">Add new purchase order record</strong>
-                            </div>
-                            <div class="panel-body">
-                                <form role="form">
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <label>Name:</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input type="text" value="" class="from-control" id="por_created_name">
-                                            </div>
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong id="por_created_heading">Add new purchase order record</strong>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label>Name:</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="text" value="" class="form-control" id="por_created_name" disabled>
+                                            <!-- <select id="por_created_name" class="form-control"></select> -->
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <label>Quantity:</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input type="number" value="" class="from-control" id="por_created_qty">
-                                            </div>
-                                        </div>                                    
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <label>Unit price:</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input type="number" value="" class="from-control" id="por_created_unitp">
-                                            </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label>Quantity:</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="number" value="" class="form-control" id="por_created_qty">
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label>Unit price:</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="number" value="" class="form-control" id="por_created_unitp" disabled>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <label>Total Price:</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input type="number" value="" class="from-control" id="por_created_total" disabled>
-                                            </div> 
-                                        </div>                                   
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <label>Created Date:</label>
-                                            </div>
-                                            <div class="col-lg-8">
-                                                <input type="date" value="" class="from-control" id="por_created_date">
-                                            </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label>Created Date:</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <input type="date" value="" class="form-control" id="por_created_date" disabled>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                </div>
+                                <hr>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <button type="button" class="btn btn-default btn-block" id="por_created_create_btn" onclick="onClickCreate()">Save</button>
+                                        </div>
+                                        <!-- <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default btn-block" id="por_created_edit_btn" onclick="onClickEdit()">Edit</button>
+                                        </div>
                                         <div class="col-lg-3">
-                                            <button type="button" class="btn btn-default btn-block" id="por_created_create_btn" onclick="onClickCreate()">Create</button>
-                                        </div>
-                                        <div class="col-lg-6"></div>
-                                        <div class="col-lg-3">
+                                            <button type="button" class="btn btn-default btn-block" id="por_created_delete_btn" onclick="onClickDelete()">Delete</button>
+                                        </div> -->
+                                        <div class="col-lg-6">
                                             <button type="button" class="btn btn-default btn-block" id="por_created_close_btn" onclick="onClickClose()">Close</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-    
-                <!-- /#por created overlay -->
+            </div>
+
+            <!-- /#por created overlay -->
 
                 <!-- add operation overlay -->
                 <div class="modal" id="operation_modal">
@@ -837,14 +836,9 @@
         var edit_enabled = false;
         var next_state = 'created';         // can be created, ongoing, completed
 
+        var has_to_pass_user = false;      // this variable is the global confirmation to validate about creating por's
+
         $(document).ready(function() {
-
-            // test section
-            
-            //  = "amano";
-
-            // end test section
-
             $.ajax({
                 url: 'http://18.218.167.32:8080/genso_backend/genso/invmgtservice/getJobs',
                 type: 'GET',
@@ -1136,7 +1130,6 @@
         var selected_inv = null;
 
         function onClickAddItem() {
-            var has_to_pass_user = false;
             console.log('on click add item to system table clicked');
             console.log('item = ' + document.getElementById('system_details_item').value);
             console.log('qty  = ' + document.getElementById('system_details_qty').value);
@@ -1158,12 +1151,16 @@
                             if(response[i].stock < document.getElementById('system_details_qty').value) {
                                 has_to_pass_user = true;
                                 $('#yes_no_modal').modal();
+                                document.getElementById("por_created_qty").value = document.getElementById('system_details_qty').value - response[i].stock;
+                                document.getElementById("por_created_name").value = selected_inv.name;
+                                document.getElementById("por_created_date").value = getCurrentDate();
+                                document.getElementById("por_created_unitp").value = selected_inv.unitPrice;
                             }
                         }
                     }
 
                     // if we don't need user concent we move to adding new item
-                    // if(!has_to_pass_user) {
+                    if(!has_to_pass_user) {
                         // currently removed condition that we just pop up create new por but either it added or not is not checked
                         system_table.row.add({
                             "productName": selected_inv.name,
@@ -1172,7 +1169,7 @@
                             "brand": selected_inv.brand,
                             "wattage": selected_inv.wattage
                         }).draw();
-                    // }
+                    }
                 },
                 error: function(xhr) {
                     console.log('error: ' + xhr);
@@ -1187,11 +1184,12 @@
         // yes no modal functions
         function onClickYes() {
             $('#create_modal').modal();
+            $('#yes_no_modal').modal('hide');
         }
 
         function onClickNo() {
             $('#system_details_modal').modal('hide');
-            $('#create_modal').modal('hide');
+            // $('#create_modal').modal('hide');
         }
 
         // operations handling functions
@@ -1652,6 +1650,75 @@
 
         function onClickCloseFinanceIns() {
             $('#finance_modal').modal('hide');
+        }
+
+        function getCurrentDate() {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; // month is zero based
+            var yyyy = today.getFullYear();
+
+            // make sure date has two decimal places
+            if(dd < 10) {
+                dd = '0' + dd;
+            }
+
+            // make sure month has two decimal places
+            if(mm < 10) {
+                mm = '0' + mm;
+            }
+
+            return yyyy + '-' + mm + '-' + dd;
+        }
+
+        // handling created overlay
+        function onClickCreate() {
+            $.ajax({
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "http://18.218.167.32:8080/genso_backend/genso/invmgtservice/addPOR",
+                    "method": "POST",
+                    "headers": {
+                        "Authorization": "Basic YWRtaW46YWRtaW4=",
+                        "Content-Type": "application/json"
+                    },
+                    "processData": false,
+                    "data": "{ \"name\":\"" + selected_inv.name 
+                        + "\", \"dateApproved\":\"" + getCurrentDate()
+                        + "\", \"quantity\":" + document.getElementById('por_created_qty').value 
+                        + ", \"unitPrice\":" + selected_inv.unitPrice 
+                        + ", \"dateCreated\":\"" + getCurrentDate() 
+                        + "\", \"dateSupInformed\":\"" + getCurrentDate() 
+                        + "\", \"approvedBy\":\"\", \"status\":\"Created\", \"supplierinformedBy\":\"\" }"
+                }).done(function (response) {
+                    // add value to table
+                    system_table.row.add({
+                            "productName": selected_inv.name,
+                            "requiredQuantity": document.getElementById("system_details_qty").value,
+                            "capacity": selected_inv.stock,
+                            "brand": selected_inv.brand,
+                            "wattage": selected_inv.wattage
+                        }).draw();
+                        $('#create_modal').modal('hide');
+                }).fail(function(xhr) {
+                    // add value to table
+                    system_table.row.add({
+                            "productName": selected_inv.name,
+                            "requiredQuantity": document.getElementById("system_details_qty").value,
+                            "capacity": selected_inv.stock,
+                            "brand": selected_inv.brand,
+                            "wattage": selected_inv.wattage
+                        }).draw();
+                        $('#create_modal').modal('hide');
+                });
+        }
+
+        function onClickClose() {
+            $('#create_modal').modal('hide');
+            document.getElementById('por_created_name').value = "";
+            document.getElementById('por_created_qty').value = "";
+            document.getElementById('por_created_unitp').value = "";
+            document.getElementById('por_created_date').value = "";
         }
 
     </script>
